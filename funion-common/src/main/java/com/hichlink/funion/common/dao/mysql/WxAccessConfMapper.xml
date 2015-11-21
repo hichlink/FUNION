@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hichlink.funion.common.dao.WxAccessConfMapper">
+	<resultMap id="BaseResultMap" type="com.hichlink.funion.common.entity.WxAccessConf">
+		<id column="seq_id" property="seqId" jdbcType="BIGINT" />
+		<result column="wx_name" property="wxName" jdbcType="VARCHAR" />
+		<result column="customer_id" property="customerId" jdbcType="BIGINT" />
+		<result column="access_token" property="accessToken" jdbcType="VARCHAR" />
+		<result column="expires_time" property="expiresTime" jdbcType="TIMESTAMP" />
+		<result column="app_id" property="appId" jdbcType="VARCHAR" />
+		<result column="app_secret" property="appSecret" jdbcType="VARCHAR" />
+		<result column="token" property="token" jdbcType="VARCHAR" />
+		<result column="jsapi_ticket" property="jsapiTicket" jdbcType="VARCHAR" />
+		<result column="jsap_expires_time" property="jsapExpiresTime"
+			jdbcType="TIMESTAMP" />
+		<result column="ip" property="ip" jdbcType="VARCHAR" />
+		<result column="aes_key" property="aesKey" jdbcType="VARCHAR" />
+		<result column="wx_merchant_no" property="wxMerchantNo"
+			jdbcType="VARCHAR" />
+		<result column="wx_pay_callback_url" property="wxPayCallbackUrl"
+			jdbcType="VARCHAR" />
+		<result column="creator" property="creator" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="updator" property="updator" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="customer_name" property="customerName"
+			jdbcType="VARCHAR" />
+		<result column="api_key" property="apiKey" jdbcType="VARCHAR" />
+		<result column="identity_id" property="identityId" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<!--例子:<if test="params['name'] != null and params['name'] != ''">and 
+				name=#{params.name}</if> -->
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		seq_id, wx_name, wx_access_conf.customer_id, access_token, expires_time,
+		app_id, app_secret, token,
+		jsapi_ticket, jsap_expires_time, wx_access_conf.ip, aes_key, wx_merchant_no,
+		wx_pay_callback_url,
+		wx_access_conf.creator, wx_access_conf.create_time, wx_access_conf.updator,
+		wx_access_conf.update_time,api_key
+	</sql>
+	<select id="pageQuery" resultMap="BaseResultMap"
+		parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page">
+		select
+		<include refid="Base_Column_List" />
+		,customer_info.customer_name,customer_info.identity_id
+		from wx_access_conf,customer_info
+		where customer_info.customer_id=wx_access_conf.customer_id
+		<if test="params['appId'] != null and  params['appId'] != ''">
+			and app_id like concat('%',#{params.appId},'%')
+		</if>
+		<if test="params['appId'] != null and  params['appId'] != ''">
+			and wx_name like concat('%',#{params.wxName},'%')
+		</if>
+		<if test="params['customerId'] != null">
+			and wx_access_conf.customer_id=#{params.customerId}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		wx_access_conf.*,customer_info.customer_name,customer_info.identity_id
+		from wx_access_conf,customer_info
+		where customer_info.customer_id=wx_access_conf.customer_id
+		and seq_id = #{seqId,jdbcType=BIGINT}
+	</select>
+
+	<select id="getByActId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		wx_access_conf.*,customer_info.customer_name,customer_info.identity_id
+		from wx_access_conf,customer_info,greeting_card_act
+		where customer_info.customer_id=wx_access_conf.customer_id
+		and greeting_card_act.customer_id=customer_info.customer_id
+		and greeting_card_act.card_act_id = #{actId,jdbcType=VARCHAR}
+	</select>
+	<select id="getByCustomerId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		wx_access_conf.*
+		from wx_access_conf
+		where
+		wx_access_conf.customer_id = #{customerId,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getByWxConf" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		wx_access_conf.*
+		from wx_access_conf
+		where
+		1=1
+		<if test="appId != null and appId != ''">
+			and wx_access_conf.app_id = #{appId,jdbcType=VARCHAR}
+		</if>
+		<if test="appSecret != null and appSecret != ''">
+			and wx_access_conf.app_secret = #{appSecret,jdbcType=VARCHAR}
+		</if>
+		<if test="accessToken != null and accessToken != ''">
+			and wx_access_conf.access_token = #{accessToken,jdbcType=VARCHAR}
+		</if>
+		 order by jsap_expires_time desc
+		 limit 1
+	</select>
+	
+
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from wx_access_conf
+		where seq_id = #{seqId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hichlink.funion.common.entity.WxAccessConf">
+		insert into wx_access_conf (seq_id, wx_name, customer_id,
+		access_token, expires_time, app_id,
+		app_secret, token, jsapi_ticket,
+		jsap_expires_time, ip, aes_key,
+		wx_merchant_no, wx_pay_callback_url, creator,
+		create_time, updator, update_time,api_key
+		)
+		values (#{seqId,jdbcType=BIGINT}, #{wxName,jdbcType=VARCHAR},
+		#{customerId,jdbcType=BIGINT},
+		#{accessToken,jdbcType=VARCHAR}, #{expiresTime,jdbcType=TIMESTAMP}, #{appId,jdbcType=VARCHAR},
+		#{appSecret,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR},
+		#{jsapiTicket,jdbcType=VARCHAR},
+		#{jsapExpiresTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR},
+		#{aesKey,jdbcType=VARCHAR},
+		#{wxMerchantNo,jdbcType=VARCHAR}, #{wxPayCallbackUrl,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP},#{apiKey,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.WxAccessConf">
+		insert into wx_access_conf
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="seqId != null">
+				seq_id,
+			</if>
+			<if test="wxName != null">
+				wx_name,
+			</if>
+			<if test="customerId != null">
+				customer_id,
+			</if>
+			<if test="accessToken != null">
+				access_token,
+			</if>
+			<if test="expiresTime != null">
+				expires_time,
+			</if>
+			<if test="appId != null">
+				app_id,
+			</if>
+			<if test="appSecret != null">
+				app_secret,
+			</if>
+			<if test="token != null">
+				token,
+			</if>
+			<if test="jsapiTicket != null">
+				jsapi_ticket,
+			</if>
+			<if test="jsapExpiresTime != null">
+				jsap_expires_time,
+			</if>
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="aesKey != null">
+				aes_key,
+			</if>
+			<if test="wxMerchantNo != null">
+				wx_merchant_no,
+			</if>
+			<if test="wxPayCallbackUrl != null">
+				wx_pay_callback_url,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updator != null">
+				updator,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="apiKey != null">
+				api_key,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="seqId != null">
+				#{seqId,jdbcType=BIGINT},
+			</if>
+			<if test="wxName != null">
+				#{wxName,jdbcType=VARCHAR},
+			</if>
+			<if test="customerId != null">
+				#{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="accessToken != null">
+				#{accessToken,jdbcType=VARCHAR},
+			</if>
+			<if test="expiresTime != null">
+				#{expiresTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="appId != null">
+				#{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="appSecret != null">
+				#{appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="token != null">
+				#{token,jdbcType=VARCHAR},
+			</if>
+			<if test="jsapiTicket != null">
+				#{jsapiTicket,jdbcType=VARCHAR},
+			</if>
+			<if test="jsapExpiresTime != null">
+				#{jsapExpiresTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="aesKey != null">
+				#{aesKey,jdbcType=VARCHAR},
+			</if>
+			<if test="wxMerchantNo != null">
+				#{wxMerchantNo,jdbcType=VARCHAR},
+			</if>
+			<if test="wxPayCallbackUrl != null">
+				#{wxPayCallbackUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updator != null">
+				#{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="apiKey != null">
+				#{apiKey,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hichlink.funion.common.entity.WxAccessConf">
+		update wx_access_conf
+		<set>
+			<if test="wxName != null">
+				wx_name = #{wxName,jdbcType=VARCHAR},
+			</if>
+			<if test="customerId != null">
+				customer_id = #{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="accessToken != null">
+				access_token = #{accessToken,jdbcType=VARCHAR},
+			</if>
+			<if test="expiresTime != null">
+				expires_time = #{expiresTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="appId != null">
+				app_id = #{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="appSecret != null">
+				app_secret = #{appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="token != null">
+				token = #{token,jdbcType=VARCHAR},
+			</if>
+			<if test="jsapiTicket != null">
+				jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
+			</if>
+			<if test="jsapExpiresTime != null">
+				jsap_expires_time = #{jsapExpiresTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ip != null">
+				ip = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="aesKey != null">
+				aes_key = #{aesKey,jdbcType=VARCHAR},
+			</if>
+			<if test="wxMerchantNo != null">
+				wx_merchant_no = #{wxMerchantNo,jdbcType=VARCHAR},
+			</if>
+			<if test="wxPayCallbackUrl != null">
+				wx_pay_callback_url = #{wxPayCallbackUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updator != null">
+				updator = #{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="apiKey != null">
+				api_key=#{apiKey,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where seq_id = #{seqId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hichlink.funion.common.entity.WxAccessConf">
+		update wx_access_conf
+		set wx_name = #{wxName,jdbcType=VARCHAR},
+		customer_id = #{customerId,jdbcType=BIGINT},
+		access_token = #{accessToken,jdbcType=VARCHAR},
+		expires_time = #{expiresTime,jdbcType=TIMESTAMP},
+		app_id = #{appId,jdbcType=VARCHAR},
+		app_secret = #{appSecret,jdbcType=VARCHAR},
+		token = #{token,jdbcType=VARCHAR},
+		jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
+		jsap_expires_time = #{jsapExpiresTime,jdbcType=TIMESTAMP},
+		ip = #{ip,jdbcType=VARCHAR},
+		aes_key = #{aesKey,jdbcType=VARCHAR},
+		wx_merchant_no = #{wxMerchantNo,jdbcType=VARCHAR},
+		wx_pay_callback_url = #{wxPayCallbackUrl,jdbcType=VARCHAR},
+		creator = #{creator,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		updator = #{updator,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		api_key=#{apiKey,jdbcType=VARCHAR}
+		where seq_id = #{seqId,jdbcType=BIGINT}
+	</update>
+</mapper>
