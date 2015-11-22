@@ -13,12 +13,12 @@ import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import com.funion.foss.common.alipay.config.AlipayConfig;
-import com.funion.foss.common.alipay.sign.RSA;
-import com.funion.foss.common.alipay.util.httpClient.HttpProtocolHandler;
-import com.funion.foss.common.alipay.util.httpClient.HttpRequest;
-import com.funion.foss.common.alipay.util.httpClient.HttpResponse;
-import com.funion.foss.common.alipay.util.httpClient.HttpResultType;
+import com.hichlink.funion.common.alipay.config.AlipayConfig;
+import com.hichlink.funion.common.alipay.sign.RSA;
+import com.hichlink.funion.common.alipay.util.httpClient.HttpProtocolHandler;
+import com.hichlink.funion.common.alipay.util.httpClient.HttpRequest;
+import com.hichlink.funion.common.alipay.util.httpClient.HttpResponse;
+import com.hichlink.funion.common.alipay.util.httpClient.HttpResultType;
 
 /* *
  *类名：AlipaySubmit

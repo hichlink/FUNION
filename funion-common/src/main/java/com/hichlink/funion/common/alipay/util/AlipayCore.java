@@ -13,7 +13,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.httpclient.methods.multipart.FilePartSource;
 import org.apache.commons.httpclient.methods.multipart.PartSource;
 
-import com.funion.foss.common.alipay.config.AlipayConfig;
+import com.hichlink.funion.common.alipay.config.AlipayConfig;
 
 /* *
  *类名：AlipayFunction
