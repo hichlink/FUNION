@@ -35,26 +35,6 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  <filter>
-    <filter-name>portalAuthFilter</filter-name>
-    <filter-class>com.aspire.webbas.client.filter.AuthFilter</filter-class>
-    <init-param>
-      <param-name>authFailPage</param-name>
-      <param-value>/pages/login.shtml</param-value>
-    </init-param>
-    <init-param>
-      <param-name>noGrantAuthorityPage</param-name>
-      <param-value>/pages/noAuthority.shtml</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>portalAuthFilter</filter-name>
-    <url-pattern>*.shtml</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>portalAuthFilter</filter-name>
-    <url-pattern>*.ajax</url-pattern>
-  </filter-mapping>
   <servlet>
     <servlet-name>springServlet</servlet-name>
     <servlet-class>
