@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.funion.foss.common.util.Signature;
+import com.hichlink.funion.common.util.Signature;
 
 public class WxOrderInfo {
 	/**

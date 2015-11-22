@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.httpclient.Header;
 
-import com.funion.foss.common.alipay.config.AlipayConfig;
+import com.hichlink.funion.common.alipay.config.AlipayConfig;
 
 /* *
  *类名：HttpResponse

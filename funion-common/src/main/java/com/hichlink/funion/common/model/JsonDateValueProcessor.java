@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import com.funion.foss.common.util.DateUtil;
+import com.hichlink.funion.common.util.DateUtil;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;

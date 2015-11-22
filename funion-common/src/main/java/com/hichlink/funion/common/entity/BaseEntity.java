@@ -5,8 +5,8 @@ import java.util.Date;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.funion.foss.common.model.CustomDateTimeDeserializer;
-import com.funion.foss.common.model.CustomDateTimeSerializer;
+import com.hichlink.funion.common.model.CustomDateTimeDeserializer;
+import com.hichlink.funion.common.model.CustomDateTimeSerializer;
 
 public class BaseEntity {
 	/**

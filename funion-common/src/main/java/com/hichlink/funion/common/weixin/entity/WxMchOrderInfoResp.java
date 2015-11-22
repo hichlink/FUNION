@@ -2,7 +2,7 @@ package com.hichlink.funion.common.weixin.entity;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.funion.foss.common.util.XStreamHandle;
+import com.hichlink.funion.common.util.XStreamHandle;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 public class WxMchOrderInfoResp extends WxBaseResp {
