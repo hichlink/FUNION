@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<servers>
+	<!--memcached 服务器地址和端口号配置，支持多个ip,以逗号隔开-->
+	<server>10.1.5.31:11211</server>
+</servers>
