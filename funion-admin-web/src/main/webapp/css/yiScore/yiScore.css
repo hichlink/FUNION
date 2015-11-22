@@ -1,0 +1,92 @@
+/*.score-container:before, .score-container:after {
+    content: " ";
+    display: table;
+    line-height: 0;
+    width: 0;
+}
+
+.score-container:after {
+    clear: both;
+}*/
+.score-clear {
+    overflow: auto;
+    zoom: 1;
+    height: auto;
+}
+
+.score-star {
+    float: left;
+    width: 20px;
+    height: 20px;
+    background: url("./star.png") left top no-repeat;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=Enabled, sizingMethod=scale , src=/eump-admin/css/yiScore/star.png);background:none\9!important;
+}
+
+.score-text {
+    float: left;
+    color: #aaa;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+.score-text-active {
+    color: #ff6600;
+}
+
+.score-star:hover {
+    cursor: pointer;
+}
+
+.score-star-active {
+    float: left;
+    width: 20px;
+    height: 20px;
+    background: url("./star_on.png") left top no-repeat;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=Enabled, sizingMethod=scale , src=/eump-portal/js/plugins/yiScore/star_on.png);background:none\9!important;
+}
+
+@media screen and (max-width: 960px) {
+    .score-clear {
+        overflow: auto;
+        zoom: 1;
+        height: auto;
+    }
+
+    .score-star {
+        float: left;
+        width: 13px;
+        height: 13px;
+        background: url("./star.png") no-repeat left top;
+        background-size: 100%;
+    }
+
+    .score-text {
+        float: left;
+        color: #aaa;
+        height: 13px;
+        line-height: 13px;
+        margin-left: 10px;
+    }
+
+    .score-text-active {
+        color: #ff6600;
+    }
+
+    .score-star:hover {
+        cursor: pointer;
+    }
+
+    .score-star-active {
+        background: url("./star_on.png") no-repeat left top;
+        background-size: 100%;
+    }
+}
