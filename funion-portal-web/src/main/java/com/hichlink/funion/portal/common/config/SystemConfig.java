@@ -73,4 +73,10 @@ public class SystemConfig {
 		return configuration.getString(arg);
 	}
 
+	public String getAppId() {
+		return getString("wx.appId");
+	}
+	public String getDomain() {
+		return getString("domain");
+	}
 }

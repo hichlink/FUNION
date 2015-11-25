@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	
+	<wx>
+		<appId></appId>
+	</wx>
+	<domain></domain>
 </config>
