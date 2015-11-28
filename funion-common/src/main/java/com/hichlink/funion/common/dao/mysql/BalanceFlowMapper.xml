@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hichlink.funion.common.dao.BalanceFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.hichlink.funion.common.entity.BalanceFlow" >
+    <id column="flow_id" property="flowId" jdbcType="BIGINT" />
+    <result column="agent_id" property="agentId" jdbcType="BIGINT" />
+    <result column="record_id" property="recordId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="commision_amount" property="commisionAmount" jdbcType="DECIMAL" />
+    <result column="input_time" property="inputTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <!--例子:<if test="params['name'] != null and  params['name'] != ''">and name=#{params.name}</if>-->
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    flow_id, agent_id, record_id, type, commision_amount, input_time, remark
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page" >
+    select
+    <include refid="Base_Column_List" />
+    from balance_flow
+    <if test="params != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from balance_flow
+    where flow_id = #{flowId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from balance_flow
+    where flow_id = #{flowId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hichlink.funion.common.entity.BalanceFlow" >
+    insert into balance_flow (flow_id, agent_id, record_id, 
+      type, commision_amount, input_time, 
+      remark)
+    values (#{flowId,jdbcType=BIGINT}, #{agentId,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{commisionAmount,jdbcType=DECIMAL}, #{inputTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.BalanceFlow" >
+    insert into balance_flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowId != null" >
+        flow_id,
+      </if>
+      <if test="agentId != null" >
+        agent_id,
+      </if>
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="commisionAmount != null" >
+        commision_amount,
+      </if>
+      <if test="inputTime != null" >
+        input_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowId != null" >
+        #{flowId,jdbcType=BIGINT},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="commisionAmount != null" >
+        #{commisionAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="inputTime != null" >
+        #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hichlink.funion.common.entity.BalanceFlow" >
+    update balance_flow
+    <set >
+      <if test="agentId != null" >
+        agent_id = #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="commisionAmount != null" >
+        commision_amount = #{commisionAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="inputTime != null" >
+        input_time = #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where flow_id = #{flowId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hichlink.funion.common.entity.BalanceFlow" >
+    update balance_flow
+    set agent_id = #{agentId,jdbcType=BIGINT},
+      record_id = #{recordId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      commision_amount = #{commisionAmount,jdbcType=DECIMAL},
+      input_time = #{inputTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where flow_id = #{flowId,jdbcType=BIGINT}
+  </update>
+</mapper>

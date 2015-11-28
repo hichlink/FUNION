@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hichlink.funion.common.dao.FlowExchangeLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hichlink.funion.common.entity.FlowExchangeLog" >
+    <id column="log_id" property="logId" jdbcType="BIGINT" />
+    <result column="flow_voucher_id" property="flowVoucherId" jdbcType="VARCHAR" />
+    <result column="exchange_order_id" property="exchangeOrderId" jdbcType="VARCHAR" />
+    <result column="source_type" property="sourceType" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="item_count" property="itemCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="mobile_operator" property="mobileOperator" jdbcType="VARCHAR" />
+    <result column="mobile_home" property="mobileHome" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="record_id" property="recordId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <!--例子:<if test="params['name'] != null and  params['name'] != ''">and name=#{params.name}</if>-->
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    log_id, flow_voucher_id, exchange_order_id, source_type, mobile, product_id, item_count, 
+    create_time, flag, mobile_operator, mobile_home, remark, record_id
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page" >
+    select
+    <include refid="Base_Column_List" />
+    from flow_exchange_log
+    <if test="params != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from flow_exchange_log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from flow_exchange_log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hichlink.funion.common.entity.FlowExchangeLog" >
+    insert into flow_exchange_log (log_id, flow_voucher_id, exchange_order_id, 
+      source_type, mobile, product_id, 
+      item_count, create_time, flag, 
+      mobile_operator, mobile_home, remark, 
+      record_id)
+    values (#{logId,jdbcType=BIGINT}, #{flowVoucherId,jdbcType=VARCHAR}, #{exchangeOrderId,jdbcType=VARCHAR}, 
+      #{sourceType,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT}, 
+      #{itemCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=VARCHAR}, 
+      #{mobileOperator,jdbcType=VARCHAR}, #{mobileHome,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{recordId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.FlowExchangeLog" >
+    insert into flow_exchange_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="flowVoucherId != null" >
+        flow_voucher_id,
+      </if>
+      <if test="exchangeOrderId != null" >
+        exchange_order_id,
+      </if>
+      <if test="sourceType != null" >
+        source_type,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="itemCount != null" >
+        item_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="mobileOperator != null" >
+        mobile_operator,
+      </if>
+      <if test="mobileHome != null" >
+        mobile_home,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="recordId != null" >
+        record_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=BIGINT},
+      </if>
+      <if test="flowVoucherId != null" >
+        #{flowVoucherId,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeOrderId != null" >
+        #{exchangeOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null" >
+        #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="itemCount != null" >
+        #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileOperator != null" >
+        #{mobileOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileHome != null" >
+        #{mobileHome,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null" >
+        #{recordId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hichlink.funion.common.entity.FlowExchangeLog" >
+    update flow_exchange_log
+    <set >
+      <if test="flowVoucherId != null" >
+        flow_voucher_id = #{flowVoucherId,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeOrderId != null" >
+        exchange_order_id = #{exchangeOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null" >
+        source_type = #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="itemCount != null" >
+        item_count = #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileOperator != null" >
+        mobile_operator = #{mobileOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileHome != null" >
+        mobile_home = #{mobileHome,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null" >
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hichlink.funion.common.entity.FlowExchangeLog" >
+    update flow_exchange_log
+    set flow_voucher_id = #{flowVoucherId,jdbcType=VARCHAR},
+      exchange_order_id = #{exchangeOrderId,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=BIGINT},
+      item_count = #{itemCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=VARCHAR},
+      mobile_operator = #{mobileOperator,jdbcType=VARCHAR},
+      mobile_home = #{mobileHome,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      record_id = #{recordId,jdbcType=BIGINT}
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+</mapper>
