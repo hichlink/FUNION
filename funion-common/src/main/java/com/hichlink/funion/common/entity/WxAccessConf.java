@@ -1,107 +1,101 @@
-/***
- * Auto generator by codegenerator 2015-09-09 10:22:21
- */
+/*** Auto generator by codegenerator 2015-11-28 14:10:51*/
 package com.hichlink.funion.common.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-
-public class WxAccessConf extends BaseEntity  implements Serializable {
+public class WxAccessConf {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-     * 自增序列
+    自增序列
      */
     private Long seqId;
 
     /**
-     * 微信名称
+    微信名称
      */
     private String wxName;
 
     /**
-     * 客户ID
+    获取到的凭证
      */
-    private Long customerId;
+    private String accessToken;
 
     /**
-     * 获取到的凭证
-     */
-    private String accessToken = "";
-
-    /**
-     * 凭证有效时间
+    凭证有效时间
      */
     private Date expiresTime;
 
     /**
-     * 微信appid
+    微信appid
      */
     private String appId;
 
     /**
-     * 微信appsecret
+    微信appsecret
      */
     private String appSecret;
 
     /**
-     * 微信token
+    微信token
      */
-    private String token = "";
+    private String token;
 
     /**
-     * 微信jsapiTicket
+    微信jsapiTicket
      */
-    private String jsapiTicket = "";
+    private String jsapiTicket;
 
     /**
-     * JS凭证有效时间
+    JS凭证有效时间
      */
     private Date jsapExpiresTime;
 
     /**
-     * 录入者ip
+    录入者ip
      */
     private String ip;
 
     /**
-     * 微信aeskey
+    微信aeskey
      */
-    private String aesKey = "";
+    private String aesKey;
 
     /**
-     * 微信支付商户号
+    微信支付商户号
      */
     private String wxMerchantNo;
 
     /**
-     * 支付回调URL
+    支付回调URL
      */
     private String wxPayCallbackUrl;
 
     /**
-     * 客户名称
+    创建者
      */
-    private String customerName = "";
+    private String creator;
 
     /**
-     * 商户签名加密key
-     * key设置路径：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
+    创建时间
      */
-    private String apiKey = "";
+    private Date createTime;
 
     /**
-     * 客户UUID
+    修改者
      */
-    private String identityId;
+    private String updator;
 
     /**
-     * 自增序列
-     *
+    修改时间
+     */
+    private Date updateTime;
+
+    /**
+    微信支付签名key
+     */
+    private String apiKey;
+
+    /**
+    自增序列
      * @return the value of wx_access_conf.seq_id
      */
     public Long getSeqId() {
@@ -113,8 +107,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 微信名称
-     *
+    微信名称
      * @return the value of wx_access_conf.wx_name
      */
     public String getWxName() {
@@ -126,21 +119,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 客户ID
-     *
-     * @return the value of wx_access_conf.customer_id
-     */
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    /**
-     * 获取到的凭证
-     *
+    获取到的凭证
      * @return the value of wx_access_conf.access_token
      */
     public String getAccessToken() {
@@ -152,8 +131,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 凭证有效时间
-     *
+    凭证有效时间
      * @return the value of wx_access_conf.expires_time
      */
     public Date getExpiresTime() {
@@ -165,8 +143,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 微信appid
-     *
+    微信appid
      * @return the value of wx_access_conf.app_id
      */
     public String getAppId() {
@@ -178,8 +155,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 微信appsecret
-     *
+    微信appsecret
      * @return the value of wx_access_conf.app_secret
      */
     public String getAppSecret() {
@@ -191,8 +167,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 微信token
-     *
+    微信token
      * @return the value of wx_access_conf.token
      */
     public String getToken() {
@@ -204,8 +179,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 微信jsapiTicket
-     *
+    微信jsapiTicket
      * @return the value of wx_access_conf.jsapi_ticket
      */
     public String getJsapiTicket() {
@@ -217,8 +191,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * JS凭证有效时间
-     *
+    JS凭证有效时间
      * @return the value of wx_access_conf.jsap_expires_time
      */
     public Date getJsapExpiresTime() {
@@ -230,8 +203,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 录入者ip
-     *
+    录入者ip
      * @return the value of wx_access_conf.ip
      */
     public String getIp() {
@@ -243,8 +215,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 微信aeskey
-     *
+    微信aeskey
      * @return the value of wx_access_conf.aes_key
      */
     public String getAesKey() {
@@ -256,8 +227,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 微信支付商户号
-     *
+    微信支付商户号
      * @return the value of wx_access_conf.wx_merchant_no
      */
     public String getWxMerchantNo() {
@@ -269,8 +239,7 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
     }
 
     /**
-     * 支付回调URL
-     *
+    支付回调URL
      * @return the value of wx_access_conf.wx_pay_callback_url
      */
     public String getWxPayCallbackUrl() {
@@ -281,29 +250,63 @@ public class WxAccessConf extends BaseEntity  implements Serializable {
         this.wxPayCallbackUrl = wxPayCallbackUrl == null ? null : wxPayCallbackUrl.trim();
     }
 
-    public String getCustomerName() {
-        return customerName;
+    /**
+    创建者
+     * @return the value of wx_access_conf.creator
+     */
+    public String getCreator() {
+        return creator;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
     }
 
+    /**
+    创建时间
+     * @return the value of wx_access_conf.create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+    修改者
+     * @return the value of wx_access_conf.updator
+     */
+    public String getUpdator() {
+        return updator;
+    }
+
+    public void setUpdator(String updator) {
+        this.updator = updator == null ? null : updator.trim();
+    }
+
+    /**
+    修改时间
+     * @return the value of wx_access_conf.update_time
+     */
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    /**
+    微信支付签名key
+     * @return the value of wx_access_conf.api_key
+     */
     public String getApiKey() {
         return apiKey;
     }
 
     public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+        this.apiKey = apiKey == null ? null : apiKey.trim();
     }
-
-    public String getIdentityId() {
-        return identityId;
-    }
-
-    public void setIdentityId(String identityId) {
-        this.identityId = identityId;
-    }
-
-
 }

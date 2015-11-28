@@ -3,9 +3,15 @@ package com.hichlink.funion.portal.common.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class CheckPhone {
+	public static final String DX = "DX";
+	public static final String YD = "YD";
+	public static final String LT = "LT";
+
 	public static boolean isMobileNO(String mobiles) {
-		if (!isNotNull(mobiles)) {
+		if (StringUtils.isBlank(mobiles)) {
 			return false;
 		}
 		String all = "^((13[0-9])|(14[7])|(15[^4,\\D])|(17[6,7])|(18[0,1,2,3,4,5-9]))\\d{8}$";

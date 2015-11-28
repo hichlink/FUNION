@@ -71,7 +71,7 @@
   </error-page>
   <error-page>
     <error-code>404</error-code>
-    <location>/pages/404.shtml</location>
+    <location>/404.html</location>
   </error-page>
   <resource-ref>
     <description>datasource</description>
