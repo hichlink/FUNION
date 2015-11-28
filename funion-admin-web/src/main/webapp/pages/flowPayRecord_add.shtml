@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>flowPayRecord</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				flowPayRecord
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					新增/修改
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<input type="hidden" name="recordId"  id="recordId"/>
+		<input type="hidden" name="updId"  id="updId"/>
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="openId">
+																<span class="red">*</span>
+															微信OpenID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="openId" id="openId" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="nickName">
+																<span class="red">*</span>
+															微信昵称:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="nickName" id="nickName" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="mobile">
+																<span class="red">*</span>
+															手机号码:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="mobile" id="mobile" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="num">
+																<span class="red">*</span>
+															流量包个数:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="num" id="num" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="settlementPrice">
+																<span class="red">*</span>
+															结算价格:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="settlementPrice" id="settlementPrice" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="payType">
+															支付类型 1:微信支付 2:支付宝支付:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="payType" id="payType" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="sendStatus">
+																<span class="red">*</span>
+															流量下发状态　0:网关收到成功　00:成功　1:拒绝收单 其它编码表失败:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="sendStatus" id="sendStatus" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="inputTime">
+															购买时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="inputTime" id="inputTime" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="isBalance">
+																<span class="red">*</span>
+															结算标识 0:否 1:是:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="isBalance" id="isBalance" class="form-control input-sm" />
+							</div>
+						</div>
+												 														
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="unionId">
+																<span class="red">*</span>
+															微信UnionID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="unionId" id="unionId" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="headImg">
+																<span class="red">*</span>
+															微信头像:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="headImg" id="headImg" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="productId">
+																<span class="red">*</span>
+															产品ID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="productId" id="productId" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="costPrice">
+																<span class="red">*</span>
+															原价格:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="costPrice" id="costPrice" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="operatorPrice">
+																<span class="red">*</span>
+															运营商价格:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="operatorPrice" id="operatorPrice" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="payStatus">
+																<span class="red">*</span>
+															支付状态 0:未支付 1:支付成功 2:支付完成 3:支付失败:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="payStatus" id="payStatus" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="outTradeNo">
+																<span class="red">*</span>
+															商户订单号:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="outTradeNo" id="outTradeNo" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="identityId">
+																<span class="red">*</span>
+															购买来源标识:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="identityId" id="identityId" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="remark">
+															备注:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="remark" id="remark" class="form-control input-sm" />
+							</div>
+						</div>
+																
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="center">
+							<button class="btn btn-info" type="submit" id="submitButton">
+								<i class="ace-icon fa fa-check bigger-110"></i>
+								保 存
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" id="resetBtn">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								重 置
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-arrow-left"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var update_url   = ctxPaths+ '/flowPayRecord/add.ajax';
+	var view_url 	 = ctxPaths+ '/flowPayRecord/get.ajax';
+	var pkId = getP('recordId');
+	$(function(){
+		var add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'openId' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'unionId' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'nickName' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'headImg' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'mobile' : {
+	 						 					required:true,
+	 						 					maxlength: 32
+					 },	 				 	 					 										'productId' : {
+	 						 					required:true,
+	 						 					maxlength: 32
+					 },	 				 	 					 										'num' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'costPrice' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'settlementPrice' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'operatorPrice' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'payType' : {
+	 						 					maxlength: 11
+					 },	 				 	 					 										'payStatus' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'sendStatus' : {
+	 						 					required:true,
+	 						 					maxlength: 16
+					 },	 				 	 					 										'outTradeNo' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'inputTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'identityId' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'isBalance' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'remark' : {
+	 						 					maxlength: 512
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    Q_Alert('新增成功',function(){
+										location.href = ctxPaths+'/pages/flowPayRecord_list.shtml';
+									});
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+	    });	
+		$('#resetBtn').on('click',function(){
+			resetForm($('#add-form'),add_validator);
+		});
+		if (pkId){
+			$('#updId').val(pkId);
+			$.ajaxSubmit(view_url, {'recordId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$('#add-form').json2Form2(rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

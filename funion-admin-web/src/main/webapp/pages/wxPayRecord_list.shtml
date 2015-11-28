@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>wxPayRecord</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<!-- PAGE CONTENT BEGINS -->
+			<form id="queryForm" onsubmit="return false;">
+				<div class="widget-box">
+                        <div class="widget-header widget-header-flat search_tj_bar_tit">
+                            <h5 class="widget-title">查询条件</h5>
+                            <div class="widget-toolbar">
+                                <a href="javascript:;" data-action="collapse">
+                                    <i class="1 ace-icon fa fa-chevron-up bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row search_tj_bar">
+							<div class="col-xs-12">
+								<div class="center">
+                                    <div class="row">
+																																								                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">支付流水号：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['outTradeNo']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">微信订单号：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['transactionId']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">设备号：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['deviceInfo']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																																																																																																																																																																																																																																																																																																</div>
+							</div>
+						</div>   
+                        <div class="bs_btn">
+						<button id="addBtn" class="btn btn-sm btn-success"><i class="ace-icon fa fa-hand-o-right bigger-120"></i>新增</button>
+						<button class="btn btn-sm" type="button" id="resetBtn">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							重 置
+						</button>
+						<button id="seachBtn" type="button" class="btn btn-purple btn-sm">查找<i class="ace-icon fa fa-search icon-on-right bigger-110"></i></button>
+						
+                        </div>	  
+                	</div>	
+				</div>
+			</form>
+			<div class="space-6"></div>
+			<table id="grid-table"></table>
+			<div id="grid-pager"></div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+	</div>
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var list_url  = ctxPaths+ '/wxPayRecord/query.ajax';
+	var delete_url   = ctxPaths+ '/wxPayRecord/delete.ajax';
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	$(function($) {
+				jqGrid_init($(grid_selector),pager_selector,{
+					url: list_url,
+					sortable : true,
+																									sortname : 'outTradeNo',
+																																																																																																																																																																					sortorder:'desc',
+					colNames:[
+										'支付自增序列',
+										'支付流水号',
+										'微信订单号',
+										'设备号',
+										'微信OpenID',
+										'微信OpenID',
+										'单价',
+										'数量',
+										'总金额',
+										'备注',
+										'支付时间',
+										'对账时间',
+										'支付IP',
+										'交易类型,取值如下：JSAPI，NATIVE，APP，WAP',
+										'支付状态 0:提交待支付 1:支付成功 2:支付完成 3:支付失败',
+										'支付类型 0:贺卡',
+										'记录ID',
+										''
+					],
+					colModel:[
+												   					{name:'paySeqId',index:'paySeqId', hidden:true},
+						   					   						   												{name:'outTradeNo',index:'outTradeNo', sortable:true,sortname : 'out_trade_no',width:100,formatter:formatName},
+													   					   						   												{name:'transactionId',index:'transactionId', sortable:true,sortname : 'transaction_id',width:100},
+													   					   						   												{name:'deviceInfo',index:'deviceInfo', sortable:true,sortname : 'device_info',width:100},
+													   					   						   												{name:'openId',index:'openId', sortable:true,sortname : 'open_id',width:100},
+													   					   						   												{name:'nickName',index:'nickName', sortable:true,sortname : 'nick_name',width:100},
+													   					   						   												{name:'price',index:'price', sortable:true,sortname : 'price',width:100},
+													   					   						   												{name:'num',index:'num', sortable:true,sortname : 'num',width:100},
+													   					   						   												{name:'totalFee',index:'totalFee', sortable:true,sortname : 'total_fee',width:100},
+													   					   						   												{name:'remark',index:'remark', sortable:true,sortname : 'remark',width:100},
+													   					   						   												{name:'payTime',index:'payTime', sortable:true,sortname : 'pay_time',width:100},
+													   					   						   												{name:'payCheckTime',index:'payCheckTime', sortable:true,sortname : 'pay_check_time',width:100},
+													   					   						   												{name:'payIp',index:'payIp', sortable:true,sortname : 'pay_ip',width:100},
+													   					   						   												{name:'tradeType',index:'tradeType', sortable:true,sortname : 'trade_type',width:100},
+													   					   						   												{name:'payStatus',index:'payStatus', sortable:true,sortname : 'pay_status',width:100},
+													   					   						   												{name:'payType',index:'payType', sortable:true,sortname : 'pay_type',width:100},
+													   					   						   												{name:'recordId',index:'recordId', sortable:true,sortname : 'record_id',width:100},
+													   					   					{name:'myac',index:'', width:120, fixed:true, sortable:false, resize:false,formatter:actionButtons}					
+					]
+				});
+				function formatName(cellvalue, options, rowObject){
+					return '<a href="javascript:;" onclick="viewEvent(\''+rowObject['paySeqId']+'\')">' + cellvalue + '</a>';
+				}
+				function actionButtons(cellvalue, options, rowObject){
+					return '<div >' + 
+								'<button onclick=\"editEvent('+rowObject['paySeqId']+')\" class=\"btn btn-xs btn-info\" data-rel=\"tooltip\" title=\"编辑\" >' +
+									'<i class=\"ace-icon fa fa-pencil bigger-120\"></i>' +
+								'</button>' + 
+								'<button onclick=\"deleteEvent('+rowObject['paySeqId']+')\" class=\"btn btn-xs btn-danger\" data-rel=\"tooltip\" title=\"删除\" >' +
+									'<i class=\"ace-icon fa fa-trash-o bigger-120\"></i>' +
+								'</button>'  + 
+							'</div>';
+				}
+				
+			});
+
+			function editEvent(id){
+				window.location.href = ctxPaths+'/pages/wxPayRecord_add.shtml?paySeqId=' + id;
+			};
+			function viewEvent(id){
+				window.location.href = ctxPaths+'/pages/wxPayRecord_view.shtml?paySeqId=' + id;
+			};
+			function deleteEvent(id){
+				Q_Confirm("是否要删除？",function(result) {
+					if(result){
+						$.ajaxSubmit(delete_url,{'paySeqId' : id}, function(data){
+							$(grid_selector).jqGrid('setGridParam',{page:1}).trigger("reloadGrid");
+						});
+					}
+				});
+			};
+			
+			add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'outTradeNo' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'transactionId' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'deviceInfo' : {
+	 						 					maxlength: 32
+					 },	 				 	 					 										'openId' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'nickName' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'price' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'num' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'totalFee' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'remark' : {
+	 						 					required:true,
+	 						 					maxlength: 512
+					 },	 				 	 					 										'payTime' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'payCheckTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'payIp' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'tradeType' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'payStatus' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'payType' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'recordId' : {
+	 						 					required:true,
+	 						 					maxlength: 20
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    $('#add-form-modal').modal2('hide');
+									$(grid_selector).trigger("reloadGrid");
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+			});
+			
+			$('#addBtn').on('click', function(){
+				window.location.href = ctxPaths+'/pages/wxPayRecord_add.shtml';
+			});
+			
+			$('#seachBtn').on('click', function(){
+				$(grid_selector).jqGrid('setGridParam',{postData: $('#queryForm').serializeJson(),page:1}).trigger("reloadGrid");
+			});
+			$('#resetBtn').on('click',function(){
+				resetForm($('#queryForm'));
+			});
+		</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>flowProductInfo</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				flowProductInfo
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					详情
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="productName">
+							产品名称:
+							</label>
+							<div class="col-sm-7">
+								<p name="productName" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="packageId">
+							流量包ID:
+							</label>
+							<div class="col-sm-7">
+								<p name="packageId" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="operatorCode">
+							对应运营商产品ID,YD:移动　LT:联通　DX:电信:
+							</label>
+							<div class="col-sm-7">
+								<p name="operatorCode" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="settlementPrice">
+							结算价格:
+							</label>
+							<div class="col-sm-7">
+								<p name="settlementPrice" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="remark">
+							备注:
+							</label>
+							<div class="col-sm-7">
+								<p name="remark" class="form-control-static"></p>
+							</div>
+						</div>
+																
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="productCode">
+							产品代码:
+							</label>
+							<div class="col-sm-7">
+								<p name="productCode" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="zone">
+							适用区域:
+							</label>
+							<div class="col-sm-7">
+								<p name="zone" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="costPrice">
+							原价格:
+							</label>
+							<div class="col-sm-7">
+								<p name="costPrice" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="operatorPrice">
+							运营商价格:
+							</label>
+							<div class="col-sm-7">
+								<p name="operatorPrice" class="form-control-static"></p>
+							</div>
+						</div>
+																											
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var view_url 	 = ctxPaths+ '/flowProductInfo/get.ajax';
+	var pkId = getP('productId');
+	$(function(){
+		if (pkId){
+			$.ajaxSubmit(view_url, {'productId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$.dataInput($('.form-control-static'),rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}else{
+			Q_Alert_Fail('参数错误'); 
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

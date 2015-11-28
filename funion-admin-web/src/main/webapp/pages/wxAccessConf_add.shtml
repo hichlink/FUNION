@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>wxAccessConf</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				wxAccessConf
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					新增/修改
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<input type="hidden" name="seqId"  id="seqId"/>
+		<input type="hidden" name="updId"  id="updId"/>
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="wxName">
+																<span class="red">*</span>
+															微信名称:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="wxName" id="wxName" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="expiresTime">
+															凭证有效时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="expiresTime" id="expiresTime" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="appSecret">
+																<span class="red">*</span>
+															微信appsecret:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="appSecret" id="appSecret" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="jsapiTicket">
+															微信jsapiTicket:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="jsapiTicket" id="jsapiTicket" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="ip">
+																<span class="red">*</span>
+															录入者ip:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="ip" id="ip" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="wxMerchantNo">
+															微信支付商户号:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="wxMerchantNo" id="wxMerchantNo" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="creator">
+																<span class="red">*</span>
+															创建者:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="creator" id="creator" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="updator">
+															修改者:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="updator" id="updator" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="apiKey">
+															微信支付签名key:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="apiKey" id="apiKey" class="form-control input-sm" />
+							</div>
+						</div>
+																
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="accessToken">
+																<span class="red">*</span>
+															获取到的凭证:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="accessToken" id="accessToken" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="appId">
+																<span class="red">*</span>
+															微信appid:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="appId" id="appId" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="token">
+																<span class="red">*</span>
+															微信token:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="token" id="token" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="jsapExpiresTime">
+															JS凭证有效时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="jsapExpiresTime" id="jsapExpiresTime" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="aesKey">
+																<span class="red">*</span>
+															微信aeskey:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="aesKey" id="aesKey" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="wxPayCallbackUrl">
+															支付回调URL:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="wxPayCallbackUrl" id="wxPayCallbackUrl" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="createTime">
+																<span class="red">*</span>
+															创建时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="createTime" id="createTime" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="updateTime">
+															修改时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="updateTime" id="updateTime" class="form-control input-sm" />
+							</div>
+						</div>
+																											
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="center">
+							<button class="btn btn-info" type="submit" id="submitButton">
+								<i class="ace-icon fa fa-check bigger-110"></i>
+								保 存
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" id="resetBtn">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								重 置
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-arrow-left"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var update_url   = ctxPaths+ '/wxAccessConf/add.ajax';
+	var view_url 	 = ctxPaths+ '/wxAccessConf/get.ajax';
+	var pkId = getP('seqId');
+	$(function(){
+		var add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'wxName' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'accessToken' : {
+	 						 					required:true,
+	 						 					maxlength: 1024
+					 },	 				 	 					 										'expiresTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'appId' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'appSecret' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'token' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'jsapiTicket' : {
+	 						 					maxlength: 128
+					 },	 				 	 					 										'jsapExpiresTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'ip' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'aesKey' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'wxMerchantNo' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'wxPayCallbackUrl' : {
+	 						 					maxlength: 512
+					 },	 				 	 					 										'creator' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'createTime' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'updator' : {
+	 						 					maxlength: 64
+					 },	 				 	 					 										'updateTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'apiKey' : {
+	 						 					maxlength: 128
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    Q_Alert('新增成功',function(){
+										location.href = ctxPaths+'/pages/wxAccessConf_list.shtml';
+									});
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+	    });	
+		$('#resetBtn').on('click',function(){
+			resetForm($('#add-form'),add_validator);
+		});
+		if (pkId){
+			$('#updId').val(pkId);
+			$.ajaxSubmit(view_url, {'seqId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$('#add-form').json2Form2(rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

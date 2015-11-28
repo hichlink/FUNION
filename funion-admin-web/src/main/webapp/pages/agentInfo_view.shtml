@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>agentInfo</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				agentInfo
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					详情
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="identityId">
+							身份标识,随机生成唯一:
+							</label>
+							<div class="col-sm-7">
+								<p name="identityId" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="openId">
+							微信OpenID:
+							</label>
+							<div class="col-sm-7">
+								<p name="openId" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="nickName">
+							微信昵称:
+							</label>
+							<div class="col-sm-7">
+								<p name="nickName" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="realName">
+							真实姓名:
+							</label>
+							<div class="col-sm-7">
+								<p name="realName" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="email">
+							邮箱地址:
+							</label>
+							<div class="col-sm-7">
+								<p name="email" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="inputTime">
+							录入时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="inputTime" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="modifyTime">
+							修改时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="modifyTime" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="parentId">
+							父结点:
+							</label>
+							<div class="col-sm-7">
+								<p name="parentId" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="balance">
+							帐户余额:
+							</label>
+							<div class="col-sm-7">
+								<p name="balance" class="form-control-static"></p>
+							</div>
+						</div>
+																
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="agentName">
+							代理别名:
+							</label>
+							<div class="col-sm-7">
+								<p name="agentName" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="unionId">
+							微信UnionID:
+							</label>
+							<div class="col-sm-7">
+								<p name="unionId" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="headImg">
+							微信头像:
+							</label>
+							<div class="col-sm-7">
+								<p name="headImg" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="mobile">
+							手机号码:
+							</label>
+							<div class="col-sm-7">
+								<p name="mobile" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="cardNo">
+							身份证号码:
+							</label>
+							<div class="col-sm-7">
+								<p name="cardNo" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="inputBy">
+							录入者:
+							</label>
+							<div class="col-sm-7">
+								<p name="inputBy" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="modifier">
+							修改者:
+							</label>
+							<div class="col-sm-7">
+								<p name="modifier" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="commisionRatio">
+							佣金比例 0-100:
+							</label>
+							<div class="col-sm-7">
+								<p name="commisionRatio" class="form-control-static"></p>
+							</div>
+						</div>
+																											
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var view_url 	 = ctxPaths+ '/agentInfo/get.ajax';
+	var pkId = getP('agentId');
+	$(function(){
+		if (pkId){
+			$.ajaxSubmit(view_url, {'agentId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$.dataInput($('.form-control-static'),rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}else{
+			Q_Alert_Fail('参数错误'); 
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

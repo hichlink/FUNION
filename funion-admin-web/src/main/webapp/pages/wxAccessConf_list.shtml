@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>wxAccessConf</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<!-- PAGE CONTENT BEGINS -->
+			<form id="queryForm" onsubmit="return false;">
+				<div class="widget-box">
+                        <div class="widget-header widget-header-flat search_tj_bar_tit">
+                            <h5 class="widget-title">查询条件</h5>
+                            <div class="widget-toolbar">
+                                <a href="javascript:;" data-action="collapse">
+                                    <i class="1 ace-icon fa fa-chevron-up bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row search_tj_bar">
+							<div class="col-xs-12">
+								<div class="center">
+                                    <div class="row">
+																																								                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">微信名称：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['wxName']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">获取到的凭证：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['accessToken']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">凭证有效时间：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['expiresTime']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																																																																																																																																																																																																																																																																																																																				</div>
+							</div>
+						</div>   
+                        <div class="bs_btn">
+						<button id="addBtn" class="btn btn-sm btn-success"><i class="ace-icon fa fa-hand-o-right bigger-120"></i>新增</button>
+						<button class="btn btn-sm" type="button" id="resetBtn">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							重 置
+						</button>
+						<button id="seachBtn" type="button" class="btn btn-purple btn-sm">查找<i class="ace-icon fa fa-search icon-on-right bigger-110"></i></button>
+						
+                        </div>	  
+                	</div>	
+				</div>
+			</form>
+			<div class="space-6"></div>
+			<table id="grid-table"></table>
+			<div id="grid-pager"></div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+	</div>
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var list_url  = ctxPaths+ '/wxAccessConf/query.ajax';
+	var delete_url   = ctxPaths+ '/wxAccessConf/delete.ajax';
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	$(function($) {
+				jqGrid_init($(grid_selector),pager_selector,{
+					url: list_url,
+					sortable : true,
+																									sortname : 'wxName',
+																																																																																																																																																																															sortorder:'desc',
+					colNames:[
+										'自增序列',
+										'微信名称',
+										'获取到的凭证',
+										'凭证有效时间',
+										'微信appid',
+										'微信appsecret',
+										'微信token',
+										'微信jsapiTicket',
+										'JS凭证有效时间',
+										'录入者ip',
+										'微信aeskey',
+										'微信支付商户号',
+										'支付回调URL',
+										'创建者',
+										'创建时间',
+										'修改者',
+										'修改时间',
+										'微信支付签名key',
+										''
+					],
+					colModel:[
+												   					{name:'seqId',index:'seqId', hidden:true},
+						   					   						   												{name:'wxName',index:'wxName', sortable:true,sortname : 'wx_name',width:100,formatter:formatName},
+													   					   						   												{name:'accessToken',index:'accessToken', sortable:true,sortname : 'access_token',width:100},
+													   					   						   												{name:'expiresTime',index:'expiresTime', sortable:true,sortname : 'expires_time',width:100},
+													   					   						   												{name:'appId',index:'appId', sortable:true,sortname : 'app_id',width:100},
+													   					   						   												{name:'appSecret',index:'appSecret', sortable:true,sortname : 'app_secret',width:100},
+													   					   						   												{name:'token',index:'token', sortable:true,sortname : 'token',width:100},
+													   					   						   												{name:'jsapiTicket',index:'jsapiTicket', sortable:true,sortname : 'jsapi_ticket',width:100},
+													   					   						   												{name:'jsapExpiresTime',index:'jsapExpiresTime', sortable:true,sortname : 'jsap_expires_time',width:100},
+													   					   						   												{name:'ip',index:'ip', sortable:true,sortname : 'ip',width:100},
+													   					   						   												{name:'aesKey',index:'aesKey', sortable:true,sortname : 'aes_key',width:100},
+													   					   						   												{name:'wxMerchantNo',index:'wxMerchantNo', sortable:true,sortname : 'wx_merchant_no',width:100},
+													   					   						   												{name:'wxPayCallbackUrl',index:'wxPayCallbackUrl', sortable:true,sortname : 'wx_pay_callback_url',width:100},
+													   					   						   												{name:'creator',index:'creator', sortable:true,sortname : 'creator',width:100},
+													   					   						   												{name:'createTime',index:'createTime', sortable:true,sortname : 'create_time',width:100},
+													   					   						   												{name:'updator',index:'updator', sortable:true,sortname : 'updator',width:100},
+													   					   						   												{name:'updateTime',index:'updateTime', sortable:true,sortname : 'update_time',width:100},
+													   					   						   												{name:'apiKey',index:'apiKey', sortable:true,sortname : 'api_key',width:100},
+													   					   					{name:'myac',index:'', width:120, fixed:true, sortable:false, resize:false,formatter:actionButtons}					
+					]
+				});
+				function formatName(cellvalue, options, rowObject){
+					return '<a href="javascript:;" onclick="viewEvent(\''+rowObject['seqId']+'\')">' + cellvalue + '</a>';
+				}
+				function actionButtons(cellvalue, options, rowObject){
+					return '<div >' + 
+								'<button onclick=\"editEvent('+rowObject['seqId']+')\" class=\"btn btn-xs btn-info\" data-rel=\"tooltip\" title=\"编辑\" >' +
+									'<i class=\"ace-icon fa fa-pencil bigger-120\"></i>' +
+								'</button>' + 
+								'<button onclick=\"deleteEvent('+rowObject['seqId']+')\" class=\"btn btn-xs btn-danger\" data-rel=\"tooltip\" title=\"删除\" >' +
+									'<i class=\"ace-icon fa fa-trash-o bigger-120\"></i>' +
+								'</button>'  + 
+							'</div>';
+				}
+				
+			});
+
+			function editEvent(id){
+				window.location.href = ctxPaths+'/pages/wxAccessConf_add.shtml?seqId=' + id;
+			};
+			function viewEvent(id){
+				window.location.href = ctxPaths+'/pages/wxAccessConf_view.shtml?seqId=' + id;
+			};
+			function deleteEvent(id){
+				Q_Confirm("是否要删除？",function(result) {
+					if(result){
+						$.ajaxSubmit(delete_url,{'seqId' : id}, function(data){
+							$(grid_selector).jqGrid('setGridParam',{page:1}).trigger("reloadGrid");
+						});
+					}
+				});
+			};
+			
+			add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'wxName' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'accessToken' : {
+	 						 					required:true,
+	 						 					maxlength: 1024
+					 },	 				 	 					 										'expiresTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'appId' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'appSecret' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'token' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'jsapiTicket' : {
+	 						 					maxlength: 128
+					 },	 				 	 					 										'jsapExpiresTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'ip' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'aesKey' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'wxMerchantNo' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'wxPayCallbackUrl' : {
+	 						 					maxlength: 512
+					 },	 				 	 					 										'creator' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'createTime' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'updator' : {
+	 						 					maxlength: 64
+					 },	 				 	 					 										'updateTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'apiKey' : {
+	 						 					maxlength: 128
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    $('#add-form-modal').modal2('hide');
+									$(grid_selector).trigger("reloadGrid");
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+			});
+			
+			$('#addBtn').on('click', function(){
+				window.location.href = ctxPaths+'/pages/wxAccessConf_add.shtml';
+			});
+			
+			$('#seachBtn').on('click', function(){
+				$(grid_selector).jqGrid('setGridParam',{postData: $('#queryForm').serializeJson(),page:1}).trigger("reloadGrid");
+			});
+			$('#resetBtn').on('click',function(){
+				resetForm($('#queryForm'));
+			});
+		</script>
+</body>
+</html>

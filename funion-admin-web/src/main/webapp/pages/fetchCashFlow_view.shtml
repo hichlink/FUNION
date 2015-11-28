@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>fetchCashFlow</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				fetchCashFlow
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					详情
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="agentId">
+							代理ID:
+							</label>
+							<div class="col-sm-7">
+								<p name="agentId" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="cashAmount">
+							提现金额:
+							</label>
+							<div class="col-sm-7">
+								<p name="cashAmount" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="remark">
+							备注:
+							</label>
+							<div class="col-sm-7">
+								<p name="remark" class="form-control-static"></p>
+							</div>
+						</div>
+																
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="type">
+							提现类型:
+							</label>
+							<div class="col-sm-7">
+								<p name="type" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="inputTime">
+							录入时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="inputTime" class="form-control-static"></p>
+							</div>
+						</div>
+																											
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var view_url 	 = ctxPaths+ '/fetchCashFlow/get.ajax';
+	var pkId = getP('flowId');
+	$(function(){
+		if (pkId){
+			$.ajaxSubmit(view_url, {'flowId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$.dataInput($('.form-control-static'),rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}else{
+			Q_Alert_Fail('参数错误'); 
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>wxAccessConf</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				wxAccessConf
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					详情
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="wxName">
+							微信名称:
+							</label>
+							<div class="col-sm-7">
+								<p name="wxName" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="expiresTime">
+							凭证有效时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="expiresTime" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="appSecret">
+							微信appsecret:
+							</label>
+							<div class="col-sm-7">
+								<p name="appSecret" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="jsapiTicket">
+							微信jsapiTicket:
+							</label>
+							<div class="col-sm-7">
+								<p name="jsapiTicket" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="ip">
+							录入者ip:
+							</label>
+							<div class="col-sm-7">
+								<p name="ip" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="wxMerchantNo">
+							微信支付商户号:
+							</label>
+							<div class="col-sm-7">
+								<p name="wxMerchantNo" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="creator">
+							创建者:
+							</label>
+							<div class="col-sm-7">
+								<p name="creator" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="updator">
+							修改者:
+							</label>
+							<div class="col-sm-7">
+								<p name="updator" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="apiKey">
+							微信支付签名key:
+							</label>
+							<div class="col-sm-7">
+								<p name="apiKey" class="form-control-static"></p>
+							</div>
+						</div>
+																
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="accessToken">
+							获取到的凭证:
+							</label>
+							<div class="col-sm-7">
+								<p name="accessToken" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="appId">
+							微信appid:
+							</label>
+							<div class="col-sm-7">
+								<p name="appId" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="token">
+							微信token:
+							</label>
+							<div class="col-sm-7">
+								<p name="token" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="jsapExpiresTime">
+							JS凭证有效时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="jsapExpiresTime" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="aesKey">
+							微信aeskey:
+							</label>
+							<div class="col-sm-7">
+								<p name="aesKey" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="wxPayCallbackUrl">
+							支付回调URL:
+							</label>
+							<div class="col-sm-7">
+								<p name="wxPayCallbackUrl" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="createTime">
+							创建时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="createTime" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="updateTime">
+							修改时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="updateTime" class="form-control-static"></p>
+							</div>
+						</div>
+																											
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var view_url 	 = ctxPaths+ '/wxAccessConf/get.ajax';
+	var pkId = getP('seqId');
+	$(function(){
+		if (pkId){
+			$.ajaxSubmit(view_url, {'seqId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$.dataInput($('.form-control-static'),rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}else{
+			Q_Alert_Fail('参数错误'); 
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

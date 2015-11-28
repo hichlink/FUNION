@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>agentInfo</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<!-- PAGE CONTENT BEGINS -->
+			<form id="queryForm" onsubmit="return false;">
+				<div class="widget-box">
+                        <div class="widget-header widget-header-flat search_tj_bar_tit">
+                            <h5 class="widget-title">查询条件</h5>
+                            <div class="widget-toolbar">
+                                <a href="javascript:;" data-action="collapse">
+                                    <i class="1 ace-icon fa fa-chevron-up bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row search_tj_bar">
+							<div class="col-xs-12">
+								<div class="center">
+                                    <div class="row">
+																																								                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">身份标识,随机生成唯一：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['identityId']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">代理别名：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['agentName']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">微信OpenID：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['openId']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																																																																																																																																																																																																																																																																																																																				</div>
+							</div>
+						</div>   
+                        <div class="bs_btn">
+						<button id="addBtn" class="btn btn-sm btn-success"><i class="ace-icon fa fa-hand-o-right bigger-120"></i>新增</button>
+						<button class="btn btn-sm" type="button" id="resetBtn">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							重 置
+						</button>
+						<button id="seachBtn" type="button" class="btn btn-purple btn-sm">查找<i class="ace-icon fa fa-search icon-on-right bigger-110"></i></button>
+						
+                        </div>	  
+                	</div>	
+				</div>
+			</form>
+			<div class="space-6"></div>
+			<table id="grid-table"></table>
+			<div id="grid-pager"></div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+	</div>
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var list_url  = ctxPaths+ '/agentInfo/query.ajax';
+	var delete_url   = ctxPaths+ '/agentInfo/delete.ajax';
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	$(function($) {
+				jqGrid_init($(grid_selector),pager_selector,{
+					url: list_url,
+					sortable : true,
+																									sortname : 'identityId',
+																																																																																																																																																																															sortorder:'desc',
+					colNames:[
+										'代理ID',
+										'身份标识,随机生成唯一',
+										'代理别名',
+										'微信OpenID',
+										'微信UnionID',
+										'微信昵称',
+										'微信头像',
+										'真实姓名',
+										'手机号码',
+										'邮箱地址',
+										'身份证号码',
+										'录入时间',
+										'录入者',
+										'修改时间',
+										'修改者',
+										'父结点',
+										'佣金比例 0-100',
+										'帐户余额',
+										''
+					],
+					colModel:[
+												   					{name:'agentId',index:'agentId', hidden:true},
+						   					   						   												{name:'identityId',index:'identityId', sortable:true,sortname : 'identity_id',width:100,formatter:formatName},
+													   					   						   												{name:'agentName',index:'agentName', sortable:true,sortname : 'agent_name',width:100},
+													   					   						   												{name:'openId',index:'openId', sortable:true,sortname : 'open_id',width:100},
+													   					   						   												{name:'unionId',index:'unionId', sortable:true,sortname : 'union_id',width:100},
+													   					   						   												{name:'nickName',index:'nickName', sortable:true,sortname : 'nick_name',width:100},
+													   					   						   												{name:'headImg',index:'headImg', sortable:true,sortname : 'head_img',width:100},
+													   					   						   												{name:'realName',index:'realName', sortable:true,sortname : 'real_name',width:100},
+													   					   						   												{name:'mobile',index:'mobile', sortable:true,sortname : 'mobile',width:100},
+													   					   						   												{name:'email',index:'email', sortable:true,sortname : 'email',width:100},
+													   					   						   												{name:'cardNo',index:'cardNo', sortable:true,sortname : 'card_no',width:100},
+													   					   						   												{name:'inputTime',index:'inputTime', sortable:true,sortname : 'input_time',width:100},
+													   					   						   												{name:'inputBy',index:'inputBy', sortable:true,sortname : 'input_by',width:100},
+													   					   						   												{name:'modifyTime',index:'modifyTime', sortable:true,sortname : 'modify_time',width:100},
+													   					   						   												{name:'modifier',index:'modifier', sortable:true,sortname : 'modifier',width:100},
+													   					   						   												{name:'parentId',index:'parentId', sortable:true,sortname : 'parent_id',width:100},
+													   					   						   												{name:'commisionRatio',index:'commisionRatio', sortable:true,sortname : 'commision_ratio',width:100},
+													   					   						   												{name:'balance',index:'balance', sortable:true,sortname : 'balance',width:100},
+													   					   					{name:'myac',index:'', width:120, fixed:true, sortable:false, resize:false,formatter:actionButtons}					
+					]
+				});
+				function formatName(cellvalue, options, rowObject){
+					return '<a href="javascript:;" onclick="viewEvent(\''+rowObject['agentId']+'\')">' + cellvalue + '</a>';
+				}
+				function actionButtons(cellvalue, options, rowObject){
+					return '<div >' + 
+								'<button onclick=\"editEvent('+rowObject['agentId']+')\" class=\"btn btn-xs btn-info\" data-rel=\"tooltip\" title=\"编辑\" >' +
+									'<i class=\"ace-icon fa fa-pencil bigger-120\"></i>' +
+								'</button>' + 
+								'<button onclick=\"deleteEvent('+rowObject['agentId']+')\" class=\"btn btn-xs btn-danger\" data-rel=\"tooltip\" title=\"删除\" >' +
+									'<i class=\"ace-icon fa fa-trash-o bigger-120\"></i>' +
+								'</button>'  + 
+							'</div>';
+				}
+				
+			});
+
+			function editEvent(id){
+				window.location.href = ctxPaths+'/pages/agentInfo_add.shtml?agentId=' + id;
+			};
+			function viewEvent(id){
+				window.location.href = ctxPaths+'/pages/agentInfo_view.shtml?agentId=' + id;
+			};
+			function deleteEvent(id){
+				Q_Confirm("是否要删除？",function(result) {
+					if(result){
+						$.ajaxSubmit(delete_url,{'agentId' : id}, function(data){
+							$(grid_selector).jqGrid('setGridParam',{page:1}).trigger("reloadGrid");
+						});
+					}
+				});
+			};
+			
+			add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'identityId' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'agentName' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'openId' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'unionId' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'nickName' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'headImg' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'realName' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'mobile' : {
+	 						 					required:true,
+	 						 					maxlength: 32
+					 },	 				 	 					 										'email' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'cardNo' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'inputTime' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'inputBy' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'modifyTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'modifier' : {
+	 						 					maxlength: 64
+					 },	 				 	 					 										'parentId' : {
+	 						 					maxlength: 20
+					 },	 				 	 					 										'commisionRatio' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'balance' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    $('#add-form-modal').modal2('hide');
+									$(grid_selector).trigger("reloadGrid");
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+			});
+			
+			$('#addBtn').on('click', function(){
+				window.location.href = ctxPaths+'/pages/agentInfo_add.shtml';
+			});
+			
+			$('#seachBtn').on('click', function(){
+				$(grid_selector).jqGrid('setGridParam',{postData: $('#queryForm').serializeJson(),page:1}).trigger("reloadGrid");
+			});
+			$('#resetBtn').on('click',function(){
+				resetForm($('#queryForm'));
+			});
+		</script>
+</body>
+</html>

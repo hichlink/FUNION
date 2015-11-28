@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>wxPayRecord</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				wxPayRecord
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					详情
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="outTradeNo">
+							支付流水号:
+							</label>
+							<div class="col-sm-7">
+								<p name="outTradeNo" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="deviceInfo">
+							设备号:
+							</label>
+							<div class="col-sm-7">
+								<p name="deviceInfo" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="nickName">
+							微信OpenID:
+							</label>
+							<div class="col-sm-7">
+								<p name="nickName" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="num">
+							数量:
+							</label>
+							<div class="col-sm-7">
+								<p name="num" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="remark">
+							备注:
+							</label>
+							<div class="col-sm-7">
+								<p name="remark" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="payCheckTime">
+							对账时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="payCheckTime" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="tradeType">
+							交易类型,取值如下：JSAPI，NATIVE，APP，WAP:
+							</label>
+							<div class="col-sm-7">
+								<p name="tradeType" class="form-control-static"></p>
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="payType">
+							支付类型 0:贺卡:
+							</label>
+							<div class="col-sm-7">
+								<p name="payType" class="form-control-static"></p>
+							</div>
+						</div>
+												 														
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="transactionId">
+							微信订单号:
+							</label>
+							<div class="col-sm-7">
+								<p name="transactionId" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="openId">
+							微信OpenID:
+							</label>
+							<div class="col-sm-7">
+								<p name="openId" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="price">
+							单价:
+							</label>
+							<div class="col-sm-7">
+								<p name="price" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="totalFee">
+							总金额:
+							</label>
+							<div class="col-sm-7">
+								<p name="totalFee" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="payTime">
+							支付时间:
+							</label>
+							<div class="col-sm-7">
+								<p name="payTime" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="payIp">
+							支付IP:
+							</label>
+							<div class="col-sm-7">
+								<p name="payIp" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="payStatus">
+							支付状态 0:提交待支付 1:支付成功 2:支付完成 3:支付失败:
+							</label>
+							<div class="col-sm-7">
+								<p name="payStatus" class="form-control-static"></p>
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-5 control-label no-padding-right text-right" for="recordId">
+							记录ID:
+							</label>
+							<div class="col-sm-7">
+								<p name="recordId" class="form-control-static"></p>
+							</div>
+						</div>
+																
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="col-md-offset-3 col-md-9">
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var view_url 	 = ctxPaths+ '/wxPayRecord/get.ajax';
+	var pkId = getP('paySeqId');
+	$(function(){
+		if (pkId){
+			$.ajaxSubmit(view_url, {'paySeqId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$.dataInput($('.form-control-static'),rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}else{
+			Q_Alert_Fail('参数错误'); 
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

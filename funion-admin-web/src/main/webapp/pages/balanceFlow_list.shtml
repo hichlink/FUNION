@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>balanceFlow</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<!-- PAGE CONTENT BEGINS -->
+			<form id="queryForm" onsubmit="return false;">
+				<div class="widget-box">
+                        <div class="widget-header widget-header-flat search_tj_bar_tit">
+                            <h5 class="widget-title">查询条件</h5>
+                            <div class="widget-toolbar">
+                                <a href="javascript:;" data-action="collapse">
+                                    <i class="1 ace-icon fa fa-chevron-up bigger-125"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row search_tj_bar">
+							<div class="col-xs-12">
+								<div class="center">
+                                    <div class="row">
+																																								                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">代理ID：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['agentId']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">记录ID：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['recordId']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																														                                        <div class="col-xs-4">
+                                            <span>
+                                            	<label class="col-xs-12 col-sm-3">结算类型 1:佣金：</label>
+												<div class="input-group col-xs-12 col-sm-9">
+                                                    <input name="params['type']" class="form-control search-query">
+                                                </div>
+                                            </span> 
+                                        </div>
+																																																																																								</div>
+							</div>
+						</div>   
+                        <div class="bs_btn">
+						<button id="addBtn" class="btn btn-sm btn-success"><i class="ace-icon fa fa-hand-o-right bigger-120"></i>新增</button>
+						<button class="btn btn-sm" type="button" id="resetBtn">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							重 置
+						</button>
+						<button id="seachBtn" type="button" class="btn btn-purple btn-sm">查找<i class="ace-icon fa fa-search icon-on-right bigger-110"></i></button>
+						
+                        </div>	  
+                	</div>	
+				</div>
+			</form>
+			<div class="space-6"></div>
+			<table id="grid-table"></table>
+			<div id="grid-pager"></div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+	</div>
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var list_url  = ctxPaths+ '/balanceFlow/query.ajax';
+	var delete_url   = ctxPaths+ '/balanceFlow/delete.ajax';
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	$(function($) {
+				jqGrid_init($(grid_selector),pager_selector,{
+					url: list_url,
+					sortable : true,
+																									sortname : 'agentId',
+																																																																	sortorder:'desc',
+					colNames:[
+										'流水ID',
+										'代理ID',
+										'记录ID',
+										'结算类型 1:佣金',
+										'佣金',
+										'录入时间',
+										'备注',
+										''
+					],
+					colModel:[
+												   					{name:'flowId',index:'flowId', hidden:true},
+						   					   						   												{name:'agentId',index:'agentId', sortable:true,sortname : 'agent_id',width:100,formatter:formatName},
+													   					   						   												{name:'recordId',index:'recordId', sortable:true,sortname : 'record_id',width:100},
+													   					   						   												{name:'type',index:'type', sortable:true,sortname : 'type',width:100},
+													   					   						   												{name:'commisionAmount',index:'commisionAmount', sortable:true,sortname : 'commision_amount',width:100},
+													   					   						   												{name:'inputTime',index:'inputTime', sortable:true,sortname : 'input_time',width:100},
+													   					   						   												{name:'remark',index:'remark', sortable:true,sortname : 'remark',width:100},
+													   					   					{name:'myac',index:'', width:120, fixed:true, sortable:false, resize:false,formatter:actionButtons}					
+					]
+				});
+				function formatName(cellvalue, options, rowObject){
+					return '<a href="javascript:;" onclick="viewEvent(\''+rowObject['flowId']+'\')">' + cellvalue + '</a>';
+				}
+				function actionButtons(cellvalue, options, rowObject){
+					return '<div >' + 
+								'<button onclick=\"editEvent('+rowObject['flowId']+')\" class=\"btn btn-xs btn-info\" data-rel=\"tooltip\" title=\"编辑\" >' +
+									'<i class=\"ace-icon fa fa-pencil bigger-120\"></i>' +
+								'</button>' + 
+								'<button onclick=\"deleteEvent('+rowObject['flowId']+')\" class=\"btn btn-xs btn-danger\" data-rel=\"tooltip\" title=\"删除\" >' +
+									'<i class=\"ace-icon fa fa-trash-o bigger-120\"></i>' +
+								'</button>'  + 
+							'</div>';
+				}
+				
+			});
+
+			function editEvent(id){
+				window.location.href = ctxPaths+'/pages/balanceFlow_add.shtml?flowId=' + id;
+			};
+			function viewEvent(id){
+				window.location.href = ctxPaths+'/pages/balanceFlow_view.shtml?flowId=' + id;
+			};
+			function deleteEvent(id){
+				Q_Confirm("是否要删除？",function(result) {
+					if(result){
+						$.ajaxSubmit(delete_url,{'flowId' : id}, function(data){
+							$(grid_selector).jqGrid('setGridParam',{page:1}).trigger("reloadGrid");
+						});
+					}
+				});
+			};
+			
+			add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'agentId' : {
+	 						 					maxlength: 20
+					 },	 				 	 					 										'recordId' : {
+	 						 					maxlength: 20
+					 },	 				 	 					 										'type' : {
+	 						 					maxlength: 11
+					 },	 				 	 					 										'commisionAmount' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'inputTime' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'remark' : {
+	 						 					maxlength: 512
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    $('#add-form-modal').modal2('hide');
+									$(grid_selector).trigger("reloadGrid");
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+			});
+			
+			$('#addBtn').on('click', function(){
+				window.location.href = ctxPaths+'/pages/balanceFlow_add.shtml';
+			});
+			
+			$('#seachBtn').on('click', function(){
+				$(grid_selector).jqGrid('setGridParam',{postData: $('#queryForm').serializeJson(),page:1}).trigger("reloadGrid");
+			});
+			$('#resetBtn').on('click',function(){
+				resetForm($('#queryForm'));
+			});
+		</script>
+</body>
+</html>

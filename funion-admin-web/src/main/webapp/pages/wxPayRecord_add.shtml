@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>wxPayRecord</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				wxPayRecord
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					新增/修改
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<input type="hidden" name="paySeqId"  id="paySeqId"/>
+		<input type="hidden" name="updId"  id="updId"/>
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="outTradeNo">
+																<span class="red">*</span>
+															支付流水号:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="outTradeNo" id="outTradeNo" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="deviceInfo">
+															设备号:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="deviceInfo" id="deviceInfo" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="nickName">
+																<span class="red">*</span>
+															微信OpenID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="nickName" id="nickName" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="num">
+																<span class="red">*</span>
+															数量:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="num" id="num" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="remark">
+																<span class="red">*</span>
+															备注:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="remark" id="remark" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="payCheckTime">
+															对账时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="payCheckTime" id="payCheckTime" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="tradeType">
+																<span class="red">*</span>
+															交易类型,取值如下：JSAPI，NATIVE，APP，WAP:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="tradeType" id="tradeType" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="payType">
+																<span class="red">*</span>
+															支付类型 0:贺卡:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="payType" id="payType" class="form-control input-sm" />
+							</div>
+						</div>
+												 														
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="transactionId">
+																<span class="red">*</span>
+															微信订单号:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="transactionId" id="transactionId" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="openId">
+																<span class="red">*</span>
+															微信OpenID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="openId" id="openId" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="price">
+																<span class="red">*</span>
+															单价:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="price" id="price" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="totalFee">
+																<span class="red">*</span>
+															总金额:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="totalFee" id="totalFee" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="payTime">
+																<span class="red">*</span>
+															支付时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="payTime" id="payTime" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="payIp">
+																<span class="red">*</span>
+															支付IP:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="payIp" id="payIp" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="payStatus">
+																<span class="red">*</span>
+															支付状态 0:提交待支付 1:支付成功 2:支付完成 3:支付失败:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="payStatus" id="payStatus" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="recordId">
+																<span class="red">*</span>
+															记录ID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="recordId" id="recordId" class="form-control input-sm" />
+							</div>
+						</div>
+																
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="center">
+							<button class="btn btn-info" type="submit" id="submitButton">
+								<i class="ace-icon fa fa-check bigger-110"></i>
+								保 存
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" id="resetBtn">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								重 置
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-arrow-left"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var update_url   = ctxPaths+ '/wxPayRecord/add.ajax';
+	var view_url 	 = ctxPaths+ '/wxPayRecord/get.ajax';
+	var pkId = getP('paySeqId');
+	$(function(){
+		var add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'outTradeNo' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'transactionId' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'deviceInfo' : {
+	 						 					maxlength: 32
+					 },	 				 	 					 										'openId' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'nickName' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'price' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'num' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'totalFee' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'remark' : {
+	 						 					required:true,
+	 						 					maxlength: 512
+					 },	 				 	 					 										'payTime' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'payCheckTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'payIp' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'tradeType' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'payStatus' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'payType' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'recordId' : {
+	 						 					required:true,
+	 						 					maxlength: 20
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    Q_Alert('新增成功',function(){
+										location.href = ctxPaths+'/pages/wxPayRecord_list.shtml';
+									});
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+	    });	
+		$('#resetBtn').on('click',function(){
+			resetForm($('#add-form'),add_validator);
+		});
+		if (pkId){
+			$('#updId').val(pkId);
+			$.ajaxSubmit(view_url, {'paySeqId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$('#add-form').json2Form2(rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

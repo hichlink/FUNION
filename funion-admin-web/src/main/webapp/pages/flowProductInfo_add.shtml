@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>flowProductInfo</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				flowProductInfo
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					新增/修改
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<input type="hidden" name="productId"  id="productId"/>
+		<input type="hidden" name="updId"  id="updId"/>
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="productName">
+																<span class="red">*</span>
+															产品名称:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="productName" id="productName" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="packageId">
+																<span class="red">*</span>
+															流量包ID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="packageId" id="packageId" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="operatorCode">
+																<span class="red">*</span>
+															对应运营商产品ID,YD:移动　LT:联通　DX:电信:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="operatorCode" id="operatorCode" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="settlementPrice">
+																<span class="red">*</span>
+															结算价格:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="settlementPrice" id="settlementPrice" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="remark">
+															备注:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="remark" id="remark" class="form-control input-sm" />
+							</div>
+						</div>
+																
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="productCode">
+																<span class="red">*</span>
+															产品代码:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="productCode" id="productCode" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="zone">
+																<span class="red">*</span>
+															适用区域:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="zone" id="zone" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="costPrice">
+																<span class="red">*</span>
+															原价格:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="costPrice" id="costPrice" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="operatorPrice">
+																<span class="red">*</span>
+															运营商价格:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="operatorPrice" id="operatorPrice" class="form-control input-sm" />
+							</div>
+						</div>
+																											
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="center">
+							<button class="btn btn-info" type="submit" id="submitButton">
+								<i class="ace-icon fa fa-check bigger-110"></i>
+								保 存
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" id="resetBtn">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								重 置
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-arrow-left"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var update_url   = ctxPaths+ '/flowProductInfo/add.ajax';
+	var view_url 	 = ctxPaths+ '/flowProductInfo/get.ajax';
+	var pkId = getP('productId');
+	$(function(){
+		var add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'productName' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'productCode' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'packageId' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'zone' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'operatorCode' : {
+	 						 					required:true,
+	 						 					maxlength: 32
+					 },	 				 	 					 										'costPrice' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'settlementPrice' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'operatorPrice' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'remark' : {
+	 						 					maxlength: 256
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    Q_Alert('新增成功',function(){
+										location.href = ctxPaths+'/pages/flowProductInfo_list.shtml';
+									});
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+	    });	
+		$('#resetBtn').on('click',function(){
+			resetForm($('#add-form'),add_validator);
+		});
+		if (pkId){
+			$('#updId').val(pkId);
+			$.ajaxSubmit(view_url, {'productId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$('#add-form').json2Form2(rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>

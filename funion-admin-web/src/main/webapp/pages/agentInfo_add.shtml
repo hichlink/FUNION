@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<!--#include virtual="/root.jsp"  -->
+	<title>agentInfo</title>
+	<!--#include virtual="/include.html"  -->
+</head>
+<body>
+	<div class="page-content">
+		<!-- 新增活动按钮 -->
+		<div class="table-responsive">
+			<div class="page-header">
+			<h1>
+				agentInfo
+				<small> <i class="ace-icon fa fa-angle-double-right"></i>
+					新增/修改
+				</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" role="form"  id="add-form" onsubmit="return false;">
+		<input type="hidden" name="agentId"  id="agentId"/>
+		<input type="hidden" name="updId"  id="updId"/>
+		<div class="row">
+			
+			<div class="col-xs-6">
+				
+						 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="identityId">
+																<span class="red">*</span>
+															身份标识,随机生成唯一:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="identityId" id="identityId" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="openId">
+																<span class="red">*</span>
+															微信OpenID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="openId" id="openId" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="nickName">
+															微信昵称:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="nickName" id="nickName" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="realName">
+																<span class="red">*</span>
+															真实姓名:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="realName" id="realName" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="email">
+																<span class="red">*</span>
+															邮箱地址:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="email" id="email" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="inputTime">
+																<span class="red">*</span>
+															录入时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="inputTime" id="inputTime" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="modifyTime">
+															修改时间:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="modifyTime" id="modifyTime" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="parentId">
+															父结点:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="parentId" id="parentId" class="form-control input-sm" />
+							</div>
+						</div>
+												 										 										<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="balance">
+																<span class="red">*</span>
+															帐户余额:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="balance" id="balance" class="form-control input-sm" />
+							</div>
+						</div>
+																
+					
+				
+			</div>
+			<div class="col-xs-6">
+				
+																																							<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="agentName">
+																<span class="red">*</span>
+															代理别名:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="agentName" id="agentName" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="unionId">
+															微信UnionID:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="unionId" id="unionId" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="headImg">
+															微信头像:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="headImg" id="headImg" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="mobile">
+																<span class="red">*</span>
+															手机号码:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="mobile" id="mobile" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="cardNo">
+																<span class="red">*</span>
+															身份证号码:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="cardNo" id="cardNo" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="inputBy">
+																<span class="red">*</span>
+															录入者:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="inputBy" id="inputBy" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="modifier">
+															修改者:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="modifier" id="modifier" class="form-control input-sm" />
+							</div>
+						</div>
+																																		<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right text-right" for="commisionRatio">
+																<span class="red">*</span>
+															佣金比例 0-100:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="commisionRatio" id="commisionRatio" class="form-control input-sm" />
+							</div>
+						</div>
+																											
+					
+				
+			</div>
+				
+			
+		</div>
+		<div class="clearfix form-actions">
+						<div class="center">
+							<button class="btn btn-info" type="submit" id="submitButton">
+								<i class="ace-icon fa fa-check bigger-110"></i>
+								保 存
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" id="resetBtn">
+								<i class="ace-icon fa fa-undo bigger-110"></i>
+								重 置
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="button" onclick="javascript:history.back();">
+								<i class="ace-icon fa fa-arrow-left"></i>
+								返 回
+							</button>
+						</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--#include virtual="/include_footer.html"  -->
+
+	<script type="text/javascript">
+	var update_url   = ctxPaths+ '/agentInfo/add.ajax';
+	var view_url 	 = ctxPaths+ '/agentInfo/get.ajax';
+	var pkId = getP('agentId');
+	$(function(){
+		var add_validator = $('#add-form').validate({
+					rules: {
+							 						 					 										'identityId' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'agentName' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'openId' : {
+	 						 					required:true,
+	 						 					maxlength: 256
+					 },	 				 	 					 										'unionId' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'nickName' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'headImg' : {
+	 						 					maxlength: 256
+					 },	 				 	 					 										'realName' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'mobile' : {
+	 						 					required:true,
+	 						 					maxlength: 32
+					 },	 				 	 					 										'email' : {
+	 						 					required:true,
+	 						 					maxlength: 128
+					 },	 				 	 					 										'cardNo' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'inputTime' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 },	 				 	 					 										'inputBy' : {
+	 						 					required:true,
+	 						 					maxlength: 64
+					 },	 				 	 					 										'modifyTime' : {
+	 						 					maxlength: 0
+					 },	 				 	 					 										'modifier' : {
+	 						 					maxlength: 64
+					 },	 				 	 					 										'parentId' : {
+	 						 					maxlength: 20
+					 },	 				 	 					 										'commisionRatio' : {
+	 						 					required:true,
+	 						 					maxlength: 11
+					 },	 				 	 					 										'balance' : {
+	 						 					required:true,
+	 						 					maxlength: 0
+					 }	 				 	 									},
+					submitHandler: function (form) {
+						$.ajaxSubmit(update_url,$(form).serializeJson(),function(data){
+								if(data.success == true){
+								    Q_Alert('新增成功',function(){
+										location.href = ctxPaths+'/pages/agentInfo_list.shtml';
+									});
+								}else{
+									Q_Alert_Fail(data.message); 
+								}
+						});
+						return false;		
+					}
+	    });	
+		$('#resetBtn').on('click',function(){
+			resetForm($('#add-form'),add_validator);
+		});
+		if (pkId){
+			$('#updId').val(pkId);
+			$.ajaxSubmit(view_url, {'agentId':pkId}, function(rtn) {
+				if (rtn.success) {
+					$('#add-form').json2Form2(rtn.data);
+				} else {
+					Q_Alert_Fail(data.message); 
+				}
+			});
+		}
+	})
+	
+	
+	</script>
+</body>
+</html>
