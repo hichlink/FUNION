@@ -1,0 +1,127 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>微信支付页面</title>
+<#include "root.ftl" encoding="utf-8">
+<style>
+.order {
+	margin-top: 14px
+}
+
+.nav_title {
+	margin-left: 14px;
+	font-size: 0.8em;
+	color: #a5a0a4
+}
+
+.c_gray {
+	color: #a5a0a4
+}
+
+.c_pink {
+	color: #f56b93
+}
+
+.order .navigate {
+	line-height: 48px;
+}
+
+.nav_icon {
+	width: 28px;
+	height: 28px;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 14px;
+	margin: auto;
+}
+
+.pl_34 {
+	padding-left: 34px
+}
+
+.count {
+	border: 1px solid #989898;
+	line-height: 34px;
+	margin-top: 6px;
+	border-radius: 4px;
+	overflow: hidden;
+	background-color: #ececec;
+}
+
+.count a {
+	display: inline-block;
+	text-align: center
+}
+
+.btn_count {
+	width: 34px;
+	font-size: 16px;
+}
+
+.btn_count:active {
+	background-color: #BBBBBB
+}
+
+.num {
+	width: 3em;
+	border-left: 1px solid #989898;
+	border-right: 1px solid #989898;
+	border-top: none;
+	border-bottom: none;
+	line-height: 34px;
+	text-align: center;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div class="order">
+		<p class="nav_title">结算信息</p>
+		<input type="hidden" name="prepayId" value="${flowProductDTO.prepayId}"/>
+		<div class="navigate">
+			<div class="fl c_gray">商品名</div>
+			<div id="goodsName" class="fr ">${flowProductDTO.productName}</div>
+		</div>
+		<div class="navigate">
+			<div class="fl c_gray">售价</div>
+			<div id="price" class="fr">${flowProductDTO.settlementPrice}</div>
+		</div>
+		<div class="navigate">
+			<div class="fl c_gray">数量</div>
+			<div class="fr">
+				<div class="count">1</div>
+			</div>
+		</div>
+		<div class="navigate">
+			<div class="fl c_pink">合计支付</div>
+			<div class="fr c_pink">${flowProductDTO.totalPrice}</div>
+		</div>
+	</div>
+	<div class="order">
+		<p class="nav_title">支付方式</p>
+
+		<div class="navigate">
+			<div class="fl c_gray pl_34">
+				<span class="nav_icon"><img
+					src="${ctx}/images/icon_wechat.png" /></span>微信支付
+			</div>
+			<div class="fr ">
+				<a class="select select_on"></a>
+			</div>
+		</div>
+	</div>
+	<div class="row_90">
+		<a class="btn btn_l1" id="payMoney">安全支付</a>
+	</div>
+	<script src="${ctx}/assets/js/jquery.min.js"></script>
+	<!--<![endif]-->
+	<script src="${ctx}/assets/js/amazeui.min.js"></script>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="${ctx}/js/app/pay.js"></script>
+</body>
+</html>

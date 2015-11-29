@@ -1,0 +1,146 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Amaze UI Admin index Examples</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+<link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+	<div class="order">
+		<p class="nav_title">结算信息</p>
+
+		<div class="navigate">
+			<div class="fl c_gray">商品名</div>
+			<div id="goodsName" class="fr "></div>
+		</div>
+		<div class="navigate">
+			<div class="fl c_gray">售价</div>
+			<div id="price" class="fr"></div>
+		</div>
+		<div class="navigate">
+			<div class="fl c_gray">数量</div>
+			<div class="fr">
+				<div class="count">1</div>
+			</div>
+		</div>
+		<div class="navigate">
+			<div class="fl c_pink">合计支付</div>
+			<div id="totalPlay" class="fr c_pink"></div>
+		</div>
+	</div>
+	<div class="order">
+		<p class="nav_title">支付方式</p>
+
+		<div class="navigate">
+			<div class="fl c_gray pl_34">
+				<span class="nav_icon"><img
+					src="act/greeting/images/icon_wechat.png" /></span>微信支付
+			</div>
+			<div class="fr ">
+				<a class="select select_on"></a>
+			</div>
+		</div>
+	</div>
+	<div class="row_90">
+		<a class="btn btn_l1" id="payMoney">安全支付</a>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<!--<![endif]-->
+	<script src="assets/js/amazeui.min.js"></script>
+	<script type="text/javascript"
+		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="js/commonJs.js"></script>
+	<script type="text/javascript">
+		var flag = true;
+		$.ajax({
+			url : ctxPaths + '/greetingCard/' + actId + '/getGreeting.do',
+			type : 'get',
+			dataType : 'json',
+			success : function(data) { 
+				if (data.success) {
+					var greeting = data.data;
+					$("#goodsName").html(greeting.cardName);
+					$('#totalPlay').html("￥" + greeting.price);
+					$('#price').html(greeting.price);
+					$('#viewFlow').html(data.data.flowAmount);
+				}
+			}
+		})
+
+		$('#payMoney').click(
+				function() {
+					if (!actId) {
+						return;
+					}
+
+					if (flag) {
+						return;
+					}
+					flag = true;
+					var num = $("#quantity").val();
+					$.ajax({
+						url : ctxPaths
+								+ '/greetingCard/createGreetingCrad.do?actId='
+								+ actId + '&num=' + num,
+						type : 'get',
+						success : function(data) {
+							if (data.success) {
+								if (data.data.isPay) {
+									pay(data.data.prepayId,
+											data.data.myGreetingCard.uuid);
+								}
+							} else if (data.code == "302") {
+								window.location.href = data.message;
+							} else {
+								alert(data.message);
+							}
+							flag = false;
+						}
+					});
+				})
+
+		function pay(prepayId, uuid) {
+			$.ajax({
+				url : ctxPaths + '/greetingCard/' + prepayId
+						+ '/sendPayRequest.do',
+				type : 'get',
+				dataType : 'json',
+				aysnc : false,
+				success : function(data) {
+					if (data.success) {
+						var obj = data.data;
+						wx.chooseWXPay({
+							timestamp : obj.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+							nonceStr : obj.nonceStr, // 支付签名随机串，不长于 32 位
+							package : obj.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+							signType : obj.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+							paySign : obj.paySign, // 支付签名
+							success : function(res) {
+								window.location.href = ctxPaths + "/"
+										+ getP('tempUrl')
+										+ "/mycards.shtml?greetingActId="
+										+ greetingActId;
+							}
+						});
+						wx.error(function(res) {
+							alert(res.err_msg);
+						});
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>
