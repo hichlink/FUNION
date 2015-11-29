@@ -1,248 +1,264 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hichlink.funion.common.dao.WxPayRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.hichlink.funion.common.entity.WxPayRecord" >
-    <id column="pay_seq_id" property="paySeqId" jdbcType="BIGINT" />
-    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
-    <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
-    <result column="device_info" property="deviceInfo" jdbcType="VARCHAR" />
-    <result column="open_id" property="openId" jdbcType="VARCHAR" />
-    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="num" property="num" jdbcType="INTEGER" />
-    <result column="total_fee" property="totalFee" jdbcType="DECIMAL" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
-    <result column="pay_check_time" property="payCheckTime" jdbcType="TIMESTAMP" />
-    <result column="pay_ip" property="payIp" jdbcType="VARCHAR" />
-    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
-    <result column="pay_status" property="payStatus" jdbcType="INTEGER" />
-    <result column="pay_type" property="payType" jdbcType="INTEGER" />
-    <result column="record_id" property="recordId" jdbcType="BIGINT" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <!--例子:<if test="params['name'] != null and  params['name'] != ''">and name=#{params.name}</if>-->
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    pay_seq_id, out_trade_no, transaction_id, device_info, open_id, nick_name, price, 
-    num, total_fee, remark, pay_time, pay_check_time, pay_ip, trade_type, pay_status, 
-    pay_type, record_id
-  </sql>
-  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page" >
-    select
-    <include refid="Base_Column_List" />
-    from wx_pay_record
-    <if test="params != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from wx_pay_record
-    where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from wx_pay_record
-    where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.hichlink.funion.common.entity.WxPayRecord" >
-    insert into wx_pay_record (pay_seq_id, out_trade_no, transaction_id, 
-      device_info, open_id, nick_name, 
-      price, num, total_fee, 
-      remark, pay_time, pay_check_time, 
-      pay_ip, trade_type, pay_status, 
-      pay_type, record_id)
-    values (#{paySeqId,jdbcType=BIGINT}, #{outTradeNo,jdbcType=VARCHAR}, #{transactionId,jdbcType=VARCHAR}, 
-      #{deviceInfo,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, #{totalFee,jdbcType=DECIMAL}, 
-      #{remark,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, #{payCheckTime,jdbcType=TIMESTAMP}, 
-      #{payIp,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, #{payStatus,jdbcType=INTEGER}, 
-      #{payType,jdbcType=INTEGER}, #{recordId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.WxPayRecord" >
-    insert into wx_pay_record
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="paySeqId != null" >
-        pay_seq_id,
-      </if>
-      <if test="outTradeNo != null" >
-        out_trade_no,
-      </if>
-      <if test="transactionId != null" >
-        transaction_id,
-      </if>
-      <if test="deviceInfo != null" >
-        device_info,
-      </if>
-      <if test="openId != null" >
-        open_id,
-      </if>
-      <if test="nickName != null" >
-        nick_name,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="num != null" >
-        num,
-      </if>
-      <if test="totalFee != null" >
-        total_fee,
-      </if>
-      <if test="remark != null" >
-        remark,
-      </if>
-      <if test="payTime != null" >
-        pay_time,
-      </if>
-      <if test="payCheckTime != null" >
-        pay_check_time,
-      </if>
-      <if test="payIp != null" >
-        pay_ip,
-      </if>
-      <if test="tradeType != null" >
-        trade_type,
-      </if>
-      <if test="payStatus != null" >
-        pay_status,
-      </if>
-      <if test="payType != null" >
-        pay_type,
-      </if>
-      <if test="recordId != null" >
-        record_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="paySeqId != null" >
-        #{paySeqId,jdbcType=BIGINT},
-      </if>
-      <if test="outTradeNo != null" >
-        #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="transactionId != null" >
-        #{transactionId,jdbcType=VARCHAR},
-      </if>
-      <if test="deviceInfo != null" >
-        #{deviceInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="openId != null" >
-        #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="num != null" >
-        #{num,jdbcType=INTEGER},
-      </if>
-      <if test="totalFee != null" >
-        #{totalFee,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="payTime != null" >
-        #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payCheckTime != null" >
-        #{payCheckTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payIp != null" >
-        #{payIp,jdbcType=VARCHAR},
-      </if>
-      <if test="tradeType != null" >
-        #{tradeType,jdbcType=VARCHAR},
-      </if>
-      <if test="payStatus != null" >
-        #{payStatus,jdbcType=INTEGER},
-      </if>
-      <if test="payType != null" >
-        #{payType,jdbcType=INTEGER},
-      </if>
-      <if test="recordId != null" >
-        #{recordId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hichlink.funion.common.entity.WxPayRecord" >
-    update wx_pay_record
-    <set >
-      <if test="outTradeNo != null" >
-        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="transactionId != null" >
-        transaction_id = #{transactionId,jdbcType=VARCHAR},
-      </if>
-      <if test="deviceInfo != null" >
-        device_info = #{deviceInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="openId != null" >
-        open_id = #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        nick_name = #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="num != null" >
-        num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="totalFee != null" >
-        total_fee = #{totalFee,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="payTime != null" >
-        pay_time = #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payCheckTime != null" >
-        pay_check_time = #{payCheckTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payIp != null" >
-        pay_ip = #{payIp,jdbcType=VARCHAR},
-      </if>
-      <if test="tradeType != null" >
-        trade_type = #{tradeType,jdbcType=VARCHAR},
-      </if>
-      <if test="payStatus != null" >
-        pay_status = #{payStatus,jdbcType=INTEGER},
-      </if>
-      <if test="payType != null" >
-        pay_type = #{payType,jdbcType=INTEGER},
-      </if>
-      <if test="recordId != null" >
-        record_id = #{recordId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hichlink.funion.common.entity.WxPayRecord" >
-    update wx_pay_record
-    set out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      transaction_id = #{transactionId,jdbcType=VARCHAR},
-      device_info = #{deviceInfo,jdbcType=VARCHAR},
-      open_id = #{openId,jdbcType=VARCHAR},
-      nick_name = #{nickName,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      num = #{num,jdbcType=INTEGER},
-      total_fee = #{totalFee,jdbcType=DECIMAL},
-      remark = #{remark,jdbcType=VARCHAR},
-      pay_time = #{payTime,jdbcType=TIMESTAMP},
-      pay_check_time = #{payCheckTime,jdbcType=TIMESTAMP},
-      pay_ip = #{payIp,jdbcType=VARCHAR},
-      trade_type = #{tradeType,jdbcType=VARCHAR},
-      pay_status = #{payStatus,jdbcType=INTEGER},
-      pay_type = #{payType,jdbcType=INTEGER},
-      record_id = #{recordId,jdbcType=BIGINT}
-    where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
-  </update>
+<mapper namespace="com.hichlink.funion.common.dao.WxPayRecordMapper">
+	<resultMap id="BaseResultMap" type="com.hichlink.funion.common.entity.WxPayRecord">
+		<id column="pay_seq_id" property="paySeqId" jdbcType="BIGINT" />
+		<result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+		<result column="transaction_id" property="transactionId"
+			jdbcType="VARCHAR" />
+		<result column="device_info" property="deviceInfo" jdbcType="VARCHAR" />
+		<result column="open_id" property="openId" jdbcType="VARCHAR" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+		<result column="total_fee" property="totalFee" jdbcType="DECIMAL" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="pay_check_time" property="payCheckTime"
+			jdbcType="TIMESTAMP" />
+		<result column="pay_ip" property="payIp" jdbcType="VARCHAR" />
+		<result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+		<result column="pay_status" property="payStatus" jdbcType="INTEGER" />
+		<result column="pay_type" property="payType" jdbcType="INTEGER" />
+		<result column="record_id" property="recordId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<!--例子:<if test="params['name'] != null and params['name'] != ''">and 
+				name=#{params.name}</if> -->
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		pay_seq_id, out_trade_no, transaction_id, device_info, open_id, nick_name, price,
+		num, total_fee, remark, pay_time, pay_check_time, pay_ip, trade_type,
+		pay_status,
+		pay_type, record_id
+	</sql>
+	<select id="pageQuery" resultMap="BaseResultMap"
+		parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page">
+		select
+		<include refid="Base_Column_List" />
+		from wx_pay_record
+		<if test="params != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from wx_pay_record
+		where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
+	</select>
+	<select id="selectByOutTradeNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from wx_pay_record
+		where out_trade_no = #{outTradeNo}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from wx_pay_record
+		where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hichlink.funion.common.entity.WxPayRecord">
+		insert into wx_pay_record (pay_seq_id, out_trade_no, transaction_id,
+		device_info, open_id, nick_name,
+		price, num, total_fee,
+		remark, pay_time, pay_check_time,
+		pay_ip, trade_type, pay_status,
+		pay_type, record_id)
+		values (#{paySeqId,jdbcType=BIGINT}, #{outTradeNo,jdbcType=VARCHAR},
+		#{transactionId,jdbcType=VARCHAR},
+		#{deviceInfo,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
+		#{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER},
+		#{totalFee,jdbcType=DECIMAL},
+		#{remark,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, #{payCheckTime,jdbcType=TIMESTAMP},
+		#{payIp,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR},
+		#{payStatus,jdbcType=INTEGER},
+		#{payType,jdbcType=INTEGER}, #{recordId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.WxPayRecord">
+		insert into wx_pay_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="paySeqId != null">
+				pay_seq_id,
+			</if>
+			<if test="outTradeNo != null">
+				out_trade_no,
+			</if>
+			<if test="transactionId != null">
+				transaction_id,
+			</if>
+			<if test="deviceInfo != null">
+				device_info,
+			</if>
+			<if test="openId != null">
+				open_id,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="totalFee != null">
+				total_fee,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="payTime != null">
+				pay_time,
+			</if>
+			<if test="payCheckTime != null">
+				pay_check_time,
+			</if>
+			<if test="payIp != null">
+				pay_ip,
+			</if>
+			<if test="tradeType != null">
+				trade_type,
+			</if>
+			<if test="payStatus != null">
+				pay_status,
+			</if>
+			<if test="payType != null">
+				pay_type,
+			</if>
+			<if test="recordId != null">
+				record_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="paySeqId != null">
+				#{paySeqId,jdbcType=BIGINT},
+			</if>
+			<if test="outTradeNo != null">
+				#{outTradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="transactionId != null">
+				#{transactionId,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceInfo != null">
+				#{deviceInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="openId != null">
+				#{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				#{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=INTEGER},
+			</if>
+			<if test="totalFee != null">
+				#{totalFee,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="payTime != null">
+				#{payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payCheckTime != null">
+				#{payCheckTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payIp != null">
+				#{payIp,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeType != null">
+				#{tradeType,jdbcType=VARCHAR},
+			</if>
+			<if test="payStatus != null">
+				#{payStatus,jdbcType=INTEGER},
+			</if>
+			<if test="payType != null">
+				#{payType,jdbcType=INTEGER},
+			</if>
+			<if test="recordId != null">
+				#{recordId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hichlink.funion.common.entity.WxPayRecord">
+		update wx_pay_record
+		<set>
+			<if test="outTradeNo != null">
+				out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="transactionId != null">
+				transaction_id = #{transactionId,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceInfo != null">
+				device_info = #{deviceInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="openId != null">
+				open_id = #{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=INTEGER},
+			</if>
+			<if test="totalFee != null">
+				total_fee = #{totalFee,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="payTime != null">
+				pay_time = #{payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payCheckTime != null">
+				pay_check_time = #{payCheckTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payIp != null">
+				pay_ip = #{payIp,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeType != null">
+				trade_type = #{tradeType,jdbcType=VARCHAR},
+			</if>
+			<if test="payStatus != null">
+				pay_status = #{payStatus,jdbcType=INTEGER},
+			</if>
+			<if test="payType != null">
+				pay_type = #{payType,jdbcType=INTEGER},
+			</if>
+			<if test="recordId != null">
+				record_id = #{recordId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hichlink.funion.common.entity.WxPayRecord">
+		update wx_pay_record
+		set out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+		transaction_id = #{transactionId,jdbcType=VARCHAR},
+		device_info = #{deviceInfo,jdbcType=VARCHAR},
+		open_id = #{openId,jdbcType=VARCHAR},
+		nick_name = #{nickName,jdbcType=VARCHAR},
+		price = #{price,jdbcType=DECIMAL},
+		num = #{num,jdbcType=INTEGER},
+		total_fee = #{totalFee,jdbcType=DECIMAL},
+		remark = #{remark,jdbcType=VARCHAR},
+		pay_time = #{payTime,jdbcType=TIMESTAMP},
+		pay_check_time = #{payCheckTime,jdbcType=TIMESTAMP},
+		pay_ip = #{payIp,jdbcType=VARCHAR},
+		trade_type = #{tradeType,jdbcType=VARCHAR},
+		pay_status = #{payStatus,jdbcType=INTEGER},
+		pay_type = #{payType,jdbcType=INTEGER},
+		record_id = #{recordId,jdbcType=BIGINT}
+		where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
+	</update>
 </mapper>

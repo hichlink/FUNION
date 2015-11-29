@@ -20,6 +20,13 @@
             <artifactId>bval-jsr303</artifactId>
             <version>0.4_1</version>
         </dependency>
+         <dependency>
+            <groupId>com.aspire.webbas</groupId>
+            <artifactId>webbas-components-core</artifactId>
+            <version>2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/webbas-components-core-2.0-SNAPSHOT.jar</systemPath>
+        </dependency>
 	   <dependency>
             <groupId>com.aspire.webbas</groupId>
             <artifactId>webbas-portal-authapi</artifactId>
@@ -29,10 +36,10 @@
         </dependency>
         <dependency>
             <groupId>com.aspire.webbas</groupId>
-            <artifactId>webbas-portal-client</artifactId>
+            <artifactId>webbas-components-configuration</artifactId>
             <version>2.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/webbas-portal-client-2.0-SNAPSHOT.jar</systemPath>
+            <systemPath>${project.basedir}/lib/webbas-components-configuration-2.0-SNAPSHOT.jar</systemPath>
         </dependency>
 
 		<dependency>
