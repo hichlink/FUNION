@@ -1,6 +1,7 @@
 package com.hichlink.funion.portal.web;
 
 import java.net.URLEncoder;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,7 +65,7 @@ public class RegisterController extends BaseController {
 	public ModelAndView enter(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(defaultValue = "") String code) {
 		OpenUserinfo openUserinfo = new OpenUserinfo();
-		openUserinfo.setOpenid("1111111111");
+		openUserinfo.setOpenid(UUID.randomUUID().toString().replaceAll("-", ""));
 		openUserinfo.setHeadimgurl("");
 		SessionUtil.setRegisterWxUserInfo(openUserinfo);
 		return new ModelAndView("register", "userInfo", openUserinfo);

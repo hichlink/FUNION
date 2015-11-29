@@ -1,7 +1,7 @@
 $(function() {
 	var MOBILE_PATTERN = /^((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8}$/;
 
-	$("#mobile").on('change', function() {
+	$("#mobile").on('keyup', function() {
 		getFlowPackageByMobile();
 	});
 	$("#payBtn").on('click', function() {

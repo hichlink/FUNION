@@ -9,7 +9,7 @@
 <body>
 <header class="am-topbar admin-header">
   <div class="am-topbar-brand">
-    <strong>流量联盟</strong> <small>我的主页</small>
+    <strong>流量联盟</strong> <small>${agentInfo.realName}的主页</small>
   </div>
 
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>

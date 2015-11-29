@@ -1,6 +1,11 @@
 $(function() {
 	var $form = $("#registerForm");
-	$("#registerBtn").on('click',post);
+	$("#registerBtn").on('click', function() {
+		var result = $form.validator('isFormValid');
+		if (result) {
+			post();
+		}
+	});
 	var submitFlag = false;
 
 	function post() {
