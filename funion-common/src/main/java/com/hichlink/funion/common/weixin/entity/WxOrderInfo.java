@@ -76,7 +76,7 @@ public class WxOrderInfo {
 	 * 交易类型
 	 */
 	private String tradeType = "JSAPI";
-	
+
 	/**
 	 * 商品ID
 	 */
@@ -253,7 +253,10 @@ public class WxOrderInfo {
 	public Map<String, String> getFieldMap() {
 		Map<String, String> map = new TreeMap<String, String>();
 		map.put("appid", this.getAppId());
-		map.put("attach", this.getAttach());
+		if (StringUtils.isNotBlank(this.getAttach())) {
+			map.put("attach", this.getAttach());
+		}
+
 		if (StringUtils.isNotBlank(this.getDeviceInfo())) {
 			map.put("device_info", this.getDeviceInfo());
 		}

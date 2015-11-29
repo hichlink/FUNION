@@ -58,7 +58,7 @@
     delete from agent_info
     where agent_id = #{agentId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.hichlink.funion.common.entity.AgentInfo" >
+  <insert id="insert" parameterType="com.hichlink.funion.common.entity.AgentInfo" useGeneratedKeys="true" keyProperty="agentId">
     insert into agent_info (agent_id, identity_id, agent_name, 
       open_id, union_id, nick_name, 
       head_img, real_name, mobile, 
@@ -67,7 +67,7 @@
       parent_id, commision_ratio, balance, 
       income_total, present_amount, remark
       )
-    values (#{agentId,jdbcType=BIGINT}, #{identityId,jdbcType=VARCHAR}, #{agentName,jdbcType=VARCHAR}, 
+    values (#{agentId}, #{identityId,jdbcType=VARCHAR}, #{agentName,jdbcType=VARCHAR}, 
       #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
       #{headImg,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, #{inputTime,jdbcType=TIMESTAMP}, 

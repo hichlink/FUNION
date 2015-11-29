@@ -50,7 +50,7 @@
     delete from flow_pay_record
     where record_id = #{recordId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" >
+  <insert id="insert" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" useGeneratedKeys="true"  keyProperty="recordId">
     insert into flow_pay_record (record_id, open_id, union_id, 
       nick_name, head_img, mobile, 
       product_id, num, cost_price, 
@@ -58,7 +58,7 @@
       pay_status, send_status, out_trade_no, 
       input_time, identity_id, is_balance, 
       remark)
-    values (#{recordId,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+    values (#{recordId}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{productId,jdbcType=BIGINT}, #{num,jdbcType=INTEGER}, #{costPrice,jdbcType=DECIMAL}, 
       #{settlementPrice,jdbcType=DECIMAL}, #{operatorPrice,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER}, 
@@ -66,7 +66,7 @@
       #{inputTime,jdbcType=TIMESTAMP}, #{identityId,jdbcType=VARCHAR}, #{isBalance,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" >
+  <insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" useGeneratedKeys="true"  keyProperty="recordId">
     insert into flow_pay_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="recordId != null" >

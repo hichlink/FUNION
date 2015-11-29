@@ -61,14 +61,14 @@
 		delete from wx_pay_record
 		where pay_seq_id = #{paySeqId,jdbcType=BIGINT}
 	</delete>
-	<insert id="insert" parameterType="com.hichlink.funion.common.entity.WxPayRecord">
+	<insert id="insert" parameterType="com.hichlink.funion.common.entity.WxPayRecord" useGeneratedKeys="true"  keyProperty="paySeqId">
 		insert into wx_pay_record (pay_seq_id, out_trade_no, transaction_id,
 		device_info, open_id, nick_name,
 		price, num, total_fee,
 		remark, pay_time, pay_check_time,
 		pay_ip, trade_type, pay_status,
 		pay_type, record_id)
-		values (#{paySeqId,jdbcType=BIGINT}, #{outTradeNo,jdbcType=VARCHAR},
+		values (#{paySeqId}, #{outTradeNo,jdbcType=VARCHAR},
 		#{transactionId,jdbcType=VARCHAR},
 		#{deviceInfo,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
 		#{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER},

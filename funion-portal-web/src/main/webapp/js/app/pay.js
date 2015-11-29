@@ -1,5 +1,6 @@
 $(function() {
-	$('#payMoney').click(prepayId)
+	pay();
+	$('#payMoney').click(pay)
 	var flag = false;
 	function pay() {
 		var prepayId = $("#prepayId").val();

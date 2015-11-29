@@ -13,7 +13,6 @@ public class XStreamHandle {
     public static <T> T toBean(String xmlStr, Class<T> cls) {
         XStream xstream = new XStream(new DomDriver());
         xstream.processAnnotations(cls);
-        
         T t = (T) xstream.fromXML(xmlStr);
         return t;
     }

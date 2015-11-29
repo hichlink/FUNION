@@ -30,16 +30,6 @@ public class WxOrderInfoResp extends WxBaseResp{
 	@XStreamAlias("trade_type")
 	private String tradeType;
 
-	public WxOrderInfoResp(String xml) {
-		parseXml(xml);
-	}
-
-	public void parseXml(String xml) {
-		if (StringUtils.isNotBlank(xml)) {
-			XStreamHandle.toBean(xml, this.getClass());
-		}
-	}
-
 	public String getAppId() {
 		return appId;
 	}
@@ -122,4 +112,14 @@ public class WxOrderInfoResp extends WxBaseResp{
 		return sign.equals(getSign());
 	}
 
+	@Override
+	public String toString() {
+		return "WxOrderInfoResp [appId=" + appId + ", mchId=" + mchId + ", nonceStr=" + nonceStr + ", sign=" + sign
+				+ ", prepayId=" + prepayId + ", tradeType=" + tradeType + ", getReturnCode()=" + getReturnCode()
+				+ ", getReturnMsg()=" + getReturnMsg() + ", getResultCode()=" + getResultCode() + ", isResultSuccess()="
+				+ isResultSuccess() + ", isReturnSuccess()=" + isReturnSuccess() + ", isSuccess()=" + isSuccess()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	
 }

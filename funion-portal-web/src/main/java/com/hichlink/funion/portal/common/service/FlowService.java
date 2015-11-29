@@ -54,7 +54,7 @@ public class FlowService {
 	}
 
 	@Transactional
-	public FlowProductDTO initPayRecord(HttpServletRequest request, HttpServletResponse response, String mobile,
+	public FlowProductDTO initPayRecord(HttpServletRequest request, HttpServletResponse response, String uuid,String mobile,
 			Long productId) {
 		FlowProductInfo flowProductInfo = flowProductInfoService.get(productId);
 		if (null == flowProductInfo) {
@@ -63,7 +63,6 @@ public class FlowService {
 		}
 		String appId = SystemConfig.getInstance().getAppId();
 		String openId = SessionUtil.getPayOpenId();
-		String identityId = SessionUtil.getUUID();
 		String ip = CommonUtil.getIp(request);
 		WxOrderInfo wxOrderInfo = new WxOrderInfo();
 		wxOrderInfo.setAppId(appId);
@@ -78,9 +77,10 @@ public class FlowService {
 		BigDecimal price = flowProductInfo.getSettlementPrice();
 		wxOrderInfo.setTotalFee(price.multiply(new BigDecimal(1).multiply(new BigDecimal(100))).intValue());
 		wxOrderInfo.setTradeType("JSAPI");
-
-		wxOrderInfo.setSpbillCreateIp(ip);
+		wxOrderInfo.setAttach("");
+		wxOrderInfo.setSpbillCreateIp("192.168.6.20");
 		WxOrderInfoResp resp = weixinPayBiz.sendOrder(wxOrderInfo);
+		System.out.println(resp.toString());
 		if (!resp.isSuccess()) {
 			LOG.error("下单失败,原因:{}", resp.getReturnMsg());
 			throw new MyException("下单失败,原因:" + resp.getReturnMsg());
@@ -88,7 +88,7 @@ public class FlowService {
 		FlowPayRecord flowPayRecord = new FlowPayRecord();
 		flowPayRecord.setCostPrice(flowProductInfo.getCostPrice());
 		flowPayRecord.setHeadImg("");
-		flowPayRecord.setIdentityId(identityId);
+		flowPayRecord.setIdentityId(uuid);
 		flowPayRecord.setInputTime(new Date());
 		flowPayRecord.setIsBalance(FlowPayRecord.IS_BALANCE_NO);
 		flowPayRecord.setMobile(mobile);
@@ -122,6 +122,7 @@ public class FlowService {
 		wxPayRecordService.saveAndUpdate(wxPayRecord);
 
 		String prepayId = resp.getPrepayId();
+		//String prepayId = "1111";
 		FlowProductDTO flowProductDTO = new FlowProductDTO();
 		flowProductDTO.setProductId(flowProductInfo.getProductId());
 		flowProductDTO.setProductName(flowProductInfo.getProductName());

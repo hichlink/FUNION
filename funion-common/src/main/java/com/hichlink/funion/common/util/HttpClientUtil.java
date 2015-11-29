@@ -131,8 +131,14 @@ public class HttpClientUtil {
 		post.setRequestBody(body);
 		HttpClient httpClient = new HttpClient();
 		httpClient.executeMethod(post);
-		String response = post.getResponseBodyAsString();
-		return response;
+		byte[] resBody = post.getResponseBody();
+		String responseString = "";
+		if (null == resBody || 0 == resBody.length) {
+			responseString = post.getResponseBodyAsString();
+		} else {
+			responseString = new String(resBody, UTF_8);
+		}
+		return responseString;
 	}
 
 	public final static String sendDataHttpsViaGet(String url) {

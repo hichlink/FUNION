@@ -63,7 +63,7 @@
 	</div>
 	<!-- content end -->
 
-	<#include "root.ftl" encoding="utf-8">
+	<#include "foot.ftl" encoding="utf-8">
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${ctx}/assets/js/jquery.min.js"></script>
 	<!--<![endif]-->

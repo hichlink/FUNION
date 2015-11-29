@@ -39,7 +39,7 @@ $(function() {
 		}
 	}
 	function pay() {
-		var tel = $.trim($("#mobile").val());
+		var tel = $.trim($("#mobile").val()),uuid = $('#uuid').val();
 		if (!MOBILE_PATTERN.test(tel)) {
 			alert('请输入有效的手机号码');
 			return;
@@ -49,7 +49,7 @@ $(function() {
 			alert('请选择流量包');
 			return;
 		}
-		location.href = ctxPaths + '/flow/' + tel + '/'
+		location.href = ctxPaths + '/flow/' + uuid + '/' + tel + '/'
 				+ $(box[0]).attr('data-id') + '/enterPay.do';
 	}
 });

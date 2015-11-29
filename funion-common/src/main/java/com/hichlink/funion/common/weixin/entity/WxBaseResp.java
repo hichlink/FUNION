@@ -3,7 +3,6 @@ package com.hichlink.funion.common.weixin.entity;
 import java.io.Serializable;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 public class WxBaseResp implements Serializable{
 	/**
 	 * 

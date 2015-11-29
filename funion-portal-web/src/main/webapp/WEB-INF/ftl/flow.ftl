@@ -8,7 +8,7 @@
 <style>
 .box {
 	border-radius: 0.5em;
-	width: 108px;
+	width: 90px;
 	height: 48px;
 	border: 1px solid #CCCCCC;
 	float: left;
@@ -58,7 +58,7 @@
 		<div class="admin-content">
 			<div class="am-u-sm-12" style="margin-top: 8px;">
 				<form class="am-form am-form-horizontal">
-					<input type="hidden" name="uuid" value="${uuid}" />
+					<input type="hidden" id="uuid" name="uuid" value="${uuid}" />
 					<div class="am-form-group">
 						<div class="am-u-sm-12">
 							<input type="text" id="mobile" name="mobile" placeholder="充值号码 ">
@@ -86,7 +86,7 @@
 	<script id="flowPackages" type="text/html"> 
 	   <div class="am-u-sm-12">
 			<% for(var i=0; i<data.length; i++){%>  
-			<div class="box" data-id="<%=data[i].costPrice%>">
+			<div class="box" data-id="<%=data[i].productId%>">
 				<span class="txt1"><%=data[i].flowAmount%>M</span><br /> <span
 						class="txt2 line-through"><%=data[i].costPrice%>元</span><span class="txt2">
 				 现价</span><span class="txt3"><%=data[i].settlementPrice%></span><span class="txt2">元</span>
@@ -95,7 +95,7 @@
 		</div>
 	</script>
 	<!-- content end -->
-
+	<#include "foot.ftl" encoding="utf-8">
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${ctx}/assets/js/jquery.min.js"></script>
 	<!--<![endif]-->

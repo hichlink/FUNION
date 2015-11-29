@@ -45,8 +45,6 @@ public class FlowController extends BaseController {
 	@Autowired
 	private FlowService flowService;
 	@Autowired
-	private FlowProductInfoService flowProductInfoService;
-	@Autowired
 	private WeixinPayBiz weixinPayBiz;
 	@Autowired
 	private WeixinApiBiz weixinApiBiz;
@@ -78,9 +76,10 @@ public class FlowController extends BaseController {
 		return super.success(flowService.getProductByMobile(mobile));
 	}
 
-	@RequestMapping(value = "/{mobile}/{productId}/enterPay.do")
-	public ModelAndView enterPay(HttpServletRequest request, HttpServletResponse response, @PathVariable String mobile,
-			@PathVariable Long productId, @RequestParam(defaultValue = "") String code) throws Exception {
+	@RequestMapping(value = "/{uuid}/{mobile}/{productId}/enterPay.do")
+	public ModelAndView enterPay(HttpServletRequest request, HttpServletResponse response, @PathVariable String uuid,
+			@PathVariable String mobile, @PathVariable Long productId, @RequestParam(defaultValue = "") String code)
+					throws Exception {
 		if (StringUtils.isBlank(mobile) || !CheckPhone.isMobileNO(mobile)) {
 			LOG.error("mobile={}无效", mobile);
 			return null;
@@ -88,11 +87,12 @@ public class FlowController extends BaseController {
 
 		String appId = SystemConfig.getInstance().getAppId();
 		String openId = SessionUtil.getPayOpenId();
+
 		if (StringUtils.isBlank(openId)) {
 			if (StringUtils.isBlank(code)) {
 				String projectName = request.getContextPath();
-				String redirectUri = URLEncoder.encode(SystemConfig.getInstance().getDomain() + projectName + "/"
-						+ mobile + "/" + productId + "/enterPay.do", "utf-8");
+				String redirectUri = URLEncoder.encode(SystemConfig.getInstance().getDomain() + projectName + "/flow/" + uuid
+						+ "/" + mobile + "/" + productId + "/enterPay.do", "utf-8");
 				response.sendRedirect(weixinApiBiz.getAuthUrlBySnsapiBase(appId, redirectUri));
 			} else {
 				AccessToken accessToken = weixinApiBiz.getAccessToken(appId, code);
@@ -106,7 +106,7 @@ public class FlowController extends BaseController {
 			}
 		}
 		try {
-			FlowProductDTO flowProductDTO = flowService.initPayRecord(request, response, mobile, productId);
+			FlowProductDTO flowProductDTO = flowService.initPayRecord(request, response, uuid, mobile, productId);
 			return new ModelAndView("pay", "flowProductDTO", flowProductDTO);
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);

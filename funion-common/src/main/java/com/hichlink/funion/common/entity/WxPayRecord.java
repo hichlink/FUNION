@@ -53,7 +53,7 @@ public class WxPayRecord {
 	/**
 	 * 备注
 	 */
-	private String remark;
+	private String remark = "";
 
 	/**
 	 * 支付时间

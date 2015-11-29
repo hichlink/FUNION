@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 
 import com.hichlink.funion.common.util.HttpClientUtil;
 import com.hichlink.funion.common.util.MediaTypes;
+import com.hichlink.funion.common.util.XStreamHandle;
 import com.hichlink.funion.common.weixin.entity.WxMchOrderInfo;
 import com.hichlink.funion.common.weixin.entity.WxMchOrderInfoResp;
+import com.hichlink.funion.common.weixin.entity.WxOrderInfoResp;
 
 @Component("weixinMchPayService")
 public class WeixinMchPayService implements WeixinMchPay {
@@ -28,7 +30,7 @@ public class WeixinMchPayService implements WeixinMchPay {
 			log.error(e.getMessage(), e);
 		}
 		if (StringUtils.isNotBlank(result)) {
-			return new WxMchOrderInfoResp(result);
+			return XStreamHandle.toBean(result, WxMchOrderInfoResp.class);
 		}
 		return null;
 	}
