@@ -7,7 +7,6 @@ import java.util.List;
 import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.dao.FlowProductInfoMapper;
 
-
 /**
  * 
  * <b>Title：</b>FlowProductInfoService.java<br/>
@@ -18,32 +17,43 @@ import com.hichlink.funion.common.dao.FlowProductInfoMapper;
  * 
  */
 @Service("flowProductInfoService")
-public class FlowProductInfoService{
-    @Autowired
-    private FlowProductInfoMapper flowProductInfoMapper;
-    
-    public Page<FlowProductInfo> pageQuery(Page<FlowProductInfo> page) {
-    	List<FlowProductInfo> list = flowProductInfoMapper.pageQuery(page);
+public class FlowProductInfoService {
+	@Autowired
+	private FlowProductInfoMapper flowProductInfoMapper;
+
+	public Page<FlowProductInfo> pageQuery(Page<FlowProductInfo> page) {
+		List<FlowProductInfo> list = flowProductInfoMapper.pageQuery(page);
 		page.setDatas(list);
-        return page;
-    }
-    public void insert(FlowProductInfo data) {
-        flowProductInfoMapper.insert(data);
-    }
-        public FlowProductInfo get(Long productId) {
-        return flowProductInfoMapper.selectByPrimaryKey(productId);
-    }
-    public void saveAndUpdate(FlowProductInfo data){
-    			if (null != data.getProductId()){//判断有没有传主键，如果传了为更新，否则为新增
-					this.update(data);
-		}else{
+		return page;
+	}
+
+	public List<FlowProductInfo> findByOperatorCode(String operatorCode) {
+		FlowProductInfo bean = new FlowProductInfo();
+		bean.setOperatorCode(operatorCode);
+		return flowProductInfoMapper.find(bean);
+	}
+
+	public void insert(FlowProductInfo data) {
+		flowProductInfoMapper.insert(data);
+	}
+
+	public FlowProductInfo get(Long productId) {
+		return flowProductInfoMapper.selectByPrimaryKey(productId);
+	}
+
+	public void saveAndUpdate(FlowProductInfo data) {
+		if (null != data.getProductId()) {// 判断有没有传主键，如果传了为更新，否则为新增
+			this.update(data);
+		} else {
 			this.insert(data);
 		}
-    }
-    public void update(FlowProductInfo data) {
-        flowProductInfoMapper.updateByPrimaryKey(data);
-    }
-    public int delete(Long productId) {
-        return flowProductInfoMapper.deleteByPrimaryKey(productId);
-    }
-    }
+	}
+
+	public void update(FlowProductInfo data) {
+		flowProductInfoMapper.updateByPrimaryKey(data);
+	}
+
+	public int delete(Long productId) {
+		return flowProductInfoMapper.deleteByPrimaryKey(productId);
+	}
+}

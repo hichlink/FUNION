@@ -2,6 +2,7 @@ package com.hichlink.funion.common.util;
 
 import java.io.UnsupportedEncodingException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +14,9 @@ public class BaseUtil {
 
 	// 加密
 	public static String getBase64(String str) {
+		if (StringUtils.isBlank(str)){
+			return "";
+		}
 		byte[] b = null;
 		String s = null;
 		log.debug("加密值str:=" + str);
@@ -30,6 +34,9 @@ public class BaseUtil {
 
 	// 解密
 	public static String getFromBase64(String s) {
+		if (StringUtils.isBlank(s)){
+			return "";
+		}
 		byte[] b = null;
 		String result = null;
 		log.debug("解密值s:=" + s);

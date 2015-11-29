@@ -1,6 +1,5 @@
 package com.hichlink.funion.portal.web;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aspire.webbas.core.web.BaseController;
 import com.hichlink.funion.common.weixin.WeixinApiBiz;
 import com.hichlink.funion.common.weixin.entity.AccessToken;
-import com.hichlink.funion.common.weixin.entity.ApiUserinfo;
 import com.hichlink.funion.common.weixin.entity.OpenUserinfo;
 import com.hichlink.funion.portal.common.config.SystemConfig;
+import com.hichlink.funion.portal.common.util.SessionUtil;
 
 @Controller
 @RequestMapping("/register")
@@ -53,11 +52,21 @@ public class RegisterController extends BaseController {
 					LOG.error("获取不到微信用户信息");
 					return null;
 				}
-				return new ModelAndView("register", "openUserinfo", openUserinfo);
+				SessionUtil.setRegisterWxUserInfo(openUserinfo);
+				return new ModelAndView("register", "userInfo", openUserinfo);
 			} else {
 				LOG.error("获取不到用户Token.");
 			}
 		}
 		return null;
 	}
+	/*@RequestMapping(value = "/enter.do")
+	public ModelAndView enter(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(defaultValue = "") String code) {
+		OpenUserinfo openUserinfo = new OpenUserinfo();
+		openUserinfo.setOpenid("1111111111");
+		openUserinfo.setHeadimgurl("");
+		SessionUtil.setRegisterWxUserInfo(openUserinfo);
+		return new ModelAndView("register", "userInfo", openUserinfo);
+	}*/
 }

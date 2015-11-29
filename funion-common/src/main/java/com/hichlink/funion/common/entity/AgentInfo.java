@@ -1,313 +1,385 @@
-/*** Auto generator by codegenerator 2015-11-28 14:10:24*/
+/*** Auto generator by codegenerator 2015-11-28 16:10:47*/
 package com.hichlink.funion.common.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class AgentInfo {
-    /**
-    代理ID
-     */
-    private Long agentId;
+	/**
+	 * 代理ID
+	 */
+	private Long agentId;
 
-    /**
-    身份标识,随机生成唯一
-     */
-    private String identityId;
+	/**
+	 * 身份标识,随机生成唯一
+	 */
+	private String identityId;
 
-    /**
-    代理别名
-     */
-    private String agentName;
+	/**
+	 * 代理别名
+	 */
+	private String agentName;
 
-    /**
-    微信OpenID
-     */
-    private String openId;
+	/**
+	 * 微信OpenID
+	 */
+	private String openId;
 
-    /**
-    微信UnionID
-     */
-    private String unionId;
+	/**
+	 * 微信UnionID
+	 */
+	private String unionId;
 
-    /**
-    微信昵称
-     */
-    private String nickName;
+	/**
+	 * 微信昵称
+	 */
+	private String nickName;
 
-    /**
-    微信头像
-     */
-    private String headImg;
+	/**
+	 * 微信头像
+	 */
+	private String headImg;
 
-    /**
-    真实姓名
-     */
-    private String realName;
+	/**
+	 * 真实姓名
+	 */
+	private String realName;
 
-    /**
-    手机号码
-     */
-    private String mobile;
+	/**
+	 * 手机号码
+	 */
+	private String mobile;
 
-    /**
-    邮箱地址
-     */
-    private String email;
+	/**
+	 * 邮箱地址
+	 */
+	private String email;
 
-    /**
-    身份证号码
-     */
-    private String cardNo;
+	/**
+	 * 身份证号码
+	 */
+	private String cardNo;
 
-    /**
-    录入时间
-     */
-    private Date inputTime;
+	/**
+	 * 录入时间
+	 */
+	private Date inputTime;
 
-    /**
-    录入者
-     */
-    private String inputBy;
+	/**
+	 * 录入者
+	 */
+	private String inputBy;
 
-    /**
-    修改时间
-     */
-    private Date modifyTime;
+	/**
+	 * 修改时间
+	 */
+	private Date modifyTime;
 
-    /**
-    修改者
-     */
-    private String modifier;
+	/**
+	 * 修改者
+	 */
+	private String modifier;
 
-    /**
-    父结点
-     */
-    private Long parentId;
+	/**
+	 * 父结点
+	 */
+	private Long parentId;
 
-    /**
-    佣金比例 0-100
-     */
-    private Integer commisionRatio;
+	/**
+	 * 佣金比例 0-100
+	 */
+	private Integer commisionRatio = 0;
 
-    /**
-    帐户余额
-     */
-    private BigDecimal balance;
+	/**
+	 * 帐户余额
+	 */
+	private BigDecimal balance = new BigDecimal(0);
 
-    /**
-    代理ID
-     * @return the value of agent_info.agent_id
-     */
-    public Long getAgentId() {
-        return agentId;
-    }
+	/**
+	 * 累计收益
+	 */
+	private BigDecimal incomeTotal = new BigDecimal(0);
 
-    public void setAgentId(Long agentId) {
-        this.agentId = agentId;
-    }
+	/**
+	 * 待提现金额
+	 */
+	private BigDecimal presentAmount = new BigDecimal(0);
 
-    /**
-    身份标识,随机生成唯一
-     * @return the value of agent_info.identity_id
-     */
-    public String getIdentityId() {
-        return identityId;
-    }
+	/**
+	 * 备注
+	 */
+	private String remark;
 
-    public void setIdentityId(String identityId) {
-        this.identityId = identityId == null ? null : identityId.trim();
-    }
+	/**
+	 * 代理ID
+	 * 
+	 * @return the value of agent_info.agent_id
+	 */
+	public Long getAgentId() {
+		return agentId;
+	}
 
-    /**
-    代理别名
-     * @return the value of agent_info.agent_name
-     */
-    public String getAgentName() {
-        return agentName;
-    }
+	public void setAgentId(Long agentId) {
+		this.agentId = agentId;
+	}
 
-    public void setAgentName(String agentName) {
-        this.agentName = agentName == null ? null : agentName.trim();
-    }
+	/**
+	 * 身份标识,随机生成唯一
+	 * 
+	 * @return the value of agent_info.identity_id
+	 */
+	public String getIdentityId() {
+		return identityId;
+	}
 
-    /**
-    微信OpenID
-     * @return the value of agent_info.open_id
-     */
-    public String getOpenId() {
-        return openId;
-    }
+	public void setIdentityId(String identityId) {
+		this.identityId = identityId == null ? null : identityId.trim();
+	}
 
-    public void setOpenId(String openId) {
-        this.openId = openId == null ? null : openId.trim();
-    }
+	/**
+	 * 代理别名
+	 * 
+	 * @return the value of agent_info.agent_name
+	 */
+	public String getAgentName() {
+		return agentName;
+	}
 
-    /**
-    微信UnionID
-     * @return the value of agent_info.union_id
-     */
-    public String getUnionId() {
-        return unionId;
-    }
+	public void setAgentName(String agentName) {
+		this.agentName = agentName == null ? null : agentName.trim();
+	}
 
-    public void setUnionId(String unionId) {
-        this.unionId = unionId == null ? null : unionId.trim();
-    }
+	/**
+	 * 微信OpenID
+	 * 
+	 * @return the value of agent_info.open_id
+	 */
+	public String getOpenId() {
+		return openId;
+	}
 
-    /**
-    微信昵称
-     * @return the value of agent_info.nick_name
-     */
-    public String getNickName() {
-        return nickName;
-    }
+	public void setOpenId(String openId) {
+		this.openId = openId == null ? null : openId.trim();
+	}
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
-    }
+	/**
+	 * 微信UnionID
+	 * 
+	 * @return the value of agent_info.union_id
+	 */
+	public String getUnionId() {
+		return unionId;
+	}
 
-    /**
-    微信头像
-     * @return the value of agent_info.head_img
-     */
-    public String getHeadImg() {
-        return headImg;
-    }
+	public void setUnionId(String unionId) {
+		this.unionId = unionId == null ? null : unionId.trim();
+	}
 
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg == null ? null : headImg.trim();
-    }
+	/**
+	 * 微信昵称
+	 * 
+	 * @return the value of agent_info.nick_name
+	 */
+	public String getNickName() {
+		return nickName;
+	}
 
-    /**
-    真实姓名
-     * @return the value of agent_info.real_name
-     */
-    public String getRealName() {
-        return realName;
-    }
+	public void setNickName(String nickName) {
+		this.nickName = nickName == null ? null : nickName.trim();
+	}
 
-    public void setRealName(String realName) {
-        this.realName = realName == null ? null : realName.trim();
-    }
+	/**
+	 * 微信头像
+	 * 
+	 * @return the value of agent_info.head_img
+	 */
+	public String getHeadImg() {
+		return headImg;
+	}
 
-    /**
-    手机号码
-     * @return the value of agent_info.mobile
-     */
-    public String getMobile() {
-        return mobile;
-    }
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg == null ? null : headImg.trim();
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
+	/**
+	 * 真实姓名
+	 * 
+	 * @return the value of agent_info.real_name
+	 */
+	public String getRealName() {
+		return realName;
+	}
 
-    /**
-    邮箱地址
-     * @return the value of agent_info.email
-     */
-    public String getEmail() {
-        return email;
-    }
+	public void setRealName(String realName) {
+		this.realName = realName == null ? null : realName.trim();
+	}
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
+	/**
+	 * 手机号码
+	 * 
+	 * @return the value of agent_info.mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
 
-    /**
-    身份证号码
-     * @return the value of agent_info.card_no
-     */
-    public String getCardNo() {
-        return cardNo;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile == null ? null : mobile.trim();
+	}
 
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo == null ? null : cardNo.trim();
-    }
+	/**
+	 * 邮箱地址
+	 * 
+	 * @return the value of agent_info.email
+	 */
+	public String getEmail() {
+		return email;
+	}
 
-    /**
-    录入时间
-     * @return the value of agent_info.input_time
-     */
-    public Date getInputTime() {
-        return inputTime;
-    }
+	public void setEmail(String email) {
+		this.email = email == null ? null : email.trim();
+	}
 
-    public void setInputTime(Date inputTime) {
-        this.inputTime = inputTime;
-    }
+	/**
+	 * 身份证号码
+	 * 
+	 * @return the value of agent_info.card_no
+	 */
+	public String getCardNo() {
+		return cardNo;
+	}
 
-    /**
-    录入者
-     * @return the value of agent_info.input_by
-     */
-    public String getInputBy() {
-        return inputBy;
-    }
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo == null ? null : cardNo.trim();
+	}
 
-    public void setInputBy(String inputBy) {
-        this.inputBy = inputBy == null ? null : inputBy.trim();
-    }
+	/**
+	 * 录入时间
+	 * 
+	 * @return the value of agent_info.input_time
+	 */
+	public Date getInputTime() {
+		return inputTime;
+	}
 
-    /**
-    修改时间
-     * @return the value of agent_info.modify_time
-     */
-    public Date getModifyTime() {
-        return modifyTime;
-    }
+	public void setInputTime(Date inputTime) {
+		this.inputTime = inputTime;
+	}
 
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
+	/**
+	 * 录入者
+	 * 
+	 * @return the value of agent_info.input_by
+	 */
+	public String getInputBy() {
+		return inputBy;
+	}
 
-    /**
-    修改者
-     * @return the value of agent_info.modifier
-     */
-    public String getModifier() {
-        return modifier;
-    }
+	public void setInputBy(String inputBy) {
+		this.inputBy = inputBy == null ? null : inputBy.trim();
+	}
 
-    public void setModifier(String modifier) {
-        this.modifier = modifier == null ? null : modifier.trim();
-    }
+	/**
+	 * 修改时间
+	 * 
+	 * @return the value of agent_info.modify_time
+	 */
+	public Date getModifyTime() {
+		return modifyTime;
+	}
 
-    /**
-    父结点
-     * @return the value of agent_info.parent_id
-     */
-    public Long getParentId() {
-        return parentId;
-    }
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
+	/**
+	 * 修改者
+	 * 
+	 * @return the value of agent_info.MODIFIER
+	 */
+	public String getModifier() {
+		return modifier;
+	}
 
-    /**
-    佣金比例 0-100
-     * @return the value of agent_info.commision_ratio
-     */
-    public Integer getCommisionRatio() {
-        return commisionRatio;
-    }
+	public void setModifier(String modifier) {
+		this.modifier = modifier == null ? null : modifier.trim();
+	}
 
-    public void setCommisionRatio(Integer commisionRatio) {
-        this.commisionRatio = commisionRatio;
-    }
+	/**
+	 * 父结点
+	 * 
+	 * @return the value of agent_info.parent_id
+	 */
+	public Long getParentId() {
+		return parentId;
+	}
 
-    /**
-    帐户余额
-     * @return the value of agent_info.balance
-     */
-    public BigDecimal getBalance() {
-        return balance;
-    }
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
+	/**
+	 * 佣金比例 0-100
+	 * 
+	 * @return the value of agent_info.commision_ratio
+	 */
+	public Integer getCommisionRatio() {
+		return commisionRatio;
+	}
+
+	public void setCommisionRatio(Integer commisionRatio) {
+		this.commisionRatio = commisionRatio;
+	}
+
+	/**
+	 * 帐户余额
+	 * 
+	 * @return the value of agent_info.balance
+	 */
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	/**
+	 * 累计收益
+	 * 
+	 * @return the value of agent_info.income_total
+	 */
+	public BigDecimal getIncomeTotal() {
+		return incomeTotal;
+	}
+
+	public void setIncomeTotal(BigDecimal incomeTotal) {
+		this.incomeTotal = incomeTotal;
+	}
+
+	/**
+	 * 待提现金额
+	 * 
+	 * @return the value of agent_info.present_amount
+	 */
+	public BigDecimal getPresentAmount() {
+		return presentAmount;
+	}
+
+	public void setPresentAmount(BigDecimal presentAmount) {
+		this.presentAmount = presentAmount;
+	}
+
+	/**
+	 * 备注
+	 * 
+	 * @return the value of agent_info.remark
+	 */
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark == null ? null : remark.trim();
+	}
 }

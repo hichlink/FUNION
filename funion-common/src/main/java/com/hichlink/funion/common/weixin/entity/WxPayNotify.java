@@ -81,7 +81,7 @@ public class WxPayNotify extends WxBaseResp {
 	 * 总金额
 	 */
 	@XStreamAlias("total_fee")
-	private String totalFee;
+	private Integer totalFee;
 	/**
 	 * 交易类型
 	 */
@@ -202,11 +202,11 @@ public class WxPayNotify extends WxBaseResp {
 		this.timeEnd = timeEnd;
 	}
 
-	public String getTotalFee() {
+	public Integer getTotalFee() {
 		return totalFee;
 	}
 
-	public void setTotalFee(String totalFee) {
+	public void setTotalFee(Integer totalFee) {
 		this.totalFee = totalFee;
 	}
 
@@ -286,9 +286,7 @@ public class WxPayNotify extends WxBaseResp {
 		if (StringUtils.isNotBlank(getTimeEnd())) {
 			map.put("time_end", getTimeEnd());
 		}
-		if (StringUtils.isNotBlank(getTotalFee())) {
-			map.put("total_fee", getTotalFee());
-		}
+		map.put("total_fee", "" + getTotalFee());
 
 		if (StringUtils.isNotBlank(getTradeType())) {
 			map.put("trade_type", getTradeType());

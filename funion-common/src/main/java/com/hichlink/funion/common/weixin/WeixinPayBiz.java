@@ -29,8 +29,9 @@ public class WeixinPayBiz {
 	@Autowired
 	private WxAccessConfMapper wxAccessConfMapper;
 
-	public WxOrderInfoResp sendOrder(WxOrderInfo wxOrderInfo, String appId) {
-		WxAccessConf wc = getWxAccessConf(appId);
+	public WxOrderInfoResp sendOrder(WxOrderInfo wxOrderInfo) {
+		WxAccessConf wc = getWxAccessConf(wxOrderInfo.getAppId());
+		wxOrderInfo.setMchId(wc.getWxMerchantNo());
 		return weixinPay.sendOrder(wxOrderInfo, wc.getApiKey());
 	}
 

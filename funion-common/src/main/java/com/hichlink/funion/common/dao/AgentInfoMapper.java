@@ -1,4 +1,4 @@
-/*** Auto generator by codegenerator 2015-11-28 14:10:24*/
+/*** Auto generator by codegenerator 2015-11-28 16:10:47*/
 package com.hichlink.funion.common.dao;
 
 import com.aspire.webbas.core.pagination.mybatis.pager.Page;
@@ -15,6 +15,8 @@ public interface AgentInfoMapper {
     List<AgentInfo> pageQuery(Page<AgentInfo> page);
 
     AgentInfo selectByPrimaryKey(Long agentId);
+    
+    AgentInfo selectByOpenId(String openId);
 
     int updateByPrimaryKeySelective(AgentInfo record);
 

@@ -13,7 +13,9 @@ public interface FlowProductInfoMapper {
     int insertSelective(FlowProductInfo record);
 
     List<FlowProductInfo> pageQuery(Page<FlowProductInfo> page);
-
+    
+    List<FlowProductInfo> find(FlowProductInfo data);
+    
     FlowProductInfo selectByPrimaryKey(Long productId);
 
     int updateByPrimaryKeySelective(FlowProductInfo record);

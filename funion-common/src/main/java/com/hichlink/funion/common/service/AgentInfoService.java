@@ -7,7 +7,6 @@ import java.util.List;
 import com.hichlink.funion.common.entity.AgentInfo;
 import com.hichlink.funion.common.dao.AgentInfoMapper;
 
-
 /**
  * 
  * <b>Title：</b>AgentInfoService.java<br/>
@@ -18,32 +17,41 @@ import com.hichlink.funion.common.dao.AgentInfoMapper;
  * 
  */
 @Service("agentInfoService")
-public class AgentInfoService{
-    @Autowired
-    private AgentInfoMapper agentInfoMapper;
-    
-    public Page<AgentInfo> pageQuery(Page<AgentInfo> page) {
-    	List<AgentInfo> list = agentInfoMapper.pageQuery(page);
+public class AgentInfoService {
+	@Autowired
+	private AgentInfoMapper agentInfoMapper;
+
+	public Page<AgentInfo> pageQuery(Page<AgentInfo> page) {
+		List<AgentInfo> list = agentInfoMapper.pageQuery(page);
 		page.setDatas(list);
-        return page;
-    }
-    public void insert(AgentInfo data) {
-        agentInfoMapper.insert(data);
-    }
-        public AgentInfo get(Long agentId) {
-        return agentInfoMapper.selectByPrimaryKey(agentId);
-    }
-    public void saveAndUpdate(AgentInfo data){
-    			if (null != data.getAgentId()){//判断有没有传主键，如果传了为更新，否则为新增
-					this.update(data);
-		}else{
+		return page;
+	}
+
+	public void insert(AgentInfo data) {
+		agentInfoMapper.insert(data);
+	}
+
+	public AgentInfo get(Long agentId) {
+		return agentInfoMapper.selectByPrimaryKey(agentId);
+	}
+	
+	public AgentInfo selectByOpenId(String openId){
+		return agentInfoMapper.selectByOpenId(openId);
+	}
+
+	public void saveAndUpdate(AgentInfo data) {
+		if (null != data.getAgentId()) {// 判断有没有传主键，如果传了为更新，否则为新增
+			this.update(data);
+		} else {
 			this.insert(data);
 		}
-    }
-    public void update(AgentInfo data) {
-        agentInfoMapper.updateByPrimaryKey(data);
-    }
-    public int delete(Long agentId) {
-        return agentInfoMapper.deleteByPrimaryKey(agentId);
-    }
-    }
+	}
+
+	public void update(AgentInfo data) {
+		agentInfoMapper.updateByPrimaryKey(data);
+	}
+
+	public int delete(Long agentId) {
+		return agentInfoMapper.deleteByPrimaryKey(agentId);
+	}
+}

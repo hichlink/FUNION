@@ -1,4 +1,4 @@
-/*** Auto generator by codegenerator 2015-11-28 14:10:46*/
+/*** Auto generator by codegenerator 2015-11-29 13:44:09*/
 package com.hichlink.funion.common.entity;
 
 import java.math.BigDecimal;
@@ -53,6 +53,11 @@ public class FlowProductInfo {
     备注
      */
     private String remark;
+
+    /**
+    流量包大小
+     */
+    private Integer flowAmount;
 
     /**
     产品ID
@@ -172,5 +177,17 @@ public class FlowProductInfo {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    /**
+    流量包大小
+     * @return the value of flow_product_info.flow_amount
+     */
+    public Integer getFlowAmount() {
+        return flowAmount;
+    }
+
+    public void setFlowAmount(Integer flowAmount) {
+        this.flowAmount = flowAmount;
     }
 }

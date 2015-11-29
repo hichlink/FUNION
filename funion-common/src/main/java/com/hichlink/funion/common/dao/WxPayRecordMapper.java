@@ -15,6 +15,8 @@ public interface WxPayRecordMapper {
     List<WxPayRecord> pageQuery(Page<WxPayRecord> page);
 
     WxPayRecord selectByPrimaryKey(Long paySeqId);
+    
+    WxPayRecord selectByOutTradeNo(String outTradeNo);
 
     int updateByPrimaryKeySelective(WxPayRecord record);
 

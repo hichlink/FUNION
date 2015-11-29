@@ -32,7 +32,7 @@ public class CheckPhone {
 
 	public static String getMobileOpr(String mobiles) {
 		if (mobiles == null || mobiles.length() < 11) {
-			return "NA";
+			return "";
 		}
 		int pos = mobiles.length() - 11;
 
@@ -59,6 +59,6 @@ public class CheckPhone {
 		if (m.matches()) {
 			return "LT";
 		}
-		return "NA";
+		return "";
 	}
 }
