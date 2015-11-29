@@ -5,14 +5,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>一键注册分享充流量拿佣金</title>
 <#include "root.ftl" encoding="utf-8">
+<style>
+.ds-avatar {
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+}
+</style>
 </head>
 <body>
 	<header class="am-topbar admin-header">
 		<div class="am-topbar-brand">
 			<strong>成为代理</strong> <small>个人信息填写</small>
 		</div>
-		<img style="width: 42px; height: 42px;margin-top:4px;"
+		<div class="ds-avatar" style="float:right;margin-top:4px;margin-right:18px;">
+		<img style="width: 42px; height: 42px;border-radius: 50%;background-color: #fff;"
 			src="${userInfo.headimgurl}" />
+		</div>
 	</header>
 
 	<div class="am-cf admin-main">
