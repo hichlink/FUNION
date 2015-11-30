@@ -77,7 +77,7 @@ public class FlowController extends BaseController {
 	}
 
 	@RequestMapping(value = "/{uuid}/{mobile}/{productId}/enterPay.do")
-	public ModelAndView enterPay(HttpServletRequest request, HttpServletResponse response, @PathVariable String uuid,
+	public void enterPay(HttpServletRequest request, HttpServletResponse response, @PathVariable String uuid,
 			@PathVariable String mobile, @PathVariable Long productId, @RequestParam(defaultValue = "") String code,
 			RedirectAttributes attr) throws Exception {
 
@@ -89,18 +89,17 @@ public class FlowController extends BaseController {
 				String redirectUri = URLEncoder.encode(SystemConfig.getInstance().getDomain() + projectName + "/flow/"
 						+ uuid + "/" + mobile + "/" + productId + "/enterPay.do", "utf-8");
 				response.sendRedirect(weixinApiBiz.getAuthUrlBySnsapiBase(appId, redirectUri));
+				return;
 			}
 		}
-		attr.addAttribute("uuid", uuid);
-		attr.addAttribute("mobile", mobile);
-		attr.addAttribute("productId", productId);
-		attr.addAttribute("code", code);
-		return new ModelAndView("redirect:/flow//pay.do");
 		/*
-		 * response.sendRedirect(SystemConfig.getInstance().getDomain() +
-		 * projectName + "/flow/pay.do?uuid=" + uuid + "&mobile=" + mobile +
-		 * "&productId=" + productId + "&code=" + code);
+		 * attr.addAttribute("uuid", uuid); attr.addAttribute("mobile", mobile);
+		 * attr.addAttribute("productId", productId); attr.addAttribute("code",
+		 * code); return new ModelAndView("redirect:/flow/pay.do");
 		 */
+
+		response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/flow/pay.do?uuid=" + uuid
+				+ "&mobile=" + mobile + "&productId=" + productId + "&code=" + code);
 
 	}
 

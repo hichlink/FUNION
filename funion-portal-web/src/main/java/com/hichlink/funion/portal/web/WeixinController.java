@@ -37,12 +37,12 @@ public class WeixinController extends BaseController {
 
 	@RequestMapping(value = "/getJsConfig")
 	@ResponseBody
-	public Map<String, Object> getJsConfig(String url, String appId) {
+	public Map<String, Object> getJsConfig(String url) {
 		if (StringUtils.isBlank(url)) {
 			LOG.info("url传递失败");
 			return fail("传递失败");
 		}
-
+		String appId = SystemConfig.getInstance().getAppId();
 		String jsTicket = weixinApiBiz.getJsapiTicket(appId);
 		LOG.debug("jsTicket:=" + jsTicket);
 		Map<String, String> ret = Signature.sign(jsTicket, url);

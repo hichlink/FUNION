@@ -1,5 +1,30 @@
 $(function() {
-	pay();
+	//pay();
+		$.ajax({
+		url: ctxPaths + '/weixin/getJsConfig.do',
+		async: false,
+		data: {
+			"url": window.location.href
+		},
+		dataType: 'json',
+		type: 'post',
+		success: function (dataResult) {
+			var data = dataResult.data;
+			if (data.appid == null || data.appid == "") {
+				return;
+			}
+			wx.config({
+				debug: false,
+				appId: data.appid,
+				timestamp: data.timestamp,
+				nonceStr: data.nonceStr,
+				signature: data.signature,
+				jsApiList: ["onMenuShareTimeline",
+					"onMenuShareAppMessage", "onMenuShareQQ",
+					"onMenuShareWeibo", "chooseWXPay"]
+			});
+		}
+	});
 	$('#payMoney').click(pay)
 	var flag = false;
 	function pay() {
