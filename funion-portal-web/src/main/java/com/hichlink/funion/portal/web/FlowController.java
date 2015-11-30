@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aspire.webbas.core.web.BaseController;
 import com.hichlink.funion.common.entity.FlowPayRecord;
 import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.entity.WxPayRecord;
 import com.hichlink.funion.common.service.FlowPayRecordService;
-import com.hichlink.funion.common.service.FlowProductInfoService;
 import com.hichlink.funion.common.service.WxAccessConfService;
 import com.hichlink.funion.common.service.WxPayRecordService;
 import com.hichlink.funion.common.weixin.WeixinApiBiz;
@@ -78,34 +78,53 @@ public class FlowController extends BaseController {
 
 	@RequestMapping(value = "/{uuid}/{mobile}/{productId}/enterPay.do")
 	public ModelAndView enterPay(HttpServletRequest request, HttpServletResponse response, @PathVariable String uuid,
-			@PathVariable String mobile, @PathVariable Long productId, @RequestParam(defaultValue = "") String code)
-					throws Exception {
+			@PathVariable String mobile, @PathVariable Long productId, @RequestParam(defaultValue = "") String code,
+			RedirectAttributes attr) throws Exception {
+
+		String appId = SystemConfig.getInstance().getAppId();
+		String openId = SessionUtil.getPayOpenId();
+		String projectName = request.getContextPath();
+		if (StringUtils.isBlank(openId)) {
+			if (StringUtils.isBlank(code)) {
+				String redirectUri = URLEncoder.encode(SystemConfig.getInstance().getDomain() + projectName + "/flow/"
+						+ uuid + "/" + mobile + "/" + productId + "/enterPay.do", "utf-8");
+				response.sendRedirect(weixinApiBiz.getAuthUrlBySnsapiBase(appId, redirectUri));
+			}
+		}
+		attr.addAttribute("uuid", uuid);
+		attr.addAttribute("mobile", mobile);
+		attr.addAttribute("productId", productId);
+		attr.addAttribute("code", code);
+		return new ModelAndView("redirect:/flow//pay.do");
+		/*
+		 * response.sendRedirect(SystemConfig.getInstance().getDomain() +
+		 * projectName + "/flow/pay.do?uuid=" + uuid + "&mobile=" + mobile +
+		 * "&productId=" + productId + "&code=" + code);
+		 */
+
+	}
+
+	@RequestMapping(value = "/pay.do")
+	public ModelAndView pay(HttpServletRequest request, HttpServletResponse response, String uuid, String mobile,
+			Long productId, String code) throws Exception {
 		if (StringUtils.isBlank(mobile) || !CheckPhone.isMobileNO(mobile)) {
 			LOG.error("mobile={}无效", mobile);
 			return null;
 		}
-
-		String appId = SystemConfig.getInstance().getAppId();
-		String openId = SessionUtil.getPayOpenId();
-
-		if (StringUtils.isBlank(openId)) {
-			if (StringUtils.isBlank(code)) {
-				String projectName = request.getContextPath();
-				String redirectUri = URLEncoder.encode(SystemConfig.getInstance().getDomain() + projectName + "/flow/" + uuid
-						+ "/" + mobile + "/" + productId + "/enterPay.do", "utf-8");
-				response.sendRedirect(weixinApiBiz.getAuthUrlBySnsapiBase(appId, redirectUri));
+		if (StringUtils.isBlank(SessionUtil.getPayOpenId()) && StringUtils.isNotBlank(code)) {
+			String appId = SystemConfig.getInstance().getAppId();
+			AccessToken accessToken = weixinApiBiz.getAccessToken(appId, code);
+			if (null != accessToken) {
+				String openId = accessToken.getOpenId();
+				SessionUtil.setPayOpenId(openId);
 			} else {
-				AccessToken accessToken = weixinApiBiz.getAccessToken(appId, code);
-				if (null != accessToken) {
-					openId = accessToken.getOpenId();
-					SessionUtil.setPayOpenId(openId);
-				} else {
-					LOG.error("获取不到用户Token.");
-					return null;
-				}
+				LOG.error("获取不到用户Token.");
+				return null;
 			}
 		}
 		try {
+			// FlowProductDTO flowProductDTO = (FlowProductDTO)
+			// request.getAttribute("flowProductDTO");
 			FlowProductDTO flowProductDTO = flowService.initPayRecord(request, response, uuid, mobile, productId);
 			return new ModelAndView("pay", "flowProductDTO", flowProductDTO);
 		} catch (Exception e) {

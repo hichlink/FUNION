@@ -12,6 +12,7 @@ public class SessionUtil {
 	public static final String SESSION_REGISTER_WXUSERINFO = "registerWxUserInfo";
 	public static final String SESSION_AGENT_UUID = "MyUUID";
 	public static final String SESSION_PAYOPENID = "PayOpenId";
+
 	public static HttpServletRequest getRequest() {
 		if (null != RequestContextHolder.getRequestAttributes()) {
 			return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
