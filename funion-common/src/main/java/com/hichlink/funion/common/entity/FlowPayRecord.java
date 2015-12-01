@@ -78,6 +78,16 @@ public class FlowPayRecord {
 	 * 流量下发状态 0:网关收到成功 00:成功 1:拒绝收单 其它编码表失败
 	 */
 	private String sendStatus;
+	
+	public static final String SEND_STATUS_INIT = "01";
+	
+	public static final String SEND_STATUS_GATE_OK = "02";
+	
+	public static final String SEND_STATUS_SENDING = "03";
+	
+	public static final String SEND_STATUS_OK = "00";
+	
+	public static final String SEND_STATUS_FAIL = "99";
 
 	/**
 	 * 商户订单号

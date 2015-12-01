@@ -12,6 +12,7 @@ import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.weixin.entity.WxMchOrderInfo;
 import com.hichlink.funion.common.weixin.entity.WxMchOrderInfoResp;
 import com.hichlink.funion.common.weixin.service.WeixinMchPay;
+
 @Component
 public class WeixinMchPayBiz {
 	private static Logger log = LoggerFactory.getLogger(WeixinMchPayBiz.class);
@@ -21,8 +22,9 @@ public class WeixinMchPayBiz {
 	@Autowired
 	private WxAccessConfMapper wxAccessConfMapper;
 
-	public WxMchOrderInfoResp sendOrder(WxMchOrderInfo wxMchOrderInfo, String appId) {
-		WxAccessConf wc = getWxAccessConf(appId);
+	public WxMchOrderInfoResp sendOrder(WxMchOrderInfo wxMchOrderInfo) {
+		WxAccessConf wc = getWxAccessConf(wxMchOrderInfo.getMchAppid());
+		wxMchOrderInfo.setMchid(wc.getWxMerchantNo());
 		return weixinMchPay.sendOrder(wxMchOrderInfo, wc.getApiKey());
 	}
 

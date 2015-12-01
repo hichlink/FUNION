@@ -97,6 +97,7 @@ public class FlowService {
 		flowPayRecord.setMobile(mobile);
 		flowPayRecord.setNickName("");
 		flowPayRecord.setNum(1);
+		flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_INIT);
 		flowPayRecord.setOpenId(openId);
 		flowPayRecord.setOperatorPrice(flowProductInfo.getOperatorPrice());
 		flowPayRecord.setOutTradeNo(outTradeNo);

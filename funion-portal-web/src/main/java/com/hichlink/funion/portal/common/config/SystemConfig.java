@@ -73,10 +73,38 @@ public class SystemConfig {
 		return configuration.getString(arg);
 	}
 
+	public int getInt(String arg) {
+		if (configuration == null) {
+			return 0;
+		}
+		return configuration.getInt(arg);
+	}
+
 	public String getAppId() {
 		return getString("wx.appId");
 	}
+
 	public String getDomain() {
 		return getString("domain");
+	}
+
+	public String geFlowAppId() {
+		return getString("flow.flowAppId");
+	}
+
+	public String getFlowAppkey() {
+		return getString("flow.flowAppkey");
+	}
+
+	public String getDispatchUrl() {
+		return getString("flow.dispatchUrl");
+	}
+
+	public int getCashMin() {
+		return getInt("cash-min");
+	}
+
+	public int getCashMax() {
+		return getInt("cash-max");
 	}
 }

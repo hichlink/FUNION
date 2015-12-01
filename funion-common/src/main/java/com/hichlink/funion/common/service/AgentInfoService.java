@@ -1,11 +1,16 @@
 package com.hichlink.funion.common.service;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.aspire.webbas.core.pagination.mybatis.pager.Page;
-import java.util.List;
-import com.hichlink.funion.common.entity.AgentInfo;
 import com.hichlink.funion.common.dao.AgentInfoMapper;
+import com.hichlink.funion.common.entity.AgentInfo;
 
 /**
  * 
@@ -34,8 +39,8 @@ public class AgentInfoService {
 	public AgentInfo get(Long agentId) {
 		return agentInfoMapper.selectByPrimaryKey(agentId);
 	}
-	
-	public AgentInfo selectByOpenId(String openId){
+
+	public AgentInfo selectByOpenId(String openId) {
 		return agentInfoMapper.selectByOpenId(openId);
 	}
 
@@ -49,6 +54,13 @@ public class AgentInfoService {
 
 	public void update(AgentInfo data) {
 		agentInfoMapper.updateByPrimaryKey(data);
+	}
+
+	public void updateBalance(Long agentId, BigDecimal balance) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("agentId", agentId);
+		params.put("balance", balance);
+		agentInfoMapper.updateBalance(params);
 	}
 
 	public int delete(Long agentId) {

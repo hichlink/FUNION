@@ -44,7 +44,7 @@ public class WxMchOrderInfo {
 	/**
 	 * 企业付款金额，单位为分
 	 */
-	private String amount;
+	private Integer amount;
 	/**
 	 * 企业付款操作说明信息。必填。
 	 */
@@ -118,11 +118,11 @@ public class WxMchOrderInfo {
 		this.reUserName = reUserName;
 	}
 
-	public String getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
@@ -168,9 +168,7 @@ public class WxMchOrderInfo {
 		if (StringUtils.isNotBlank(this.getReUserName())) {
 			map.put("re_user_name", this.getReUserName());
 		}
-		if (StringUtils.isNotBlank(this.getAmount())) {
-			map.put("amount", this.getAmount());
-		}
+		map.put("amount", "" + this.getAmount());
 		if (StringUtils.isNotBlank(this.getDesc())) {
 			map.put("desc", this.getDesc());
 		}

@@ -6,7 +6,7 @@ public class FossFlowMakeBack {
 	private String orderId; // 返回CP订单号
 
 	private String msg; // 返回具体信息
-
+	public static final String OK = "00";
 	public String getCode() {
 		return code;
 	}
