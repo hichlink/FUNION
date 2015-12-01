@@ -299,4 +299,9 @@
       remark = #{remark,jdbcType=VARCHAR}
     where agent_id = #{agentId,jdbcType=BIGINT}
   </update>
+  <update id="updateBalance" parameterType="java.util.Map" >
+    update agent_info
+    set balance = balance + #{balance,jdbcType=DECIMAL}
+    where agent_id = #{agentId,jdbcType=BIGINT}
+  </update>
 </mapper>

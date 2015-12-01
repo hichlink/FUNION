@@ -1,272 +1,308 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hichlink.funion.common.dao.FlowPayRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.hichlink.funion.common.entity.FlowPayRecord" >
-    <id column="record_id" property="recordId" jdbcType="BIGINT" />
-    <result column="open_id" property="openId" jdbcType="VARCHAR" />
-    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
-    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
-    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
-    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="product_id" property="productId" jdbcType="BIGINT" />
-    <result column="num" property="num" jdbcType="INTEGER" />
-    <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
-    <result column="settlement_price" property="settlementPrice" jdbcType="DECIMAL" />
-    <result column="operator_price" property="operatorPrice" jdbcType="DECIMAL" />
-    <result column="pay_type" property="payType" jdbcType="INTEGER" />
-    <result column="pay_status" property="payStatus" jdbcType="INTEGER" />
-    <result column="send_status" property="sendStatus" jdbcType="VARCHAR" />
-    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
-    <result column="input_time" property="inputTime" jdbcType="TIMESTAMP" />
-    <result column="identity_id" property="identityId" jdbcType="VARCHAR" />
-    <result column="is_balance" property="isBalance" jdbcType="INTEGER" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <!--例子:<if test="params['name'] != null and  params['name'] != ''">and name=#{params.name}</if>-->
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    record_id, open_id, union_id, nick_name, head_img, mobile, product_id, num, cost_price, 
-    settlement_price, operator_price, pay_type, pay_status, send_status, out_trade_no, 
-    input_time, identity_id, is_balance, remark
-  </sql>
-  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page" >
-    select
-    <include refid="Base_Column_List" />
-    from flow_pay_record
-    <if test="params != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from flow_pay_record
-    where record_id = #{recordId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from flow_pay_record
-    where record_id = #{recordId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" useGeneratedKeys="true"  keyProperty="recordId">
-    insert into flow_pay_record (record_id, open_id, union_id, 
-      nick_name, head_img, mobile, 
-      product_id, num, cost_price, 
-      settlement_price, operator_price, pay_type, 
-      pay_status, send_status, out_trade_no, 
-      input_time, identity_id, is_balance, 
-      remark)
-    values (#{recordId}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
-      #{nickName,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{productId,jdbcType=BIGINT}, #{num,jdbcType=INTEGER}, #{costPrice,jdbcType=DECIMAL}, 
-      #{settlementPrice,jdbcType=DECIMAL}, #{operatorPrice,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER}, 
-      #{payStatus,jdbcType=INTEGER}, #{sendStatus,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, 
-      #{inputTime,jdbcType=TIMESTAMP}, #{identityId,jdbcType=VARCHAR}, #{isBalance,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" useGeneratedKeys="true"  keyProperty="recordId">
-    insert into flow_pay_record
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="recordId != null" >
-        record_id,
-      </if>
-      <if test="openId != null" >
-        open_id,
-      </if>
-      <if test="unionId != null" >
-        union_id,
-      </if>
-      <if test="nickName != null" >
-        nick_name,
-      </if>
-      <if test="headImg != null" >
-        head_img,
-      </if>
-      <if test="mobile != null" >
-        mobile,
-      </if>
-      <if test="productId != null" >
-        product_id,
-      </if>
-      <if test="num != null" >
-        num,
-      </if>
-      <if test="costPrice != null" >
-        cost_price,
-      </if>
-      <if test="settlementPrice != null" >
-        settlement_price,
-      </if>
-      <if test="operatorPrice != null" >
-        operator_price,
-      </if>
-      <if test="payType != null" >
-        pay_type,
-      </if>
-      <if test="payStatus != null" >
-        pay_status,
-      </if>
-      <if test="sendStatus != null" >
-        send_status,
-      </if>
-      <if test="outTradeNo != null" >
-        out_trade_no,
-      </if>
-      <if test="inputTime != null" >
-        input_time,
-      </if>
-      <if test="identityId != null" >
-        identity_id,
-      </if>
-      <if test="isBalance != null" >
-        is_balance,
-      </if>
-      <if test="remark != null" >
-        remark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="recordId != null" >
-        #{recordId,jdbcType=BIGINT},
-      </if>
-      <if test="openId != null" >
-        #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="unionId != null" >
-        #{unionId,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="headImg != null" >
-        #{headImg,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null" >
-        #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="productId != null" >
-        #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="num != null" >
-        #{num,jdbcType=INTEGER},
-      </if>
-      <if test="costPrice != null" >
-        #{costPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="settlementPrice != null" >
-        #{settlementPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="operatorPrice != null" >
-        #{operatorPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="payType != null" >
-        #{payType,jdbcType=INTEGER},
-      </if>
-      <if test="payStatus != null" >
-        #{payStatus,jdbcType=INTEGER},
-      </if>
-      <if test="sendStatus != null" >
-        #{sendStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="outTradeNo != null" >
-        #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="inputTime != null" >
-        #{inputTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="identityId != null" >
-        #{identityId,jdbcType=VARCHAR},
-      </if>
-      <if test="isBalance != null" >
-        #{isBalance,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" >
-    update flow_pay_record
-    <set >
-      <if test="openId != null" >
-        open_id = #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="unionId != null" >
-        union_id = #{unionId,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        nick_name = #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="headImg != null" >
-        head_img = #{headImg,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null" >
-        mobile = #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="productId != null" >
-        product_id = #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="num != null" >
-        num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="costPrice != null" >
-        cost_price = #{costPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="settlementPrice != null" >
-        settlement_price = #{settlementPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="operatorPrice != null" >
-        operator_price = #{operatorPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="payType != null" >
-        pay_type = #{payType,jdbcType=INTEGER},
-      </if>
-      <if test="payStatus != null" >
-        pay_status = #{payStatus,jdbcType=INTEGER},
-      </if>
-      <if test="sendStatus != null" >
-        send_status = #{sendStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="outTradeNo != null" >
-        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="inputTime != null" >
-        input_time = #{inputTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="identityId != null" >
-        identity_id = #{identityId,jdbcType=VARCHAR},
-      </if>
-      <if test="isBalance != null" >
-        is_balance = #{isBalance,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where record_id = #{recordId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" >
-    update flow_pay_record
-    set open_id = #{openId,jdbcType=VARCHAR},
-      union_id = #{unionId,jdbcType=VARCHAR},
-      nick_name = #{nickName,jdbcType=VARCHAR},
-      head_img = #{headImg,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      product_id = #{productId,jdbcType=BIGINT},
-      num = #{num,jdbcType=INTEGER},
-      cost_price = #{costPrice,jdbcType=DECIMAL},
-      settlement_price = #{settlementPrice,jdbcType=DECIMAL},
-      operator_price = #{operatorPrice,jdbcType=DECIMAL},
-      pay_type = #{payType,jdbcType=INTEGER},
-      pay_status = #{payStatus,jdbcType=INTEGER},
-      send_status = #{sendStatus,jdbcType=VARCHAR},
-      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      input_time = #{inputTime,jdbcType=TIMESTAMP},
-      identity_id = #{identityId,jdbcType=VARCHAR},
-      is_balance = #{isBalance,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR}
-    where record_id = #{recordId,jdbcType=BIGINT}
-  </update>
+<mapper namespace="com.hichlink.funion.common.dao.FlowPayRecordMapper">
+	<resultMap id="BaseResultMap"
+		type="com.hichlink.funion.common.entity.FlowPayRecord">
+		<id column="record_id" property="recordId" jdbcType="BIGINT" />
+		<result column="open_id" property="openId" jdbcType="VARCHAR" />
+		<result column="union_id" property="unionId" jdbcType="VARCHAR" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+		<result column="head_img" property="headImg" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="BIGINT" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+		<result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
+		<result column="settlement_price" property="settlementPrice"
+			jdbcType="DECIMAL" />
+		<result column="operator_price" property="operatorPrice"
+			jdbcType="DECIMAL" />
+		<result column="pay_type" property="payType" jdbcType="INTEGER" />
+		<result column="pay_status" property="payStatus" jdbcType="INTEGER" />
+		<result column="send_status" property="sendStatus" jdbcType="VARCHAR" />
+		<result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+		<result column="input_time" property="inputTime" jdbcType="TIMESTAMP" />
+		<result column="identity_id" property="identityId" jdbcType="VARCHAR" />
+		<result column="is_balance" property="isBalance" jdbcType="INTEGER" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<if test="params['sendStatus'] != null and  params['sendStatus'] != ''">
+				and send_status =#{params.sendStatus}
+			</if>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		record_id, open_id, union_id, nick_name, head_img, mobile,
+		product_id, num,
+		cost_price,
+		settlement_price, operator_price, pay_type,
+		pay_status, send_status, out_trade_no,
+		input_time, identity_id,
+		is_balance, remark
+	</sql>
+	<select id="pageQuery" resultMap="BaseResultMap"
+		parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page">
+		select
+		<include refid="Base_Column_List" />
+		from flow_pay_record
+		<if test="params != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from flow_pay_record
+		where record_id = #{recordId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		flow_pay_record
+		where record_id = #{recordId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hichlink.funion.common.entity.FlowPayRecord"
+		useGeneratedKeys="true" keyProperty="recordId">
+		insert into flow_pay_record
+		(record_id, open_id, union_id,
+		nick_name, head_img, mobile,
+		product_id,
+		num, cost_price,
+		settlement_price, operator_price, pay_type,
+		pay_status, send_status, out_trade_no,
+		input_time, identity_id,
+		is_balance,
+		remark)
+		values (#{recordId}, #{openId,jdbcType=VARCHAR},
+		#{unionId,jdbcType=VARCHAR},
+		#{nickName,jdbcType=VARCHAR},
+		#{headImg,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+		#{productId,jdbcType=BIGINT}, #{num,jdbcType=INTEGER},
+		#{costPrice,jdbcType=DECIMAL},
+		#{settlementPrice,jdbcType=DECIMAL},
+		#{operatorPrice,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER},
+		#{payStatus,jdbcType=INTEGER}, #{sendStatus,jdbcType=VARCHAR},
+		#{outTradeNo,jdbcType=VARCHAR},
+		#{inputTime,jdbcType=TIMESTAMP},
+		#{identityId,jdbcType=VARCHAR}, #{isBalance,jdbcType=INTEGER},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.FlowPayRecord"
+		useGeneratedKeys="true" keyProperty="recordId">
+		insert into flow_pay_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recordId != null">
+				record_id,
+			</if>
+			<if test="openId != null">
+				open_id,
+			</if>
+			<if test="unionId != null">
+				union_id,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="headImg != null">
+				head_img,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="productId != null">
+				product_id,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="costPrice != null">
+				cost_price,
+			</if>
+			<if test="settlementPrice != null">
+				settlement_price,
+			</if>
+			<if test="operatorPrice != null">
+				operator_price,
+			</if>
+			<if test="payType != null">
+				pay_type,
+			</if>
+			<if test="payStatus != null">
+				pay_status,
+			</if>
+			<if test="sendStatus != null">
+				send_status,
+			</if>
+			<if test="outTradeNo != null">
+				out_trade_no,
+			</if>
+			<if test="inputTime != null">
+				input_time,
+			</if>
+			<if test="identityId != null">
+				identity_id,
+			</if>
+			<if test="isBalance != null">
+				is_balance,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recordId != null">
+				#{recordId,jdbcType=BIGINT},
+			</if>
+			<if test="openId != null">
+				#{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="unionId != null">
+				#{unionId,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				#{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="headImg != null">
+				#{headImg,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=BIGINT},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=INTEGER},
+			</if>
+			<if test="costPrice != null">
+				#{costPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="settlementPrice != null">
+				#{settlementPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="operatorPrice != null">
+				#{operatorPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="payType != null">
+				#{payType,jdbcType=INTEGER},
+			</if>
+			<if test="payStatus != null">
+				#{payStatus,jdbcType=INTEGER},
+			</if>
+			<if test="sendStatus != null">
+				#{sendStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="outTradeNo != null">
+				#{outTradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="inputTime != null">
+				#{inputTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="identityId != null">
+				#{identityId,jdbcType=VARCHAR},
+			</if>
+			<if test="isBalance != null">
+				#{isBalance,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hichlink.funion.common.entity.FlowPayRecord">
+		update flow_pay_record
+		<set>
+			<if test="openId != null">
+				open_id = #{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="unionId != null">
+				union_id = #{unionId,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="headImg != null">
+				head_img = #{headImg,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				product_id = #{productId,jdbcType=BIGINT},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=INTEGER},
+			</if>
+			<if test="costPrice != null">
+				cost_price = #{costPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="settlementPrice != null">
+				settlement_price = #{settlementPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="operatorPrice != null">
+				operator_price = #{operatorPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="payType != null">
+				pay_type = #{payType,jdbcType=INTEGER},
+			</if>
+			<if test="payStatus != null">
+				pay_status = #{payStatus,jdbcType=INTEGER},
+			</if>
+			<if test="sendStatus != null">
+				send_status = #{sendStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="outTradeNo != null">
+				out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="inputTime != null">
+				input_time = #{inputTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="identityId != null">
+				identity_id = #{identityId,jdbcType=VARCHAR},
+			</if>
+			<if test="isBalance != null">
+				is_balance = #{isBalance,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where record_id = #{recordId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hichlink.funion.common.entity.FlowPayRecord">
+		update
+		flow_pay_record
+		set open_id = #{openId,jdbcType=VARCHAR},
+		union_id =
+		#{unionId,jdbcType=VARCHAR},
+		nick_name = #{nickName,jdbcType=VARCHAR},
+		head_img = #{headImg,jdbcType=VARCHAR},
+		mobile =
+		#{mobile,jdbcType=VARCHAR},
+		product_id = #{productId,jdbcType=BIGINT},
+		num = #{num,jdbcType=INTEGER},
+		cost_price =
+		#{costPrice,jdbcType=DECIMAL},
+		settlement_price =
+		#{settlementPrice,jdbcType=DECIMAL},
+		operator_price =
+		#{operatorPrice,jdbcType=DECIMAL},
+		pay_type =
+		#{payType,jdbcType=INTEGER},
+		pay_status =
+		#{payStatus,jdbcType=INTEGER},
+		send_status =
+		#{sendStatus,jdbcType=VARCHAR},
+		out_trade_no =
+		#{outTradeNo,jdbcType=VARCHAR},
+		input_time =
+		#{inputTime,jdbcType=TIMESTAMP},
+		identity_id =
+		#{identityId,jdbcType=VARCHAR},
+		is_balance =
+		#{isBalance,jdbcType=INTEGER},
+		remark = #{remark,jdbcType=VARCHAR}
+		where record_id = #{recordId,jdbcType=BIGINT}
+	</update>
 </mapper>

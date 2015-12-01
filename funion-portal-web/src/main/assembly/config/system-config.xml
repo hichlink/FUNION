@@ -3,5 +3,12 @@
 	<wx>
 		<appId>wxa7e557056c7d41bb</appId>
 	</wx>
-	<domain></domain>
+	<domain>http://poc.szwisdom.cn</domain>
+	<flow>
+		<flowAppId></flowAppId>
+		<flowAppkey></flowAppkey>
+		<dispatchUrl></dispatchUrl>
+	</flow>
+	<cash-min>1</cash-min>
+	<cash-max>10000</cash-max>
 </config>
