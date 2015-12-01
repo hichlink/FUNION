@@ -6,7 +6,6 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 
 import com.hichlink.funion.common.util.Signature;
-import com.hichlink.funion.common.util.XStreamHandle;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
@@ -95,16 +94,8 @@ public class WxPayNotify extends WxBaseResp {
 
 	@XStreamAlias("cash_fee_type")
 	private String cashFeeType;
-
-	public WxPayNotify(String xml) {
-		parseXml(xml);
-	}
-
-	public void parseXml(String xml) {
-		if (StringUtils.isNotBlank(xml)) {
-			XStreamHandle.toBean(xml, this.getClass());
-		}
-	}
+	@XStreamAlias("cash_fee")
+	private Integer cashFee;
 
 	public String getAppId() {
 		return appId;
@@ -297,10 +288,20 @@ public class WxPayNotify extends WxBaseResp {
 		if (StringUtils.isNotBlank(getCashFeeType())) {
 			map.put("cash_fee_type", getCashFeeType());
 		}
+		map.put("cash_fee", "" + this.getCashFee());
 		if (StringUtils.isBlank(getSign())) {
 			return false;
 		}
 		String sign = Signature.getSign(map, apiKey);
 		return sign.equals(getSign());
 	}
+
+	public Integer getCashFee() {
+		return cashFee;
+	}
+
+	public void setCashFee(Integer cashFee) {
+		this.cashFee = cashFee;
+	}
+
 }

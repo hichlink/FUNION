@@ -22,6 +22,7 @@ import com.hichlink.funion.common.service.AgentInfoService;
 import com.hichlink.funion.common.util.Signature;
 import com.hichlink.funion.common.weixin.WeixinApiBiz;
 import com.hichlink.funion.common.weixin.entity.AccessToken;
+import com.hichlink.funion.common.weixin.entity.ApiUserinfo;
 import com.hichlink.funion.common.weixin.entity.OpenUserinfo;
 import com.hichlink.funion.portal.common.config.SystemConfig;
 import com.hichlink.funion.portal.common.util.SessionUtil;
@@ -35,7 +36,7 @@ public class WeixinController extends BaseController {
 	@Autowired
 	private AgentInfoService agentInfoService;
 
-	@RequestMapping(value = "/getJsConfig")
+	@RequestMapping(value = "/getJsConfig.do")
 	@ResponseBody
 	public Map<String, Object> getJsConfig(String url) {
 		if (StringUtils.isBlank(url)) {
@@ -62,13 +63,22 @@ public class WeixinController extends BaseController {
 					.encode(SystemConfig.getInstance().getDomain() + projectName + "/weixin/register.do", "utf-8");
 			response.sendRedirect(weixinApiBiz.getAuthUrlBySnsapiUserInfo(appId, redirectUri));
 		} else {
+
 			AccessToken accessToken = weixinApiBiz.getAccessToken(appId, code);
 			if (null != accessToken) {
 				LOG.debug("accessToken={}", accessToken.toString());
+				ApiUserinfo apiUserinfo = weixinApiBiz.getApiUserinfo(appId, accessToken.getOpenId());
+				if (null == apiUserinfo) {
+					return null;
+				}
+				if (!apiUserinfo.isSubscribe()){
+					return new ModelAndView("focus");
+				}
 				OpenUserinfo openUserinfo = weixinApiBiz.getOpenUserinfo(accessToken.getAccessToken(),
 						accessToken.getOpenId());
 				LOG.debug("openUserinfo={}", openUserinfo.toString());
 				if (null != openUserinfo) {
+
 					SessionUtil.setRegisterWxUserInfo(openUserinfo);
 					AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
 					if (null != agentInfo) {

@@ -1,40 +1,43 @@
 $(function() {
-	//pay();
-		$.ajax({
-		url: ctxPaths + '/weixin/getJsConfig.do',
-		async: false,
-		data: {
-			"url": window.location.href
+	// pay();
+	$.ajax({
+		url : ctxPaths + '/weixin/getJsConfig.do',
+		async : false,
+		data : {
+			"url" : window.location.href
 		},
-		dataType: 'json',
-		type: 'post',
-		success: function (dataResult) {
+		dataType : 'json',
+		type : 'post',
+		success : function(dataResult) {
 			var data = dataResult.data;
 			if (data.appid == null || data.appid == "") {
 				return;
 			}
 			wx.config({
-				debug: false,
-				appId: data.appid,
-				timestamp: data.timestamp,
-				nonceStr: data.nonceStr,
-				signature: data.signature,
-				jsApiList: ["onMenuShareTimeline",
-					"onMenuShareAppMessage", "onMenuShareQQ",
-					"onMenuShareWeibo", "chooseWXPay"]
+				debug : false,
+				appId : data.appid,
+				timestamp : data.timestamp,
+				nonceStr : data.nonceStr,
+				signature : data.signature,
+				jsApiList : [ "onMenuShareTimeline", "onMenuShareAppMessage",
+						"onMenuShareQQ", "onMenuShareWeibo", "chooseWXPay" ]
 			});
 		}
 	});
 	$('#payMoney').click(pay)
 	var flag = false;
 	function pay() {
-		var prepayId = $("#prepayId").val();
 		if (flag)
 			return;
 		flag = true;
 		$.ajax({
-			url : ctxPaths + '/flow/' + prepayId + '/sendPayRequest.do',
+			url : ctxPaths + '/flow/sendPayRequest.do',
 			type : 'get',
+			data : {
+				uuid : getP('uuid'),
+				mobile : getP('mobile'),
+				productId : getP('productId')
+			},
 			dataType : 'json',
 			aysnc : false,
 			success : function(data) {
@@ -48,12 +51,12 @@ $(function() {
 						paySign : obj.paySign, // 支付签名
 						success : function(res) {
 							flag = false;
-							alert(res);
+							location.href = ctxPaths + "/flow/" + getP('uuid') + "/enter.do";
 						}
 					});
 					wx.error(function(res) {
 						flag = false;
-						alert(res.err_msg);
+						alert(JSON.stringify(res));
 					});
 				}
 			}

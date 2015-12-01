@@ -40,6 +40,16 @@ public class WeixinApiBiz {
 		if (null == wc) {
 			throw new MyException("根据AppId[" + appId + "]取不到对应的微信公众号配置");
 		}
+		if (wc.getExpiresTime() == null || StringUtils.isBlank(wc.getAccessToken())
+				|| new Date().getTime() > wc.getExpiresTime().getTime()) {
+			ApiToken apiAccessToken = weixinApi.getToken(wc.getAppId(), wc.getAppSecret());
+			if (null == apiAccessToken) {
+				throw new MyException("根据AppId[" + appId + "]取不到对应的Token");
+			}
+			wc.setAccessToken(apiAccessToken.getAccessToken());
+			wc.setExpiresTime(new Date(new Date().getTime() + apiAccessToken.getExpiresIn() * 1000));
+			wxAccessConfMapper.updateByPrimaryKey(wc);
+		}
 		return wc;
 	}
 
@@ -87,16 +97,6 @@ public class WeixinApiBiz {
 
 	public String getToken(String appId) {
 		WxAccessConf wc = getWxAccessConf(appId);
-		if (wc.getExpiresTime() == null || StringUtils.isBlank(wc.getAccessToken())
-				|| new Date().getTime() > wc.getExpiresTime().getTime()) {
-			ApiToken apiAccessToken = weixinApi.getToken(wc.getAppId(), wc.getAppSecret());
-			if (null == apiAccessToken) {
-				throw new MyException("根据AppId[" + appId + "]取不到对应的Token");
-			}
-			wc.setAccessToken(apiAccessToken.getAccessToken());
-			wc.setExpiresTime(new Date(new Date().getTime() + apiAccessToken.getExpiresIn() * 1000));
-			wxAccessConfMapper.updateByPrimaryKey(wc);
-		}
 		return wc.getAccessToken();
 	}
 }

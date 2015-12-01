@@ -29,7 +29,6 @@ import com.hichlink.funion.common.weixin.WeixinPayBiz;
 import com.hichlink.funion.common.weixin.entity.WxOrderInfo;
 import com.hichlink.funion.common.weixin.entity.WxOrderInfoResp;
 import com.hichlink.funion.portal.common.config.SystemConfig;
-import com.hichlink.funion.portal.common.dto.FlowProductDTO;
 import com.hichlink.funion.portal.common.util.CheckPhone;
 import com.hichlink.funion.portal.common.util.SessionUtil;
 
@@ -54,12 +53,16 @@ public class FlowService {
 	}
 
 	@Transactional
-	public FlowProductDTO initPayRecord(HttpServletRequest request, HttpServletResponse response, String uuid,String mobile,
+	public String initPayRecord(HttpServletRequest request, HttpServletResponse response, String uuid, String mobile,
 			Long productId) {
 		FlowProductInfo flowProductInfo = flowProductInfoService.get(productId);
 		if (null == flowProductInfo) {
 			LOG.error("根据productId={}查找不到对应的流量包信息", productId);
 			throw new MyException("查找不到对应的流量包信息");
+		}
+		if (StringUtils.isBlank(mobile) || !CheckPhone.isMobileNO(mobile)) {
+			LOG.error("mobile={}无效", mobile);
+			throw new MyException("手机号码无效!");
 		}
 		String appId = SystemConfig.getInstance().getAppId();
 		String openId = SessionUtil.getPayOpenId();
@@ -121,16 +124,6 @@ public class FlowService {
 		wxPayRecord.setRecordId(flowPayRecord.getRecordId());
 		wxPayRecordService.saveAndUpdate(wxPayRecord);
 
-		String prepayId = resp.getPrepayId();
-		//String prepayId = "1111";
-		FlowProductDTO flowProductDTO = new FlowProductDTO();
-		flowProductDTO.setProductId(flowProductInfo.getProductId());
-		flowProductDTO.setProductName(flowProductInfo.getProductName());
-		flowProductDTO.setNum(1);
-		flowProductDTO.setPrepayId(prepayId);
-		flowProductDTO.setSettlementPrice(flowProductInfo.getSettlementPrice());
-		flowProductDTO
-				.setTotalPrice(flowProductDTO.getSettlementPrice().multiply(new BigDecimal(flowProductDTO.getNum())));
-		return flowProductDTO;
+		return resp.getPrepayId();
 	}
 }

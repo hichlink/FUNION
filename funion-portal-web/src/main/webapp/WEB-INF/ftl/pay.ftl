@@ -19,7 +19,6 @@
 		<div class="admin-content">
 			<div class="am-u-sm-12" style="margin-top: 10px;">
 				<form class="am-form am-form-horizontal" id="payForm">
-					<input type="hidden" name="prepayId" id="prepayId" value="${flowProductDTO.prepayId}"/>
 					<div class="am-form-group">
 						<div class="am-u-sm-4 am-text-right">商品名：</div>
 						<div class="am-u-sm-8">
@@ -72,6 +71,7 @@
 	<script src="${ctx}/assets/js/amazeui.min.js"></script>
 	<script type="text/javascript"
 		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-	<script type="text/javascript" src="${ctx}/js/app/pay.js"></script>
+			<script type="text/javascript" src="${ctx}/js/app/common.js"></script>
+	<script type="text/javascript" src="${ctx}/js/app/pay.js?20151201"></script>
 </body>
 </html>

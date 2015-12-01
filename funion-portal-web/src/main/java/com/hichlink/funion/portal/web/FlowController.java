@@ -21,13 +21,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aspire.webbas.core.exception.MyException;
 import com.aspire.webbas.core.web.BaseController;
 import com.hichlink.funion.common.entity.FlowPayRecord;
+import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.entity.WxPayRecord;
 import com.hichlink.funion.common.service.FlowPayRecordService;
+import com.hichlink.funion.common.service.FlowProductInfoService;
 import com.hichlink.funion.common.service.WxAccessConfService;
 import com.hichlink.funion.common.service.WxPayRecordService;
+import com.hichlink.funion.common.util.XStreamHandle;
 import com.hichlink.funion.common.weixin.WeixinApiBiz;
 import com.hichlink.funion.common.weixin.WeixinPayBiz;
 import com.hichlink.funion.common.weixin.entity.AccessToken;
@@ -54,6 +58,8 @@ public class FlowController extends BaseController {
 	private WxPayRecordService wxPayRecordService;
 	@Autowired
 	private FlowPayRecordService flowPayRecordService;
+	@Autowired
+	private FlowProductInfoService flowProductInfoService;
 
 	@RequestMapping(value = "/{uuid}/enter.do")
 	public ModelAndView enter(HttpServletRequest request, HttpServletResponse response, @PathVariable String uuid)
@@ -124,7 +130,25 @@ public class FlowController extends BaseController {
 		try {
 			// FlowProductDTO flowProductDTO = (FlowProductDTO)
 			// request.getAttribute("flowProductDTO");
-			FlowProductDTO flowProductDTO = flowService.initPayRecord(request, response, uuid, mobile, productId);
+			// FlowProductDTO flowProductDTO =
+			// flowService.initPayRecord(request, response, uuid, mobile,
+			// productId);
+			FlowProductInfo flowProductInfo = flowProductInfoService.get(productId);
+			if (null == flowProductInfo) {
+				LOG.error("根据productId={}查找不到对应的流量包信息", productId);
+				throw new MyException("查找不到对应的流量包信息");
+			}
+			if (StringUtils.isBlank(mobile) || !CheckPhone.isMobileNO(mobile)) {
+				LOG.error("mobile={}无效", mobile);
+				throw new MyException("手机号码无效!");
+			}
+			FlowProductDTO flowProductDTO = new FlowProductDTO();
+			flowProductDTO.setProductId(flowProductInfo.getProductId());
+			flowProductDTO.setProductName(flowProductInfo.getProductName());
+			flowProductDTO.setNum(1);
+			flowProductDTO.setSettlementPrice(flowProductInfo.getSettlementPrice());
+			flowProductDTO.setTotalPrice(
+					flowProductDTO.getSettlementPrice().multiply(new BigDecimal(flowProductDTO.getNum())));
 			return new ModelAndView("pay", "flowProductDTO", flowProductDTO);
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
@@ -133,19 +157,21 @@ public class FlowController extends BaseController {
 
 	}
 
-	@RequestMapping(value = "/{prepayId}/sendPayRequest.do")
+	@RequestMapping(value = "/sendPayRequest.do")
 	@ResponseBody
-	public Map<String, Object> sendPayRequest(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String prepayId) throws Exception {
+	public Map<String, Object> sendPayRequest(HttpServletRequest request, HttpServletResponse response, String uuid,
+			String mobile, Long productId) throws Exception {
+		String prepayId = flowService.initPayRecord(request, response, uuid, mobile, productId);
 		if (StringUtils.isBlank(prepayId)) {
 			LOG.error("prepayId={}无效", prepayId);
-			return super.fail("参数无效!");
+			return super.fail("生成支付订单失败!");
 		}
 		String appId = SystemConfig.getInstance().getAppId();
 		return super.success(weixinPayBiz.getPayConfig(appId, prepayId));
 	}
 
 	@RequestMapping(value = "/notify.do", produces = { "text/xml;charset=UTF-8" })
+	@ResponseBody
 	public String notify(@RequestBody String body) {
 		try {
 			LOG.debug("微信支付回调body={}", body);
@@ -153,7 +179,7 @@ public class FlowController extends BaseController {
 				LOG.error("回调参数为空");
 				return null;
 			}
-			WxPayNotify wxPayNotify = new WxPayNotify(body);
+			WxPayNotify wxPayNotify = XStreamHandle.toBean(body, WxPayNotify.class);
 
 			String appId = SystemConfig.getInstance().getAppId();
 			WxAccessConf wxAccessConf = wxAccessConfService.getWxAccessConf(appId);
@@ -176,7 +202,7 @@ public class FlowController extends BaseController {
 				return null;
 			}
 			Integer total = wxPayRecord.getTotalFee().multiply(new BigDecimal(100)).intValue();
-			if (total != wxPayNotify.getTotalFee()) {
+			if (!total.equals(wxPayNotify.getTotalFee())) {
 				LOG.error("支付回调支付金额比较不一致{}！={}", new Object[] { total, wxPayNotify.getTotalFee() });
 				return null;
 			}

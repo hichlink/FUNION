@@ -21,7 +21,7 @@ public class WeixinApiService implements WeixinApi {
 	private static Logger log = LoggerFactory.getLogger(WeixinApiService.class);
 	public static final String GET_API_TOKEN_URL = "{0}/cgi-bin/token?grant_type=client_credential&appid={1}&secret={2}";
 	public static final String GET_API_USERINFO_URL = "{0}/cgi-bin/user/info?access_token={1}&openid={2}&lang=zh_CN";
-	public static final String GET_API_JS_TICKET_URL = "{0}/cgi-bin/ticket/getticket?access_token={0}&type=jsapi";
+	public static final String GET_API_JS_TICKET_URL = "{0}/cgi-bin/ticket/getticket?access_token={1}&type=jsapi";
 	public static final String GET_ACCESS_TOKEN_URL = "{0}/sns/oauth2/access_token?appid={1}&secret={2}&code={3}&grant_type=authorization_code";
 	public static final String GET_OPEN_USERINFO_URL = "{0}/sns/userinfo?access_token={1}&openid={2}&lang=zh_CN";
 	public static final String AUTH_URL = "{0}/connect/oauth2/authorize?appid={1}&redirect_uri={2}&response_type=code&scope={3}&state=123#wechat_redirect";
