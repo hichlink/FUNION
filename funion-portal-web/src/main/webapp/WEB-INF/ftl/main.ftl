@@ -26,7 +26,7 @@
 
     <ul class="am-avg-sm-3 am-text-center">
       <li><a href="#" class="am-text-success"><span class="am-icon-btn am-success am-icon-university"></span><br/>账户余额<br/>${agentInfo.balance}</a></li>
-      <li><a href="#" class="am-text-warning"><span class="am-icon-btn am-warning am-icon-jpy"></span><br/>累计收益<br/>${agentInfo.incomeTotal}</a></li>
+      <li><a href="javascript:;" id="fetchCashBtn" class="am-text-warning"><span class="am-icon-btn am-warning am-icon-jpy"></span><br/>累计收益<br/>${agentInfo.incomeTotal}</a></li>
       <li><a href="#" class="am-text-primary"><span class="am-icon-btn am-primary am-icon-credit-card"></span><br/>待提现收益<br/>${agentInfo.presentAmount}</a></li>
     </ul>
 
