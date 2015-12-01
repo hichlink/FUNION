@@ -1,8 +1,8 @@
 $(function() {
-	$("#fetchCashBtn").on('click', function() {
+	$("#fetchCashBtn").click(function() {
 		$.ajax({
 			url : ctxPaths + '/fetchCash/fetch.do',
-			type : 'get',
+			type : 'post',
 			data : {
 				cash : 1
 			},

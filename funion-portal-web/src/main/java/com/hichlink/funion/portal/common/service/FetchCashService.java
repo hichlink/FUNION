@@ -2,6 +2,7 @@ package com.hichlink.funion.portal.common.service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,8 @@ public class FetchCashService {
 			String orderId = OrderSeqGen.createApplyId();
 			wxMchOrderInfo.setPartneTradeNo(orderId);
 			wxMchOrderInfo.setReUserName("");
+			wxMchOrderInfo.setCheckName("NO_CHECK");
+			wxMchOrderInfo.setNonceStr(UUID.randomUUID().toString().replaceAll("-", ""));
 			wxMchOrderInfo.setSpbillCreateIp("127.0.0.1");
 			WxMchOrderInfoResp resp = weixinMchPayBiz.sendOrder(wxMchOrderInfo);
 			LOG.debug("resp={}", resp.toString());

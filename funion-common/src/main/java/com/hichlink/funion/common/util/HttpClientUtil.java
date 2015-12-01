@@ -126,6 +126,10 @@ public class HttpClientUtil {
 	}
 
 	public static String postByBody(String url, String body, String contentType) throws HttpException, IOException {
+		if (url.startsWith("https")) {
+			Protocol myhttps = new Protocol("https", new MySSLProtocolSocketFactory(), 443);
+			Protocol.registerProtocol("https", myhttps);
+		}
 		PostMethod post = new PostMethod(url);
 		post.setRequestHeader("Content-Type", contentType);
 		post.setRequestBody(body);
