@@ -71,6 +71,7 @@ public class Signature {
 			}
 		}
 		sb.append("key=" + apiKey);
+		System.out.println(sb.toString());
 		String sign = MD5Util.MD5(sb.toString()).toUpperCase();
 		return sign;
 	}

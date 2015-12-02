@@ -22,10 +22,10 @@ public class WeixinMchPayBiz {
 	@Autowired
 	private WxAccessConfMapper wxAccessConfMapper;
 
-	public WxMchOrderInfoResp sendOrder(WxMchOrderInfo wxMchOrderInfo) {
+	public WxMchOrderInfoResp sendOrder(WxMchOrderInfo wxMchOrderInfo,String certPath) {
 		WxAccessConf wc = getWxAccessConf(wxMchOrderInfo.getMchAppid());
 		wxMchOrderInfo.setMchid(wc.getWxMerchantNo());
-		return weixinMchPay.sendOrder(wxMchOrderInfo, wc.getApiKey());
+		return weixinMchPay.sendOrder(wxMchOrderInfo, wc.getApiKey(),certPath);
 	}
 
 	private WxAccessConf getWxAccessConf(String appId) {

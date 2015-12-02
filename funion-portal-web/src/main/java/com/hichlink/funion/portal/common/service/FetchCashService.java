@@ -58,7 +58,7 @@ public class FetchCashService {
 			WxMchOrderInfo wxMchOrderInfo = new WxMchOrderInfo();
 			wxMchOrderInfo.setAmount(cash);
 			wxMchOrderInfo.setCheckName("");
-			wxMchOrderInfo.setDesc("流量江湖佣金提现");
+			wxMchOrderInfo.setDesc("测试提现");
 			wxMchOrderInfo.setMchAppid(appId);
 			wxMchOrderInfo.setOpenId(openUserinfo.getOpenid());
 			String orderId = OrderSeqGen.createApplyId();
@@ -67,7 +67,8 @@ public class FetchCashService {
 			wxMchOrderInfo.setCheckName("NO_CHECK");
 			wxMchOrderInfo.setNonceStr(UUID.randomUUID().toString().replaceAll("-", ""));
 			wxMchOrderInfo.setSpbillCreateIp("127.0.0.1");
-			WxMchOrderInfoResp resp = weixinMchPayBiz.sendOrder(wxMchOrderInfo);
+			String certPath = SystemConfig.getInstance().getCertPath();
+			WxMchOrderInfoResp resp = weixinMchPayBiz.sendOrder(wxMchOrderInfo,certPath);
 			LOG.debug("resp={}", resp.toString());
 			if (resp.isSuccess()) {
 				FetchCashFlow fetchCashFlow = new FetchCashFlow();
@@ -78,7 +79,7 @@ public class FetchCashService {
 				fetchCashFlow.setRemark("佣金提现,cash=" + cash + "分");
 				fetchCashFlowService.insert(fetchCashFlow);
 				agentInfoService.updateBalance(agentInfo.getAgentId(),
-						new BigDecimal(0).subtract(new BigDecimal(cash).multiply(new BigDecimal(100))));
+						new BigDecimal(0).subtract(new BigDecimal(cash).divide(new BigDecimal(100))));
 			} else {
 				throw new MyException(resp.getReturnMsg());
 			}

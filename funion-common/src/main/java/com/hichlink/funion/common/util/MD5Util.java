@@ -30,7 +30,10 @@ public class MD5Util {
     }
 
     public static void main(String[] args) {
-    	
+    	String str1 = "amount=100&check_name=NO_CHECK&desc=测试提现&mch_appid=wxa7e557056c7d41bb&mchid=1247736101&nonce_str=b803f4be6e7b4df9a2b02542c6d30613&openid=oTilysxVwov46q8UGBnrpj-MFpFs&partner_trade_no=151202904626154602&spbill_create_ip=127.0.0.1&key=KSB3649gskd8729MNSY7dn7629HYsn3u";
+    	String str2 = "amount=100&check_name=NO_CHECK&desc=测试提现&mch_appid=wxa7e557056c7d41bb&mchid=1247736101&nonce_str=b803f4be6e7b4df9a2b02542c6d30613&openid=oTilysxVwov46q8UGBnrpj-MFpFs&partner_trade_no=151202905250316601&spbill_create_ip=127.0.0.1&key=KSB3649gskd8729MNSY7dn7629HYsn3u";
+    	System.out.println(str1.equals(str2));
+    	System.out.println(MD5Util.MD5("amount=100&check_name=NO_CHECK&desc=测试提现&mch_appid=wxa7e557056c7d41bb&mchid=1247736101&nonce_str=b803f4be6e7b4df9a2b02542c6d30613&openid=oTilysxVwov46q8UGBnrpj-MFpFs&partner_trade_no=151202905250316601&spbill_create_ip=127.0.0.1&key=KSB3649gskd8729MNSY7dn7629HYsn3u").toUpperCase());
 	}
 }
 

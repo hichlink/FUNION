@@ -107,4 +107,7 @@ public class SystemConfig {
 	public int getCashMax() {
 		return getInt("cash-max");
 	}
+	public String getCertPath(){
+		return getString("cert-path");
+	}
 }
