@@ -76,7 +76,7 @@ public class FetchCashService {
 				fetchCashFlow.setCashAmount(new BigDecimal(cash).divide(new BigDecimal(100)));
 				fetchCashFlow.setInputTime(new Date());
 				fetchCashFlow.setType(1);
-				fetchCashFlow.setRemark("佣金提现,cash=" + cash + "分");
+				fetchCashFlow.setRemark("佣金提现,cash=" + new BigDecimal(cash).divide(new BigDecimal(100)) + "分");
 				fetchCashFlowService.insert(fetchCashFlow);
 				agentInfoService.updateBalance(agentInfo.getAgentId(),
 						new BigDecimal(0).subtract(new BigDecimal(cash).divide(new BigDecimal(100))));

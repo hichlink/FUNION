@@ -47,17 +47,17 @@
   </div>
   <!-- content end -->
 <script id="balanceFlowTmpl" type="text/html"> 
-	<% for(var i=0; i<datas.length; i++){%>  
-			<tr><td>${datas[i].inputTime}</td><td>${datas[i].commisionAmount}元</td><td>${datas[i].remark}</td>
+	<% for(var i=0; i<rows.length; i++){%>  
+		<tr><td><%=rows[i].inputTime%></td><td><%=rows[i].commisionAmount%>元</td><td><%=rows[i].remark%></td>
           </tr>
     <%}%> 
 	</script>
-	<#include "foot.ftl" encoding="utf-8">
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="${ctx}/assets/js/jquery.min.js"></script>
-<!--<![endif]-->
-<script src="${ctx}/assets/js/amazeui.min.js"></script>
-<script src="${ctx}/js/template-native.js"></script>
-<script src="${ctx}/js/app/main.js"></script>
+<#include "foot.ftl" encoding="utf-8">
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	<script src="${ctx}/assets/js/jquery.min.js"></script>
+	<!--<![endif]-->
+	<script src="${ctx}/assets/js/amazeui.min.js"></script>
+	<script src="${ctx}/js/template-native.js"></script>
+	<script src="${ctx}/js/app/main.js"></script>
 </body>
 </html>

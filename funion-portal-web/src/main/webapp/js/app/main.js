@@ -20,6 +20,7 @@ $(function() {
 			}
 		});
 	});
+	initBalanceFlow()
 	function initBalanceFlow() {
 		$.ajax({
 			url : ctxPaths + '/main/balanceFlow.do',
