@@ -58,7 +58,7 @@ public class FetchCashService {
 			WxMchOrderInfo wxMchOrderInfo = new WxMchOrderInfo();
 			wxMchOrderInfo.setAmount(cash);
 			wxMchOrderInfo.setCheckName("");
-			wxMchOrderInfo.setDesc("测试提现");
+			wxMchOrderInfo.setDesc("test");
 			wxMchOrderInfo.setMchAppid(appId);
 			wxMchOrderInfo.setOpenId(openUserinfo.getOpenid());
 			String orderId = OrderSeqGen.createApplyId();
