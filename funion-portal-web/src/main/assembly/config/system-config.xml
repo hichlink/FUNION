@@ -9,6 +9,7 @@
 		<flowAppkey></flowAppkey>
 		<dispatchUrl></dispatchUrl>
 	</flow>
+	<commision-ratio>20</commision-ratio>
 	<cash-min>1</cash-min>
 	<cash-max>10000</cash-max>
 </config>

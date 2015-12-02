@@ -1,7 +1,8 @@
 $(function() {
 	var flag = false;
 	$("#fetchCashBtn").click(function() {
-		if (flag)return;
+		if (flag)
+			return;
 		flag = true;
 		$.ajax({
 			url : ctxPaths + '/fetchCash/fetch.do',
@@ -19,4 +20,19 @@ $(function() {
 			}
 		});
 	});
+	function initBalanceFlow() {
+		$.ajax({
+			url : ctxPaths + '/main/balanceFlow.do',
+			type : 'get',
+			success : function(data) {
+				if (data.success) {
+					var html = template('balanceFlowTmpl', data);
+					$("#balanceFlow").html(html);
+				} else {
+					alert(data.message || '系统错误');
+				}
+
+			}
+		});
+	}
 });

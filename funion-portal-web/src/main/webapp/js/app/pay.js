@@ -41,6 +41,7 @@ $(function() {
 			dataType : 'json',
 			aysnc : false,
 			success : function(data) {
+				flag = false;
 				if (data.success) {
 					var obj = data.data;
 					wx.chooseWXPay({
@@ -50,7 +51,6 @@ $(function() {
 						signType : obj.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
 						paySign : obj.paySign, // 支付签名
 						success : function(res) {
-							flag = false;
 							location.href = ctxPaths + "/flow/" + getP('uuid') + "/enter.do";
 						}
 					});

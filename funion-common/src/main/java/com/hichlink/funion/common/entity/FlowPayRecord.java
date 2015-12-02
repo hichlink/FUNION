@@ -73,7 +73,14 @@ public class FlowPayRecord {
 	 * 支付状态 0:未支付 1:支付成功 2:支付完成 3:支付失败
 	 */
 	private Integer payStatus;
-
+	
+	public static final Integer PAY_STATUS_INIT = 0;
+	
+	public static final Integer PAY_STATUS_SUCC = 1;
+	
+	public static final Integer PAY_STATUS_FINISH = 2;
+	
+	public static final Integer PAY_STATUS_FAIL = 3;
 	/**
 	 * 流量下发状态 0:网关收到成功 00:成功 1:拒绝收单 其它编码表失败
 	 */

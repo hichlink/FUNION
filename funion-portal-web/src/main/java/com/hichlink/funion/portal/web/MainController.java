@@ -1,6 +1,7 @@
 package com.hichlink.funion.portal.web;
 
 import java.net.URLEncoder;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,11 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aspire.webbas.core.pagination.mybatis.pager.Page;
 import com.aspire.webbas.core.web.BaseController;
 import com.hichlink.funion.common.entity.AgentInfo;
+import com.hichlink.funion.common.entity.BalanceFlow;
 import com.hichlink.funion.common.service.AgentInfoService;
+import com.hichlink.funion.common.service.BalanceFlowService;
 import com.hichlink.funion.common.weixin.WeixinApiBiz;
 import com.hichlink.funion.common.weixin.entity.AccessToken;
 import com.hichlink.funion.common.weixin.entity.OpenUserinfo;
@@ -31,6 +36,25 @@ public class MainController extends BaseController {
 	private AgentInfoService agentInfoService;
 	@Autowired
 	private WeixinApiBiz weixinApiBiz;
+	@Autowired
+	private BalanceFlowService balanceFlowService;
+
+	@RequestMapping(value = "/balanceFlow.do")
+	@ResponseBody
+	public Map<String, Object> balanceFlow(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Page<BalanceFlow> params = new Page<BalanceFlow>();
+		OpenUserinfo openUserinfo = SessionUtil.getRegisterWxUserInfo();
+		if (null == openUserinfo) {
+			return fail("请从微信客户端进入");
+		}
+		AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
+		if (null == agentInfo) {
+			return fail("无效的用户");
+		}
+		params.getParams().put("agentId", agentInfo.getAgentId());
+		params.setAssembleOrderBy(" input_time desc ");
+		return super.page(balanceFlowService.pageQuery(params));
+	}
 
 	@RequestMapping(value = "/enter.do")
 	public ModelAndView enter(HttpServletRequest request, HttpServletResponse response,

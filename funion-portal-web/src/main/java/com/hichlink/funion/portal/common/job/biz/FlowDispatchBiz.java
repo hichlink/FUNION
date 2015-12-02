@@ -21,7 +21,7 @@ import com.hichlink.funion.common.service.FlowProductInfoService;
 import com.hichlink.funion.common.util.OrderSeqGen;
 import com.hichlink.funion.portal.common.config.SystemConfig;
 
-@Service
+@Service("flowDispatchBiz")
 public class FlowDispatchBiz {
 	private static final Logger LOG = LoggerFactory.getLogger(FlowDispatchBiz.class);
 	@Autowired

@@ -18,6 +18,7 @@ import com.hichlink.funion.common.entity.AgentInfo;
 import com.hichlink.funion.common.service.AgentInfoService;
 import com.hichlink.funion.common.util.BaseUtil;
 import com.hichlink.funion.common.weixin.entity.OpenUserinfo;
+import com.hichlink.funion.portal.common.config.SystemConfig;
 import com.hichlink.funion.portal.common.util.SessionUtil;
 
 @Controller
@@ -43,6 +44,7 @@ public class AgentInfoController extends BaseController {
 		data.setNickName(BaseUtil.getBase64(openUserinfo.getNickname()));
 		data.setUnionId(openUserinfo.getUnionid());
 		data.setHeadImg(openUserinfo.getHeadimgurl());
+		data.setCommisionRatio(SystemConfig.getInstance().getCommisionRatio());
 		data.setIdentityId(UUID.randomUUID().toString().replaceAll("-", ""));
 		data.setInputTime(new Date());
 		data.setInputBy(openUserinfo.getOpenid());

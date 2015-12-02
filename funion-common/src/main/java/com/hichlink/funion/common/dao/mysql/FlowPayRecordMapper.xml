@@ -30,6 +30,12 @@
 			<if test="params['sendStatus'] != null and  params['sendStatus'] != ''">
 				and send_status =#{params.sendStatus}
 			</if>
+			<if test="params['isBalance'] != null">
+				and is_balance =#{params.isBalance}
+			</if>
+			<if test="params['payStatus'] != null">
+				and pay_status =#{params.payStatus}
+			</if>
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
