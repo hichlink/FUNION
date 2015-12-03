@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<wx>
+		<appId>wxa7e557056c7d41bb</appId>
+	</wx>
+	<domain>http://poc.szwisdom.cn</domain>
+	<flow>
+		<flowAppId>151118781903715200</flowAppId>
+		<flowAppkey>3ea929526a6a4f7e978d9aa22f6be455</flowAppkey>
+		<dispatchUrl>http://192.168.6.20:48080/foss-fscg/flowservice/makeorder.ws</dispatchUrl>
+	</flow>
+	<commision-ratio>20</commision-ratio>
+	<cash-min>1</cash-min>
+	<cash-max>10000</cash-max>
+	<cert-path></cert-path>
+</config>
