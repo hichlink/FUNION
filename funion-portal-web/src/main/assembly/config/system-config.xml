@@ -11,4 +11,5 @@
 	</flow>
 	<cash-min>1</cash-min>
 	<cash-max>10000</cash-max>
+	<cert-path></cert-path>
 </config>
