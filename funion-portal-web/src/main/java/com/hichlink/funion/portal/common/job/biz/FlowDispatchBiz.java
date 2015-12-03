@@ -34,7 +34,8 @@ public class FlowDispatchBiz {
 	public void batchDispatch() {
 		Page<FlowPayRecord> page = new Page<FlowPayRecord>();
 		page.setRows(50);
-		page.addParam("sendStatus", FlowPayRecord.SEND_STATUS_INIT);
+		page.getParams().put("payStatus", FlowPayRecord.PAY_STATUS_SUCC);
+		page.getParams().put("sendStatus", FlowPayRecord.SEND_STATUS_INIT);
 		Page<FlowPayRecord> list = flowPayRecordService.pageQuery(page);
 		List<FlowPayRecord> datas = list.getDatas();
 		for (FlowPayRecord flowPayRecord : datas) {

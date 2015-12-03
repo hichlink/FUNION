@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>一键注册分享充流量拿佣金</title>
+<title>一键注册分享充流量拿佣金-流量向前冲</title>
 <#include "root.ftl" encoding="utf-8">
 <style>
 .ds-avatar {

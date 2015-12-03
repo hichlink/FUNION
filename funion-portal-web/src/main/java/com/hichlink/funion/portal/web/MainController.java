@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aspire.webbas.core.exception.MyException;
 import com.aspire.webbas.core.pagination.mybatis.pager.Page;
 import com.aspire.webbas.core.web.BaseController;
 import com.hichlink.funion.common.entity.AgentInfo;
@@ -39,18 +40,29 @@ public class MainController extends BaseController {
 	@Autowired
 	private BalanceFlowService balanceFlowService;
 
+	@RequestMapping(value = "/getMyBalance.do")
+	@ResponseBody
+	public Map<String, Object> getMyBalance(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return super.success(getAgentInfo().getBalance());
+	}
+
+	private AgentInfo getAgentInfo() {
+		OpenUserinfo openUserinfo = SessionUtil.getRegisterWxUserInfo();
+		if (null == openUserinfo) {
+			throw new MyException("请从微信客户端进入");
+		}
+		AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
+		if (null == agentInfo) {
+			throw new MyException("无效的用户");
+		}
+		return agentInfo;
+	}
+
 	@RequestMapping(value = "/balanceFlow.do")
 	@ResponseBody
 	public Map<String, Object> balanceFlow(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Page<BalanceFlow> params = new Page<BalanceFlow>();
-		OpenUserinfo openUserinfo = SessionUtil.getRegisterWxUserInfo();
-		if (null == openUserinfo) {
-			return fail("请从微信客户端进入");
-		}
-		AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
-		if (null == agentInfo) {
-			return fail("无效的用户");
-		}
+		AgentInfo agentInfo = getAgentInfo();
 		params.getParams().put("agentId", agentInfo.getAgentId());
 		params.setAssembleOrderBy(" input_time desc ");
 		return super.page(balanceFlowService.pageQuery(params));
@@ -103,6 +115,7 @@ public class MainController extends BaseController {
 			}
 			return new ModelAndView("register", "userInfo", openUserinfo);
 		}
-		return null;
+		return new ModelAndView("error","errorMsg","请从微信客户端进入");
+		
 	}
 }

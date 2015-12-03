@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>流量9.5折任性充</title>
+<title>流量9.5折任性充-流量向前冲</title>
 <#include "root.ftl" encoding="utf-8">
 <style>
 .box {
@@ -68,7 +68,7 @@
 					<div class="am-form-group" id="flowPackageDiv"></div>
 					<div class="am-form-group">
 						<div class="am-u-sm-12" style="text-align: right;">
-							<button type="button" id="payBtn" class="am-btn am-btn-danger">立即充值</button>
+							<button type="button" id="payBtn" class="am-btn am-btn-warning am-btn-block">立即充值</button>
 						</div>
 					</div>
 					<div class="am-form-group">

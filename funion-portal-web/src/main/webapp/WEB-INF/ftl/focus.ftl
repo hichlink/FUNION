@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>入驻前请先关注</title>
+<title>入驻前请先关注流量向前冲公众号</title>
 <#include "root.ftl" encoding="utf-8">
 <style>
 .ds-avatar {

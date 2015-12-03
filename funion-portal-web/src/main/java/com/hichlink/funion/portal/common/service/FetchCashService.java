@@ -33,14 +33,15 @@ public class FetchCashService {
 	@Autowired
 	private WeixinMchPayBiz weixinMchPayBiz;
 	private final static Byte[] synFlag = new Byte[0];
+	private final static BigDecimal HUNDRED = new BigDecimal(100);
 
 	@Transactional
-	public void withdrawCash(int cash) {
+	public void withdrawCash(BigDecimal cash) {
 		OpenUserinfo openUserinfo = SessionUtil.getRegisterWxUserInfo();
 		if (null == openUserinfo) {
 			throw new MyException("请在微信客户端打开");
 		}
-		if (cash > SystemConfig.getInstance().getCashMax()) {
+		if (cash.compareTo(new BigDecimal(SystemConfig.getInstance().getCashMax())) > 0) {
 			throw new MyException("提取金额超过最大限额");
 		}
 		synchronized (synFlag) {
@@ -56,7 +57,7 @@ public class FetchCashService {
 
 			String appId = SystemConfig.getInstance().getAppId();
 			WxMchOrderInfo wxMchOrderInfo = new WxMchOrderInfo();
-			wxMchOrderInfo.setAmount(cash);
+			wxMchOrderInfo.setAmount(cash.multiply(HUNDRED).intValue());
 			wxMchOrderInfo.setCheckName("");
 			wxMchOrderInfo.setDesc("test");
 			wxMchOrderInfo.setMchAppid(appId);
@@ -68,18 +69,17 @@ public class FetchCashService {
 			wxMchOrderInfo.setNonceStr(UUID.randomUUID().toString().replaceAll("-", ""));
 			wxMchOrderInfo.setSpbillCreateIp("127.0.0.1");
 			String certPath = SystemConfig.getInstance().getCertPath();
-			WxMchOrderInfoResp resp = weixinMchPayBiz.sendOrder(wxMchOrderInfo,certPath);
+			WxMchOrderInfoResp resp = weixinMchPayBiz.sendOrder(wxMchOrderInfo, certPath);
 			LOG.debug("resp={}", resp.toString());
 			if (resp.isSuccess()) {
 				FetchCashFlow fetchCashFlow = new FetchCashFlow();
 				fetchCashFlow.setAgentId(agentInfo.getAgentId());
-				fetchCashFlow.setCashAmount(new BigDecimal(cash).divide(new BigDecimal(100)));
+				fetchCashFlow.setCashAmount(cash);
 				fetchCashFlow.setInputTime(new Date());
 				fetchCashFlow.setType(1);
-				fetchCashFlow.setRemark("佣金提现,cash=" + new BigDecimal(cash).divide(new BigDecimal(100)) + "分");
+				fetchCashFlow.setRemark("佣金提现,cash=" + cash + "元");
 				fetchCashFlowService.insert(fetchCashFlow);
-				agentInfoService.updateBalance(agentInfo.getAgentId(),
-						new BigDecimal(0).subtract(new BigDecimal(cash).divide(new BigDecimal(100))));
+				agentInfoService.updateBalance(agentInfo.getAgentId(), BigDecimal.ZERO.subtract(cash));
 			} else {
 				throw new MyException(resp.getReturnMsg());
 			}

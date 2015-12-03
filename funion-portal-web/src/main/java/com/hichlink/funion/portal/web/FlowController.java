@@ -208,8 +208,9 @@ public class FlowController extends BaseController {
 			}
 			if (!WxPayRecord.PAY_STATUS_SUCC.equals(wxPayRecord.getPayStatus())) {
 				wxPayRecord.setPayStatus(WxPayRecord.PAY_STATUS_SUCC);
-				wxPayRecord.setPayTime(new Date());
-				wxPayRecordService.saveAndUpdate(wxPayRecord);
+				wxPayRecord.setPayCheckTime(new Date());
+				wxPayRecord.setTransactionId(wxPayNotify.getTransactionId());
+				wxPayRecordService.update(wxPayRecord);
 				FlowPayRecord flowPayRecord = flowPayRecordService.get(wxPayRecord.getRecordId());
 				if (null != flowPayRecord) {
 					flowPayRecord.setPayStatus(WxPayRecord.PAY_STATUS_SUCC);

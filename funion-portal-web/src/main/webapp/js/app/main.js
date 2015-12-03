@@ -1,6 +1,38 @@
 $(function() {
+	$('#fetchCashBtn').on('click', function() {
+		getMyBalance();
+		$('#cashModel').modal({
+			relatedTarget : this,
+			onConfirm : function(e) {
+				fetchCash();
+			},
+			onCancel : function(e) {
+
+			}
+		});
+	});
+	function getMyBalance() {
+		$.ajax({
+			url : ctxPaths + '/main/getMyBalance.do',
+			type : 'get',
+			success : function(data) {
+				if (data.success) {
+					$("#amountTip").html(data.data);
+				} else {
+					alert(data.message || '系统错误');
+				}
+
+			}
+		});
+	}
 	var flag = false;
-	$("#fetchCashBtn").click(function() {
+	function fetchCash() {
+		var a = /^[0-9]*(\.[0-9]{1,2})?$/;
+		var cash = $('#cash').val();
+		if (!a.test(cash)) {
+			alert('输入的金额无效');
+			return;
+		}
 		if (flag)
 			return;
 		flag = true;
@@ -8,7 +40,7 @@ $(function() {
 			url : ctxPaths + '/fetchCash/fetch.do',
 			type : 'post',
 			data : {
-				cash : 100
+				cash : cash
 			},
 			success : function(data) {
 				flag = false;
@@ -19,7 +51,8 @@ $(function() {
 				}
 			}
 		});
-	});
+	}
+	;
 	initBalanceFlow()
 	function initBalanceFlow() {
 		$.ajax({

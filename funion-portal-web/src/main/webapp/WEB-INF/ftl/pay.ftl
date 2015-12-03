@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>微信支付</title>
+<title>微信支付-流量向前冲</title>
 <#include "root.ftl" encoding="utf-8">
 </head>
 <body>

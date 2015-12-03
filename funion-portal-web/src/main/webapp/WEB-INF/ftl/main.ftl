@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>我的控制台</title>
+  <title>我的控制台-流量向前冲</title>
 <#include "root.ftl" encoding="utf-8">
 </head>
 <body>
@@ -46,13 +46,26 @@
 
   </div>
   <!-- content end -->
-<script id="balanceFlowTmpl" type="text/html"> 
+	 <div class="am-modal am-modal-prompt" tabindex="-1" id="cashModel">
+	  <div class="am-modal-dialog">
+	    <div class="am-modal-hd">佣金提现</div>
+	    <div class="am-modal-bd">
+	                     您目前可提现金额:<span id="amountTip"></span>元
+	      <input type="text" id="cash" class="am-modal-prompt-input">
+	    </div>
+	    <div class="am-modal-footer">
+	      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+	      <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+	    </div>
+	  </div>
+	</div>
+	<script id="balanceFlowTmpl" type="text/html"> 
 	<% for(var i=0; i<rows.length; i++){%>  
 		<tr><td><%=rows[i].inputTime%></td><td><%=rows[i].commisionAmount%>元</td><td><%=rows[i].remark%></td>
           </tr>
     <%}%> 
 	</script>
-<#include "foot.ftl" encoding="utf-8">
+	<#include "foot.ftl" encoding="utf-8">
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="${ctx}/assets/js/jquery.min.js"></script>
 	<!--<![endif]-->

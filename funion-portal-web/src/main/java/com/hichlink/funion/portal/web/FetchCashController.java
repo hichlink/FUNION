@@ -1,5 +1,6 @@
 package com.hichlink.funion.portal.web;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aspire.webbas.core.web.BaseController;
+import com.hichlink.funion.common.util.DigitUtil;
 import com.hichlink.funion.portal.common.service.FetchCashService;
 
 @Controller
@@ -25,7 +27,10 @@ public class FetchCashController extends BaseController {
 
 	@RequestMapping(value = "/fetch.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> fetch(HttpServletRequest request, HttpServletResponse response, int cash) {
+	public Map<String, Object> fetch(HttpServletRequest request, HttpServletResponse response, BigDecimal cash) {
+		if (null == cash || BigDecimal.ZERO.compareTo(cash) > 0 || !DigitUtil.isNumber(cash.toString())) {
+			return super.fail("无效的操作金额");
+		}
 		try {
 			fetchCashService.withdrawCash(cash);
 		} catch (Exception e) {
