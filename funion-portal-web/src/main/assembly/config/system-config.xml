@@ -12,5 +12,5 @@
 	<commision-ratio>20</commision-ratio>
 	<cash-min>1</cash-min>
 	<cash-max>10000</cash-max>
-	<cert-path></cert-path>
+	<cert-path>/data/fmp/tomcat7-foss-portal/bin/config/1247736101.p12</cert-path>
 </config>

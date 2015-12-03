@@ -44,17 +44,17 @@ public class FetchCashService {
 		if (cash.compareTo(new BigDecimal(SystemConfig.getInstance().getCashMax())) > 0) {
 			throw new MyException("提取金额超过最大限额");
 		}
+		AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
+		if (null == agentInfo) {
+			throw new MyException("代理信息不存在!");
+		}
+		if (agentInfo.getBalance().compareTo(new BigDecimal(SystemConfig.getInstance().getCashMin())) < 0) {
+			throw new MyException("当前佣金总数不满足提现");
+		}
+		if (agentInfo.getBalance().compareTo(cash) < 0) {
+			throw new MyException("输入的提取金额超过当前余额");
+		}
 		synchronized (synFlag) {
-
-			AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
-			if (null == agentInfo) {
-				throw new MyException("代理信息不存在!");
-			}
-			if (agentInfo.getBalance().multiply(new BigDecimal(100))
-					.compareTo(new BigDecimal(SystemConfig.getInstance().getCashMin())) < 0) {
-				throw new MyException("当前佣金总数不满足提现");
-			}
-
 			String appId = SystemConfig.getInstance().getAppId();
 			WxMchOrderInfo wxMchOrderInfo = new WxMchOrderInfo();
 			wxMchOrderInfo.setAmount(cash.multiply(HUNDRED).intValue());

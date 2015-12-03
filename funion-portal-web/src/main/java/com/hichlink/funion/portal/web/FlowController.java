@@ -214,7 +214,7 @@ public class FlowController extends BaseController {
 				FlowPayRecord flowPayRecord = flowPayRecordService.get(wxPayRecord.getRecordId());
 				if (null != flowPayRecord) {
 					flowPayRecord.setPayStatus(WxPayRecord.PAY_STATUS_SUCC);
-					flowPayRecordService.saveAndUpdate(flowPayRecord);
+					flowPayRecordService.update(flowPayRecord);
 				} else {
 					LOG.error("支付回调根据recordId={}找不到对应流量包支付记录", wxPayRecord.getRecordId());
 				}

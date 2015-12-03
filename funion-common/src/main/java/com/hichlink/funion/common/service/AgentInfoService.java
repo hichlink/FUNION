@@ -66,7 +66,12 @@ public class AgentInfoService {
 		params.put("balance", balance);
 		agentInfoMapper.updateBalance(params);
 	}
-
+	public void updateIncome(Long agentId, BigDecimal income) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("agentId", agentId);
+		params.put("incomeTotal", income);
+		agentInfoMapper.updateIncome(params);
+	}
 	public int delete(Long agentId) {
 		return agentInfoMapper.deleteByPrimaryKey(agentId);
 	}

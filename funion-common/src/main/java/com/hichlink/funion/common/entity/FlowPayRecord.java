@@ -368,4 +368,15 @@ public class FlowPayRecord {
 	public void setRemark(String remark) {
 		this.remark = remark == null ? null : remark.trim();
 	}
+
+	@Override
+	public String toString() {
+		return "FlowPayRecord [recordId=" + recordId + ", openId=" + openId + ", unionId=" + unionId + ", nickName="
+				+ nickName + ", headImg=" + headImg + ", mobile=" + mobile + ", productId=" + productId + ", num=" + num
+				+ ", costPrice=" + costPrice + ", settlementPrice=" + settlementPrice + ", operatorPrice="
+				+ operatorPrice + ", payType=" + payType + ", payStatus=" + payStatus + ", sendStatus=" + sendStatus
+				+ ", outTradeNo=" + outTradeNo + ", inputTime=" + inputTime + ", identityId=" + identityId
+				+ ", isBalance=" + isBalance + ", remark=" + remark + "]";
+	}
+	
 }

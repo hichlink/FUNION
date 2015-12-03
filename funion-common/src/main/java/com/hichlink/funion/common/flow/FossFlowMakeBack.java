@@ -31,4 +31,9 @@ public class FossFlowMakeBack {
 		this.msg = msg;
 	}
 
+	@Override
+	public String toString() {
+		return "FossFlowMakeBack [code=" + code + ", orderId=" + orderId + ", msg=" + msg + "]";
+	}
+	
 }

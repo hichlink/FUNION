@@ -27,4 +27,6 @@ public interface AgentInfoMapper {
     int updateByPrimaryKey(AgentInfo record);
     
     int updateBalance(Map<String,Object> params);
+    
+    int updateIncome(Map<String,Object> params);
 }

@@ -78,9 +78,11 @@ public class MainController extends BaseController {
 			SessionUtil.setRegisterWxUserInfo(openUserinfo);
 			AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
 			if (null != agentInfo) {
-				response.sendRedirect(projectName + "/main/index.do");
+				response.sendRedirect(SystemConfig.getInstance().getDomain() +projectName + "/main/index.do");
+				return;
 			}
-			response.sendRedirect(projectName + "/register/enter.do");
+			response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/register/enter.do");
+			return;
 		}
 		if (StringUtils.isBlank(code)) {
 			String redirectUri = URLEncoder
@@ -97,9 +99,11 @@ public class MainController extends BaseController {
 				SessionUtil.setRegisterWxUserInfo(openUserinfo);
 				AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
 				if (null != agentInfo) {
-					response.sendRedirect(projectName + "/main/index.do");
+					response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/main/index.do");
+					return;
 				}
-				response.sendRedirect(projectName + "/register/enter.do");
+				response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/register/enter.do");
+				return;
 			}
 		}
 	}

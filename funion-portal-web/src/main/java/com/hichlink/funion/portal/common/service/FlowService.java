@@ -104,7 +104,6 @@ public class FlowService {
 		flowPayRecord.setPayStatus(WxPayRecord.PAY_STATUS_INIT);
 		flowPayRecord.setPayType(FlowPayRecord.PAY_TYPE_WX);
 		flowPayRecord.setProductId(productId);
-		flowPayRecord.setSendStatus("");
 		flowPayRecord.setSettlementPrice(price);
 		flowPayRecord.setUnionId("");
 		flowPayRecordService.saveAndUpdate(flowPayRecord);

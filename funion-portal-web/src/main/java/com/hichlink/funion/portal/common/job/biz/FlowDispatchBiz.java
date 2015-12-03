@@ -64,6 +64,7 @@ public class FlowDispatchBiz {
 				flowPayRecordService.update(flowPayRecord);
 				FossFlowMakeBack resp = dispatchFlow(flowPayRecord.getMobile(), flowProductInfo.getPackageId(),
 						extOrder);
+				LOG.debug("resp={}",resp.toString());
 				if (FossFlowMakeBack.OK.equals(resp.getCode())) {
 					flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_GATE_OK);
 					flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_GATE_OK);
