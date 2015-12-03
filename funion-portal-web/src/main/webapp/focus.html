@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--#include virtual="/root.jsp"  -->
+    <title>入驻前请先关注</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        html, body, .wrap {
+            width: 100%;
+            height: 100%;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .wrap {
+            background: url(act/dhd/images/bg.jpg) 0 0 no-repeat;
+            -webkit-background-size: cover;
+            position: relative;
+        }
+
+        .logo {
+            width: 1.44rem;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0.33rem;
+            margin: 0 auto;
+        }
+
+        .con {
+            margin-left: 10%;
+            position: absolute;
+            top: 2.2rem;
+            width: 80%;
+            left: 0;
+            text-align: center;
+        }
+
+        .erweima {
+            width: 70%;
+            -webkit-animation: wobble 2s;
+        }
+
+        .tips {
+            font-size: 14px;
+            text-align: start;
+            margin-left: 15%;
+        }
+
+        .insulate{
+            height: 20px;
+        }
+
+        @-webkit-keyframes wobble {
+            from {
+                -webkit-transform: none;
+            }
+            15% {
+                -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            }
+            30% {
+                -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            }
+            45% {
+                -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            }
+            60% {
+                -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            }
+            75% {
+                -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            }
+            100% {
+                -webkit-transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <img src="act/dhd/images/logo.png" alt="" class="logo">
+
+    <div class="con">
+        <p class="tips"><h6>大好大 送流量</h6></p>
+        <div class="insulate"></div>
+        <img src="act/dhd/images/erweima.jpg" alt="" class="erweima">
+
+        <p class="tips">1:长按二维码关注大好大</p>
+        <div class="insulate"></div>
+        <p class="tips">2:输入“我要流量”或点击“活动季”</p>
+
+
+    </div>
+</div>
+</body>
+<script src="../zjhk/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        var ow = $(window).width();
+        $("html,body").css("fontSize", ow / 6.4 + "px");
+
+    })
+</script>
+</html>
