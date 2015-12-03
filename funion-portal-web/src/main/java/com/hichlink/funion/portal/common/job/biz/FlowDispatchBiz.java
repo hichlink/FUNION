@@ -21,7 +21,7 @@ import com.hichlink.funion.common.service.FlowProductInfoService;
 import com.hichlink.funion.common.util.OrderSeqGen;
 import com.hichlink.funion.portal.common.config.SystemConfig;
 
-@Service
+@Service("flowDispatchBiz")
 public class FlowDispatchBiz {
 	private static final Logger LOG = LoggerFactory.getLogger(FlowDispatchBiz.class);
 	@Autowired
@@ -35,52 +35,49 @@ public class FlowDispatchBiz {
 		Page<FlowPayRecord> page = new Page<FlowPayRecord>();
 		page.setRows(50);
 		page.addParam("sendStatus", FlowPayRecord.SEND_STATUS_INIT);
-		Page<FlowPayRecord> list;
-		do {
-			list = flowPayRecordService.pageQuery(page);
-			List<FlowPayRecord> datas = list.getDatas();
-			for (FlowPayRecord flowPayRecord : datas) {
+		Page<FlowPayRecord> list = flowPayRecordService.pageQuery(page);
+		List<FlowPayRecord> datas = list.getDatas();
+		for (FlowPayRecord flowPayRecord : datas) {
 
-				FlowProductInfo flowProductInfo = flowProductInfoService.get(flowPayRecord.getProductId());
-				if (null == flowProductInfo) {
-					LOG.error("productId={}找不到对应的流量产品", flowPayRecord.getProductId());
-					flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
-					flowPayRecord.setRemark("找不到对应的流量产品");
-					flowPayRecordService.update(flowPayRecord);
-					continue;
-				}
-
-				try {
-					String extOrder = "F" + OrderSeqGen.createApplyId();
-					FlowExchangeLog flowExchangeLog = new FlowExchangeLog();
-					flowExchangeLog.setCreateTime(new Date());
-					flowExchangeLog.setItemCount(1);
-					flowExchangeLog.setMobile(flowPayRecord.getMobile());
-					flowExchangeLog.setProductId(flowPayRecord.getProductId());
-					flowExchangeLog.setSourceType("00");
-					flowExchangeLog.setMobileHome("");
-					flowExchangeLog.setMobileOperator("");
-					flowExchangeLog.setFlowVoucherId(extOrder);
-					flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_SENDING);
-					flowPayRecordService.update(flowPayRecord);
-					FossFlowMakeBack resp = dispatchFlow(flowPayRecord.getMobile(), flowProductInfo.getPackageId(),
-							extOrder);
-					if (FossFlowMakeBack.OK.equals(resp.getCode())) {
-						flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_GATE_OK);
-						flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_GATE_OK);
-						flowExchangeLog.setExchangeOrderId(resp.getOrderId());
-					} else {
-						flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
-						flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_FAIL);
-					}
-					flowExchangeLog.setRecordId(flowPayRecord.getRecordId());
-					flowPayRecordService.update(flowPayRecord);
-					flowExchangeLogService.update(flowExchangeLog);
-				} catch (Exception e) {
-					LOG.error(e.getMessage(), e);
-				}
+			FlowProductInfo flowProductInfo = flowProductInfoService.get(flowPayRecord.getProductId());
+			if (null == flowProductInfo) {
+				LOG.error("productId={}找不到对应的流量产品", flowPayRecord.getProductId());
+				flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
+				flowPayRecord.setRemark("找不到对应的流量产品");
+				flowPayRecordService.update(flowPayRecord);
+				continue;
 			}
-		} while (list.getDatas().size() <= 0);
+
+			try {
+				String extOrder = "F" + OrderSeqGen.createApplyId();
+				FlowExchangeLog flowExchangeLog = new FlowExchangeLog();
+				flowExchangeLog.setCreateTime(new Date());
+				flowExchangeLog.setItemCount(1);
+				flowExchangeLog.setMobile(flowPayRecord.getMobile());
+				flowExchangeLog.setProductId(flowPayRecord.getProductId());
+				flowExchangeLog.setSourceType("00");
+				flowExchangeLog.setMobileHome("");
+				flowExchangeLog.setMobileOperator("");
+				flowExchangeLog.setFlowVoucherId(extOrder);
+				flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_SENDING);
+				flowPayRecordService.update(flowPayRecord);
+				FossFlowMakeBack resp = dispatchFlow(flowPayRecord.getMobile(), flowProductInfo.getPackageId(),
+						extOrder);
+				if (FossFlowMakeBack.OK.equals(resp.getCode())) {
+					flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_GATE_OK);
+					flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_GATE_OK);
+					flowExchangeLog.setExchangeOrderId(resp.getOrderId());
+				} else {
+					flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
+					flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_FAIL);
+				}
+				flowExchangeLog.setRecordId(flowPayRecord.getRecordId());
+				flowPayRecordService.update(flowPayRecord);
+				flowExchangeLogService.update(flowExchangeLog);
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
+		}
 	}
 
 	public FossFlowMakeBack dispatchFlow(String mobile, String packageId, String extOrder) throws Exception {

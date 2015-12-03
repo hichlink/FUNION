@@ -110,4 +110,7 @@ public class SystemConfig {
 	public String getCertPath(){
 		return getString("cert-path");
 	}
+	public int getCommisionRatio(){
+		return getInt("commision-ratio");
+	}
 }

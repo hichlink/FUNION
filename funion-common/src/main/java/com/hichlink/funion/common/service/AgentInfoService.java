@@ -44,6 +44,10 @@ public class AgentInfoService {
 		return agentInfoMapper.selectByOpenId(openId);
 	}
 
+	public AgentInfo selectByUUId(String uuid) {
+		return agentInfoMapper.selectByUUID(uuid);
+	}
+
 	public void saveAndUpdate(AgentInfo data) {
 		if (null != data.getAgentId()) {// 判断有没有传主键，如果传了为更新，否则为新增
 			this.update(data);

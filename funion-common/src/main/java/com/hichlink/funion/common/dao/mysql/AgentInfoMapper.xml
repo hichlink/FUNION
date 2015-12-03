@@ -54,6 +54,12 @@
     from agent_info
     where open_id = #{openId}
   </select>
+  <select id="selectByUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from agent_info
+    where identity_id = #{identityId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from agent_info
     where agent_id = #{agentId,jdbcType=BIGINT}

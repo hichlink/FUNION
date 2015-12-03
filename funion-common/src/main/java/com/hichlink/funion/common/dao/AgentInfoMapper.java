@@ -19,6 +19,8 @@ public interface AgentInfoMapper {
     AgentInfo selectByPrimaryKey(Long agentId);
     
     AgentInfo selectByOpenId(String openId);
+    
+    AgentInfo selectByUUID(String identityId);
 
     int updateByPrimaryKeySelective(AgentInfo record);
 

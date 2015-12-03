@@ -1,7 +1,6 @@
 package com.hichlink.funion.portal.web;
 
 import java.net.URLEncoder;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
