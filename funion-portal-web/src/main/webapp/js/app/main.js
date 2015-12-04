@@ -1,6 +1,5 @@
 $(function() {
 	$('#fetchCashBtn').on('click', function() {
-		getMyBalance();
 		$('#cashModel').modal({
 			relatedTarget : this,
 			onConfirm : function(e) {
@@ -13,11 +12,12 @@ $(function() {
 	});
 	function getMyBalance() {
 		$.ajax({
-			url : ctxPaths + '/main/getMyBalance.do',
+			url : ctxPaths + '/main/getMyBalance.do?' + new Date().getTime(),
 			type : 'get',
 			success : function(data) {
 				if (data.success) {
-					$("#amountTip").html(data.data);
+					$("#amountTip,#balance").html(data.data.balance);
+					$("#incomeTotal").html(data.data.incomeTotal);
 				} else {
 					alert(data.message || '系统错误');
 				}
@@ -44,6 +44,7 @@ $(function() {
 			success : function(data) {
 				flag = false;
 				if (data.success) {
+					getMyBalance();
 					alert('提取成功');
 				} else {
 					alert(data.message || '系统错误');

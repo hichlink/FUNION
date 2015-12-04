@@ -101,6 +101,8 @@
 	<!--<![endif]-->
 	<script src="${ctx}/assets/js/amazeui.min.js"></script>
 	<script src="${ctx}/js/template-native.js"></script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="${ctx}/js/app/wxshare.js"></script>
 	<script src="${ctx}/js/app/flow.js"></script>
 </body>
 </html>

@@ -31,6 +31,9 @@ public class DateUtil {
 
 	/** 日期格式(yyyyMMdd) */
 	public static final String YYYYMMDD_EN = "yyyyMMdd";
+	
+	/** 日期格式(yyyyMMdd) */
+	public static final String MMYYYYDD_EN = "MM/yyyy/dd";
 
 	/** 日期格式(yyyy-MM) */
 	public static final String YYYY_MM_EN = "yyyy-MM";

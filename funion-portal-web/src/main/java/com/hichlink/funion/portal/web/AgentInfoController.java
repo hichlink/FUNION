@@ -19,6 +19,7 @@ import com.hichlink.funion.common.service.AgentInfoService;
 import com.hichlink.funion.common.util.BaseUtil;
 import com.hichlink.funion.common.weixin.entity.OpenUserinfo;
 import com.hichlink.funion.portal.common.config.SystemConfig;
+import com.hichlink.funion.portal.common.dto.AgentInfoDTO;
 import com.hichlink.funion.portal.common.util.SessionUtil;
 
 @Controller
@@ -29,7 +30,7 @@ public class AgentInfoController extends BaseController {
 
 	@RequestMapping(value = "/register.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> register(HttpServletRequest request, HttpServletResponse response, AgentInfo agentInfo) {
+	public Map<String, Object> register(HttpServletRequest request, HttpServletResponse response, AgentInfoDTO agentInfo) {
 		OpenUserinfo openUserinfo = SessionUtil.getRegisterWxUserInfo();
 		if (null == openUserinfo) {
 			return super.fail("请在微信客户端打开");

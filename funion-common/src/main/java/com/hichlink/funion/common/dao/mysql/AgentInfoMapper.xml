@@ -307,7 +307,7 @@
   </update>
   <update id="updateBalance" parameterType="java.util.Map" >
     update agent_info
-    set balance = balance + #{balance,jdbcType=DECIMAL},income_total = income_total + #{balance,jdbcType=DECIMAL}
+    set balance = balance + #{balance,jdbcType=DECIMAL}
     where agent_id = #{agentId,jdbcType=BIGINT}
   </update>
   <update id="updateIncome" parameterType="java.util.Map" >

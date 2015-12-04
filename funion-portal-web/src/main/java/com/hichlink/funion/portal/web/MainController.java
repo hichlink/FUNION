@@ -1,6 +1,7 @@
 package com.hichlink.funion.portal.web;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,9 @@ public class MainController extends BaseController {
 	@RequestMapping(value = "/getMyBalance.do")
 	@ResponseBody
 	public Map<String, Object> getMyBalance(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String,Object> result = new HashMap<String,Object>();
+		result.put("balance", getAgentInfo().getBalance());
+		result.put("incomeTotal", getAgentInfo().getIncomeTotal());
 		return super.success(getAgentInfo().getBalance());
 	}
 
@@ -110,6 +114,10 @@ public class MainController extends BaseController {
 
 	@RequestMapping(value = "/index.do")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if (null == SessionUtil.getRegisterWxUserInfo()){
+			return new ModelAndView("redirect:/main/enter.do");
+		}
+		
 		AgentInfo agentInfo = null;
 		try {
 			agentInfo = getAgentInfo();

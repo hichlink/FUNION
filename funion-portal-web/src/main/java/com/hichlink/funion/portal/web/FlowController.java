@@ -88,25 +88,24 @@ public class FlowController extends BaseController {
 			@PathVariable String mobile, @PathVariable Long productId, @RequestParam(defaultValue = "") String code,
 			RedirectAttributes attr) throws Exception {
 
-		String appId = SystemConfig.getInstance().getAppId();
 		String openId = SessionUtil.getPayOpenId();
 		String projectName = request.getContextPath();
-		if (StringUtils.isBlank(openId)) {
-			if (StringUtils.isBlank(code)) {
-				String redirectUri = URLEncoder.encode(SystemConfig.getInstance().getDomain() + projectName + "/flow/"
-						+ uuid + "/" + mobile + "/" + productId + "/enterPay.do", "utf-8");
-				response.sendRedirect(weixinApiBiz.getAuthUrlBySnsapiBase(appId, redirectUri));
-				return;
-			}
+
+		if (StringUtils.isBlank(openId) && StringUtils.isBlank(code)) {
+			String appId = SystemConfig.getInstance().getAppId();
+			String redirectUri = URLEncoder.encode(SystemConfig.getInstance().getDomain() + projectName + "/flow/"
+					+ uuid + "/" + mobile + "/" + productId + "/enterPay.do", "utf-8");
+			response.sendRedirect(weixinApiBiz.getAuthUrlBySnsapiBase(appId, redirectUri));
+			return;
 		}
+		response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/flow/pay.do?uuid=" + uuid
+				+ "&mobile=" + mobile + "&productId=" + productId + "&code=" + code);
+		return;
 		/*
 		 * attr.addAttribute("uuid", uuid); attr.addAttribute("mobile", mobile);
 		 * attr.addAttribute("productId", productId); attr.addAttribute("code",
 		 * code); return new ModelAndView("redirect:/flow/pay.do");
 		 */
-
-		response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/flow/pay.do?uuid=" + uuid
-				+ "&mobile=" + mobile + "&productId=" + productId + "&code=" + code);
 
 	}
 
@@ -117,7 +116,7 @@ public class FlowController extends BaseController {
 			LOG.error("mobile={}无效", mobile);
 			return null;
 		}
-		if (StringUtils.isBlank(SessionUtil.getPayOpenId()) && StringUtils.isNotBlank(code)) {
+		if (StringUtils.isNotBlank(code)) {
 			String appId = SystemConfig.getInstance().getAppId();
 			AccessToken accessToken = weixinApiBiz.getAccessToken(appId, code);
 			if (null != accessToken) {
@@ -231,6 +230,6 @@ public class FlowController extends BaseController {
 	@RequestMapping(value = "/flowCallback.do", produces = { "text/xml;charset=UTF-8" })
 	@ResponseBody
 	public FlowRespMesg flowCallback(@RequestBody String body) {
-		return  flowService.exchangeCallback(body);
+		return flowService.exchangeCallback(body);
 	}
 }

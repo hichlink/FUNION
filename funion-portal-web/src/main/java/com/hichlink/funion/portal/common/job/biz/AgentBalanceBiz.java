@@ -61,6 +61,7 @@ public class AgentBalanceBiz {
 			balanceFlow.setRemark("佣金结算 +" + commisionAmount.toString());
 			balanceFlowService.insert(balanceFlow);
 			agentInfoService.updateBalance(agentInfo.getAgentId(), commisionAmount);
+			agentInfoService.updateIncome(agentInfo.getAgentId(), commisionAmount);
 		}
 	}
 }

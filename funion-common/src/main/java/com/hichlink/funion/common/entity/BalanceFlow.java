@@ -4,6 +4,8 @@ package com.hichlink.funion.common.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.hichlink.funion.common.util.DateUtil;
+
 public class BalanceFlow {
 	/**
 	 * 流水ID
@@ -36,6 +38,8 @@ public class BalanceFlow {
 	 * 录入时间
 	 */
 	private Date inputTime;
+	
+	private String checkTime;
 
 	/**
 	 * 备注
@@ -132,4 +136,16 @@ public class BalanceFlow {
 	public void setRemark(String remark) {
 		this.remark = remark == null ? null : remark.trim();
 	}
+
+	public String getCheckTime() {
+		if (null != this.getInputTime()){
+			this.checkTime = DateUtil.dateToDateString(this.getInputTime(), DateUtil.MMYYYYDD_EN);
+		}
+		return checkTime;
+	}
+
+	public void setCheckTime(String checkTime) {
+		this.checkTime = checkTime;
+	}
+	
 }
