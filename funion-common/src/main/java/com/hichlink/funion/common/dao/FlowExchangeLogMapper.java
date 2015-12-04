@@ -13,6 +13,8 @@ public interface FlowExchangeLogMapper {
     int insertSelective(FlowExchangeLog record);
 
     List<FlowExchangeLog> pageQuery(Page<FlowExchangeLog> page);
+    
+    List<FlowExchangeLog> find(FlowExchangeLog record);
 
     FlowExchangeLog selectByPrimaryKey(Long logId);
 

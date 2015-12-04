@@ -78,7 +78,7 @@ public class MainController extends BaseController {
 			SessionUtil.setRegisterWxUserInfo(openUserinfo);
 			AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
 			if (null != agentInfo) {
-				response.sendRedirect(SystemConfig.getInstance().getDomain() +projectName + "/main/index.do");
+				response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/main/index.do");
 				return;
 			}
 			response.sendRedirect(SystemConfig.getInstance().getDomain() + projectName + "/register/enter.do");
@@ -110,16 +110,28 @@ public class MainController extends BaseController {
 
 	@RequestMapping(value = "/index.do")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		OpenUserinfo openUserinfo = SessionUtil.getRegisterWxUserInfo();
-		if (null != openUserinfo) {
-			SessionUtil.setRegisterWxUserInfo(openUserinfo);
-			AgentInfo agentInfo = agentInfoService.selectByOpenId(openUserinfo.getOpenid());
-			if (null != agentInfo) {
-				return new ModelAndView("main", "agentInfo", agentInfo);
-			}
-			return new ModelAndView("register", "userInfo", openUserinfo);
+		AgentInfo agentInfo = null;
+		try {
+			agentInfo = getAgentInfo();
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+			return new ModelAndView("error", "errorMsg", e.getMessage());
 		}
-		return new ModelAndView("error","errorMsg","请从微信客户端进入");
-		
+		return new ModelAndView("main", "agentInfo", agentInfo);
+
+	}
+
+	@RequestMapping(value = "/share.do")
+	public ModelAndView share(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+			AgentInfo agentInfo = getAgentInfo();
+			agentInfo.setFlowLink(SystemConfig.getInstance().getDomain() + request.getContextPath() + "/flow/"
+					+ agentInfo.getIdentityId() + "/enter.do");
+			return new ModelAndView("share", "agentInfo", agentInfo);
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+			return new ModelAndView("error", "errorMsg", e.getMessage());
+		}
+
 	}
 }

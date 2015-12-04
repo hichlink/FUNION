@@ -1,51 +1,49 @@
 package com.hichlink.funion.common.flow.exchange;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import net.sf.json.JSONObject;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class RespMsgBody {
 
-	@JsonProperty("RCODE")
-	private String rcode;
-	@JsonProperty("RMSG")
-	private String rmsg;
-
-	public RespMsgBody() {
-		rcode = "-1";
-		rmsg = "null";
+	@JsonProperty("ORDERID")
+	private String orderId;
+	@JsonProperty("EXTORDER")
+	private String extOrder;
+	@JsonProperty("STATUS")
+	private String status;
+	@JsonProperty("CODE")
+	private String code;
+	public static final String SUCC = "00";
+	
+	public String getOrderId() {
+		return orderId;
 	}
-
-	public RespMsgBody(String jsonStr) {
-		JSONObject rtnjb = JSONObject.fromObject(jsonStr);
-		rcode = rtnjb.getString("RCODE");
-		rmsg = rtnjb.getString("RMSG");
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
-
-	public RespMsgBody(String retCode, String retMsg) {
-		rcode = retCode;
-		rmsg = retMsg;
+	public String getExtOrder() {
+		return extOrder;
 	}
-
-	public String getRcode() {
-		return rcode;
+	public void setExtOrder(String extOrder) {
+		this.extOrder = extOrder;
 	}
-
-	public void setRcode(String rcode) {
-		this.rcode = rcode;
+	public String getStatus() {
+		return status;
 	}
-
-	public String getRmsg() {
-		return rmsg;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
-	public void setRmsg(String rmsg) {
-		this.rmsg = rmsg;
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public boolean isSuccess(){
+		return SUCC.equals(this.getCode());
 	}
 	
 }

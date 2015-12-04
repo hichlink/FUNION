@@ -7,7 +7,6 @@ import java.util.List;
 import com.hichlink.funion.common.entity.FlowExchangeLog;
 import com.hichlink.funion.common.dao.FlowExchangeLogMapper;
 
-
 /**
  * 
  * <b>Title：</b>FlowExchangeLogService.java<br/>
@@ -18,32 +17,45 @@ import com.hichlink.funion.common.dao.FlowExchangeLogMapper;
  * 
  */
 @Service("flowExchangeLogService")
-public class FlowExchangeLogService{
-    @Autowired
-    private FlowExchangeLogMapper flowExchangeLogMapper;
-    
-    public Page<FlowExchangeLog> pageQuery(Page<FlowExchangeLog> page) {
-    	List<FlowExchangeLog> list = flowExchangeLogMapper.pageQuery(page);
+public class FlowExchangeLogService {
+	@Autowired
+	private FlowExchangeLogMapper flowExchangeLogMapper;
+
+	public Page<FlowExchangeLog> pageQuery(Page<FlowExchangeLog> page) {
+		List<FlowExchangeLog> list = flowExchangeLogMapper.pageQuery(page);
 		page.setDatas(list);
-        return page;
-    }
-    public void insert(FlowExchangeLog data) {
-        flowExchangeLogMapper.insert(data);
-    }
-        public FlowExchangeLog get(Long logId) {
-        return flowExchangeLogMapper.selectByPrimaryKey(logId);
-    }
-    public void saveAndUpdate(FlowExchangeLog data){
-    			if (null != data.getLogId()){//判断有没有传主键，如果传了为更新，否则为新增
-					this.update(data);
-		}else{
+		return page;
+	}
+
+	public void insert(FlowExchangeLog data) {
+		flowExchangeLogMapper.insert(data);
+	}
+
+	public FlowExchangeLog get(Long logId) {
+		return flowExchangeLogMapper.selectByPrimaryKey(logId);
+	}
+
+	public void saveAndUpdate(FlowExchangeLog data) {
+		if (null != data.getLogId()) {// 判断有没有传主键，如果传了为更新，否则为新增
+			this.update(data);
+		} else {
 			this.insert(data);
 		}
-    }
-    public void update(FlowExchangeLog data) {
-        flowExchangeLogMapper.updateByPrimaryKey(data);
-    }
-    public int delete(Long logId) {
-        return flowExchangeLogMapper.deleteByPrimaryKey(logId);
-    }
-    }
+	}
+
+	public void update(FlowExchangeLog data) {
+		flowExchangeLogMapper.updateByPrimaryKey(data);
+	}
+	public FlowExchangeLog getByFlowVoucherId(String flowVoucherId){
+		FlowExchangeLog bean = new FlowExchangeLog();
+		bean.setFlowVoucherId(flowVoucherId);
+		List<FlowExchangeLog> list = flowExchangeLogMapper.find(bean);
+		if (null != list && !list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
+	}
+	public int delete(Long logId) {
+		return flowExchangeLogMapper.deleteByPrimaryKey(logId);
+	}
+}

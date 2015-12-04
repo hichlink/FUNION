@@ -17,10 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aspire.webbas.core.exception.MyException;
+import com.hichlink.funion.common.entity.FlowExchangeLog;
 import com.hichlink.funion.common.entity.FlowPayRecord;
 import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.entity.WxPayRecord;
+import com.hichlink.funion.common.flow.exchange.FlowRespMesg;
+import com.hichlink.funion.common.service.FlowExchangeLogService;
 import com.hichlink.funion.common.service.FlowPayRecordService;
 import com.hichlink.funion.common.service.FlowProductInfoService;
 import com.hichlink.funion.common.service.WxPayRecordService;
@@ -43,7 +47,8 @@ public class FlowService {
 	private WxPayRecordService wxPayRecordService;
 	@Autowired
 	private FlowPayRecordService flowPayRecordService;
-
+	@Autowired
+	private FlowExchangeLogService flowExchangeLogService;
 	public List<FlowProductInfo> getProductByMobile(String mobile) {
 		String operatorCode = CheckPhone.getMobileOpr(mobile);
 		if (StringUtils.isBlank(operatorCode)) {// 找不到对应运营商，返回空
@@ -125,5 +130,32 @@ public class FlowService {
 		wxPayRecordService.saveAndUpdate(wxPayRecord);
 
 		return resp.getPrepayId();
+	}
+	public FlowRespMesg exchangeCallback(String body){
+		if (StringUtils.isBlank(body)){
+			throw new MyException("内容为空");
+		}
+		FlowRespMesg resp = JSONObject.parseObject(body, FlowRespMesg.class);
+		String extOrderId = resp.getMsgbody().getContent().getExtOrder();
+		if (StringUtils.isBlank(extOrderId)){
+			throw new MyException("extOrder为空");
+		}
+		FlowExchangeLog flowExchangeLog = flowExchangeLogService.getByFlowVoucherId(extOrderId);
+		if (null == flowExchangeLog){
+			throw new MyException("根据extOrder=" + extOrderId + "查找不到记录.");
+		}
+		FlowPayRecord flowPayRecord = flowPayRecordService.get(flowExchangeLog.getRecordId());
+		if (resp.getMsgbody().getContent().isSuccess()){
+			flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_OK);
+			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_OK);
+		}else{
+			flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_FAIL);
+			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
+		}
+		flowExchangeLog.setRemark(resp.getMsgbody().getContent().getStatus());
+		flowExchangeLogService.update(flowExchangeLog);
+		flowPayRecordService.update(flowPayRecord);
+		
+		return null;
 	}
 }

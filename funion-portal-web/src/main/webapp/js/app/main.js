@@ -4,7 +4,7 @@ $(function() {
 		$('#cashModel').modal({
 			relatedTarget : this,
 			onConfirm : function(e) {
-				fetchCash();
+				fetchCash(e.data);
 			},
 			onCancel : function(e) {
 
@@ -26,9 +26,8 @@ $(function() {
 		});
 	}
 	var flag = false;
-	function fetchCash() {
+	function fetchCash(cash) {
 		var a = /^[0-9]*(\.[0-9]{1,2})?$/;
-		var cash = $('#cash').val();
 		if (!a.test(cash)) {
 			alert('输入的金额无效');
 			return;

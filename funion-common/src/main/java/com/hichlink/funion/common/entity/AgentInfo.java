@@ -109,7 +109,8 @@ public class AgentInfo {
 	 * 备注
 	 */
 	private String remark;
-
+	
+	private String flowLink = "";
 	/**
 	 * 代理ID
 	 * 
@@ -382,4 +383,13 @@ public class AgentInfo {
 	public void setRemark(String remark) {
 		this.remark = remark == null ? null : remark.trim();
 	}
+
+	public String getFlowLink() {
+		return flowLink;
+	}
+
+	public void setFlowLink(String flowLink) {
+		this.flowLink = flowLink;
+	}
+	
 }

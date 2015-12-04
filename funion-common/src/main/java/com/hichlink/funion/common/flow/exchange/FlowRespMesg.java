@@ -14,7 +14,7 @@ public class FlowRespMesg {
 
 	@JsonProperty("MSGBODY")
 	private FlowRespMesgBody msgbody;
-
+	
 	public FlowRespMesg() {
 
 	}

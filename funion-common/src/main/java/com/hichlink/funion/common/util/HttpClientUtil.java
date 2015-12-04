@@ -57,6 +57,7 @@ public class HttpClientUtil {
 		try {
 
 			int responseCode = httpClient.executeMethod(httpPost);
+			
 			if (responseCode == 200) {
 				byte[] resBody = httpPost.getResponseBody();
 

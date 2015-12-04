@@ -39,6 +39,15 @@
     from flow_exchange_log
     where log_id = #{logId,jdbcType=BIGINT}
   </select>
+  <select id="find" resultMap="BaseResultMap" parameterType="com.hichlink.funion.common.entity.FlowExchangeLog" >
+    select 
+    <include refid="Base_Column_List" />
+    from flow_exchange_log
+    where 1=1
+    <if test="flowVoucherId != null and  flowVoucherId != ''">
+    	and flow_voucher_id = #{flowVoucherId}
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from flow_exchange_log
     where log_id = #{logId,jdbcType=BIGINT}

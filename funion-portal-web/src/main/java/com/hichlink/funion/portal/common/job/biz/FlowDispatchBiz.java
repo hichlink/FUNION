@@ -75,7 +75,7 @@ public class FlowDispatchBiz {
 				}
 				flowExchangeLog.setRecordId(flowPayRecord.getRecordId());
 				flowPayRecordService.update(flowPayRecord);
-				flowExchangeLogService.update(flowExchangeLog);
+				flowExchangeLogService.saveAndUpdate(flowExchangeLog);
 			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);
 			}
@@ -87,6 +87,7 @@ public class FlowDispatchBiz {
 		reqMesg.setUser(mobile);
 		reqMesg.setPackageId(packageId);
 		reqMesg.setExtorder(extOrder);
+		reqMesg.setOrderType("1");
 		return FlowDispatch.getInstance().dispatchFlow(reqMesg, SystemConfig.getInstance().geFlowAppId(),
 				SystemConfig.getInstance().getFlowAppkey(), SystemConfig.getInstance().getDispatchUrl());
 	}
