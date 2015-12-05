@@ -24,7 +24,7 @@ $.ajax({
 });
 wx.ready(function() {
 	loadWxShare("全网流量最便9.5折,赶紧来抢吧", window.location.href, 'http://' + window.location.host
-			+ ctxPaths + '/images/logo.png', '你的朋友邀请你来充流量了');
+			+ ctxPaths + '/images/share.jpg', '你的朋友邀请你来充流量了');
 });
 $(function() {
 

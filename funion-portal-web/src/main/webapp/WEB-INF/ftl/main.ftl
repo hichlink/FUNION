@@ -71,8 +71,17 @@
 	</div>
 	<script id="balanceFlowTmpl" type="text/html"> 
 	<% for(var i=0; i<rows.length; i++){%>  
-		<tr><td><%=rows[i].checkTime%></td><td><span style="color:#CD853F"><%=rows[i].commisionAmount%>元</span></td><td><%=rows[i].remark%></td>
-          </tr>
+		<tr>
+			<td><%=rows[i].checkTime%></td>
+			<td><span style="color:#CD853F">
+			<% if(rows[i].commisionAmount > 0) {%> 
+				+<%=rows[i].commisionAmount%> 
+			<% }else{%>  
+				<%=rows[i].commisionAmount%>
+			<% }%> 
+			元</span></td>
+			<td><%=rows[i].remark%></td>
+         </tr>
     <%}%> 
 	</script>
 	<#include "foot.ftl" encoding="utf-8">

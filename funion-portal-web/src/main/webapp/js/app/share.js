@@ -25,6 +25,6 @@ $(function() {
 		}
 	});
 	wx.ready(function(){
-		loadWxShare("全网流量最便9.5折,赶紧来抢吧",shareLink,'http://' + window.location.host + ctxPaths + '/images/logo.png','你的朋友邀请你来充流量了');
+		loadWxShare("全网流量最便9.5折,赶紧来抢吧",shareLink,'http://' + window.location.host + ctxPaths + '/images/share.jpg','你的朋友邀请你来充流量了');
 	});
 });

@@ -54,8 +54,8 @@
 						</div>
 					</div>
 					<div class="am-form-group">
-						<div class="am-u-sm-8 am-u-sm-push-3">
-							<button type="button" id="payMoney" class="am-btn am-btn-warning">安全支付</button>
+						<div class="am-u-sm-12">
+							<button type="button" id="payMoney" class="am-btn am-btn-warning am-btn-block">安全支付</button>
 						</div>
 					</div>
 				</form>
