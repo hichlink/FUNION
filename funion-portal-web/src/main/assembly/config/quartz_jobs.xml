@@ -42,4 +42,25 @@
 			</cron>
 		</trigger>
 	</job>
+	<job>
+		<job-detail>
+			<name>RefundJob</name>
+			<group>DEFAULT</group>
+			<job-class>com.hichlink.funion.portal.common.job.RefundJob
+			</job-class>
+			<volatility>false</volatility>
+			<durability>false</durability>
+			<recover>false</recover>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>RefundJob</name>
+				<group>DEFAULT</group>
+				<job-name>refundJob</job-name>
+				<job-group>DEFAULT</job-group>
+				<!-- 每天早上1点整 -->
+				<cron-expression>0 0/30 * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
 </quartz>

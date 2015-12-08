@@ -26,7 +26,13 @@ public class FlowPayRecordService {
 		page.setDatas(list);
 		return page;
 	}
-
+	public List<FlowPayRecord> findRefundList(){
+		FlowPayRecord bean = new FlowPayRecord();
+		bean.setPayStatus(FlowPayRecord.PAY_STATUS_SUCC);
+		bean.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
+		bean.setIsRefund(FlowPayRecord.IS_REFUND_NO);
+		return flowPayRecordMapper.find(bean);
+	}
 	public void insert(FlowPayRecord data) {
 		flowPayRecordMapper.insert(data);
 	}

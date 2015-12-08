@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.security.KeyStore;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.protocol.Protocol;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -57,7 +59,7 @@ public class HttpClientUtil {
 		try {
 
 			int responseCode = httpClient.executeMethod(httpPost);
-			
+
 			if (responseCode == 200) {
 				byte[] resBody = httpPost.getResponseBody();
 
@@ -142,7 +144,7 @@ public class HttpClientUtil {
 		return response;
 	}
 
-	public static String postByBodyWithCert(String url, String body, String contentType,String certPath)
+	public static String postByBodyWithCert(String url, String body, String contentType, String certPath)
 			throws HttpException, Exception {
 		KeyStore keyStore = KeyStore.getInstance("PKCS12");
 		File file = new File(certPath);
@@ -150,7 +152,7 @@ public class HttpClientUtil {
 		fileName = fileName.substring(0, fileName.lastIndexOf("."));
 		FileInputStream instream = new FileInputStream(file);
 		try {
-			
+
 			keyStore.load(instream, fileName.toCharArray());
 		} finally {
 			instream.close();
@@ -167,7 +169,9 @@ public class HttpClientUtil {
 
 			HttpPost httpPost = new HttpPost(url);
 			httpPost.addHeader("Content-Type", contentType);
-			System.out.println("executing request" + httpPost.getRequestLine());
+			if (StringUtils.isNotBlank(body)) {
+				body = URLEncoder.encode(body, "UTF-8");
+			}
 			HttpEntity se = new StringEntity(body);
 			httpPost.setEntity(se);
 
@@ -175,10 +179,7 @@ public class HttpClientUtil {
 			try {
 				HttpEntity entity = response.getEntity();
 
-				System.out.println("----------------------------------------");
-				System.out.println(response.getStatusLine());
 				if (entity != null) {
-					System.out.println("Response content length: " + entity.getContentLength());
 					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));
 					String text;
 

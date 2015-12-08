@@ -1,4 +1,4 @@
-/*** Auto generator by codegenerator 2015-11-28 14:10:42*/
+/*** Auto generator by codegenerator 2015-12-08 21:31:38*/
 package com.hichlink.funion.common.dao;
 
 import com.aspire.webbas.core.pagination.mybatis.pager.Page;
@@ -13,6 +13,8 @@ public interface FlowPayRecordMapper {
     int insertSelective(FlowPayRecord record);
 
     List<FlowPayRecord> pageQuery(Page<FlowPayRecord> page);
+    
+    List<FlowPayRecord> find(FlowPayRecord record);
 
     FlowPayRecord selectByPrimaryKey(Long recordId);
 

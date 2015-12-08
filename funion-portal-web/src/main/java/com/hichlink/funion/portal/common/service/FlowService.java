@@ -152,6 +152,7 @@ public class FlowService {
 			flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_FAIL);
 			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
 		}
+		flowPayRecord.setCheckTime(new Date());
 		flowExchangeLog.setRemark(resp.getMsgbody().getContent().getStatus());
 		flowExchangeLogService.update(flowExchangeLog);
 		flowPayRecordService.update(flowPayRecord);

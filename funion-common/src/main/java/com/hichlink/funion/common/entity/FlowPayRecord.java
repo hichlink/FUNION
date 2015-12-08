@@ -1,4 +1,4 @@
-/*** Auto generator by codegenerator 2015-11-28 14:10:42*/
+/*** Auto generator by codegenerator 2015-12-08 21:31:38*/
 package com.hichlink.funion.common.entity;
 
 import java.math.BigDecimal;
@@ -64,36 +64,36 @@ public class FlowPayRecord {
 	 * 支付类型 1:微信支付 2:支付宝支付
 	 */
 	private Integer payType;
-	
+
 	public static final Integer PAY_TYPE_WX = 1;
-	
+
 	public static final Integer PAY_TYPE_ALIPAY = 2;
 
 	/**
 	 * 支付状态 0:未支付 1:支付成功 2:支付完成 3:支付失败
 	 */
 	private Integer payStatus;
-	
+
 	public static final Integer PAY_STATUS_INIT = 0;
-	
+
 	public static final Integer PAY_STATUS_SUCC = 1;
-	
+
 	public static final Integer PAY_STATUS_FINISH = 2;
-	
+
 	public static final Integer PAY_STATUS_FAIL = 3;
 	/**
 	 * 流量下发状态 0:网关收到成功 00:成功 1:拒绝收单 其它编码表失败
 	 */
 	private String sendStatus;
-	
+
 	public static final String SEND_STATUS_INIT = "01";
-	
+
 	public static final String SEND_STATUS_GATE_OK = "02";
-	
+
 	public static final String SEND_STATUS_SENDING = "03";
-	
+
 	public static final String SEND_STATUS_OK = "00";
-	
+
 	public static final String SEND_STATUS_FAIL = "99";
 
 	/**
@@ -121,6 +121,29 @@ public class FlowPayRecord {
 	 * 备注
 	 */
 	private String remark;
+
+	/**
+	 * 是否退款 0:否 1:是
+	 */
+	private Integer isRefund = IS_REFUND_NO;
+	/**
+	 * 已退款
+	 */
+	public static final int IS_REFUND_YES = 1;
+	/**
+	 * 款退款
+	 */
+	public static final int IS_REFUND_NO = 0;
+
+	/**
+	 * 退款时间
+	 */
+	private Date refundTime;
+
+	/**
+	 * 流量回调时间
+	 */
+	private Date checkTime;
 
 	/**
 	 * 记录ID
@@ -369,14 +392,42 @@ public class FlowPayRecord {
 		this.remark = remark == null ? null : remark.trim();
 	}
 
-	@Override
-	public String toString() {
-		return "FlowPayRecord [recordId=" + recordId + ", openId=" + openId + ", unionId=" + unionId + ", nickName="
-				+ nickName + ", headImg=" + headImg + ", mobile=" + mobile + ", productId=" + productId + ", num=" + num
-				+ ", costPrice=" + costPrice + ", settlementPrice=" + settlementPrice + ", operatorPrice="
-				+ operatorPrice + ", payType=" + payType + ", payStatus=" + payStatus + ", sendStatus=" + sendStatus
-				+ ", outTradeNo=" + outTradeNo + ", inputTime=" + inputTime + ", identityId=" + identityId
-				+ ", isBalance=" + isBalance + ", remark=" + remark + "]";
+	/**
+	 * 是否退款 0:否 1:是
+	 * 
+	 * @return the value of flow_pay_record.is_refund
+	 */
+	public Integer getIsRefund() {
+		return isRefund;
 	}
-	
+
+	public void setIsRefund(Integer isRefund) {
+		this.isRefund = isRefund;
+	}
+
+	/**
+	 * 退款时间
+	 * 
+	 * @return the value of flow_pay_record.refund_time
+	 */
+	public Date getRefundTime() {
+		return refundTime;
+	}
+
+	public void setRefundTime(Date refundTime) {
+		this.refundTime = refundTime;
+	}
+
+	/**
+	 * 流量回调时间
+	 * 
+	 * @return the value of flow_pay_record.check_time
+	 */
+	public Date getCheckTime() {
+		return checkTime;
+	}
+
+	public void setCheckTime(Date checkTime) {
+		this.checkTime = checkTime;
+	}
 }
