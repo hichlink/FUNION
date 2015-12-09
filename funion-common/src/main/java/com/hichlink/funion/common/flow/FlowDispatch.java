@@ -21,17 +21,20 @@ import net.sf.json.JSONObject;
 public class FlowDispatch {
 	private static Logger logger = LoggerFactory.getLogger(FlowDispatch.class);
 	private static FlowDispatch instance = null;
-	public synchronized static FlowDispatch getInstance(){
-		if (null == instance){
+
+	public synchronized static FlowDispatch getInstance() {
+		if (null == instance) {
 			instance = new FlowDispatch();
 		}
 		return instance;
 	}
-	private FlowDispatch(){
-		
+
+	private FlowDispatch() {
+
 	}
-	public  FossFlowMakeBack dispatchFlow(FlowMakeOrderReqMesg s, String flowRequestAppId,
-			String flowRequestAppSecret, String dispatchUrl) throws Exception {
+
+	public FossFlowMakeBack dispatchFlow(FlowMakeOrderReqMesg s, String flowRequestAppId, String flowRequestAppSecret,
+			String dispatchUrl) throws Exception {
 		FlowReqMesg reqMsg = new FlowReqMesg();
 		FlowMesgHeader header = new FlowMesgHeader();
 		FossFlowMakeBack flowMackBack = new FossFlowMakeBack();
@@ -60,16 +63,16 @@ public class FlowDispatch {
 		logger.debug("****respJson---------------------:" + respJson);
 		if (StringUtils.isNotBlank(respJson)) {
 			FlowRespMesg respMesg = objectMapper.readValue(respJson, FlowRespMesg.class);
-			if ("00".equals(respMesg.getMsgbody().getResp().getRcode())) {
-				flowMackBack.setCode(respMesg.getMsgbody().getResp().getRcode());
-				flowMackBack.setOrderId(respMesg.getMsgbody().getContent().get("ORDERID").toString());
-				flowMackBack.setMsg(respMesg.getMsgbody().getResp().getRmsg());
+			if ("00".equals(respMesg.getMsgbody().getContent().getCode())) {
+				flowMackBack.setCode(respMesg.getMsgbody().getContent().getCode());
+				flowMackBack.setOrderId(respMesg.getMsgbody().getContent().getOrderId().toString());
+				flowMackBack.setMsg(respMesg.getMsgbody().getContent().getStatus());
 				return flowMackBack;
 			} else {
-				logger.error("兑换失败，网关返回：" + respMesg.getMsgbody().getResp().getRmsg());
-				flowMackBack.setCode(respMesg.getMsgbody().getResp().getRcode());
+				logger.error("兑换失败，网关返回：" + respMesg.getMsgbody().getContent().getStatus());
+				flowMackBack.setCode(respMesg.getMsgbody().getContent().getCode());
 				flowMackBack.setOrderId(null);
-				flowMackBack.setMsg(respMesg.getMsgbody().getResp().getRmsg());
+				flowMackBack.setMsg(respMesg.getMsgbody().getContent().getStatus());
 				return flowMackBack;
 			}
 		}
