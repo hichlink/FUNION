@@ -27,7 +27,7 @@ import com.hichlink.funion.common.entity.FlowPayRecord;
 import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.entity.WxPayRecord;
-import com.hichlink.funion.common.flow.exchange.FlowRespMesg;
+import com.hichlink.funion.common.flow.entity.FlowNotifyResp;
 import com.hichlink.funion.common.service.FlowPayRecordService;
 import com.hichlink.funion.common.service.FlowProductInfoService;
 import com.hichlink.funion.common.service.WxAccessConfService;
@@ -229,7 +229,7 @@ public class FlowController extends BaseController {
 
 	@RequestMapping(value = "/flowCallback.do", produces = { "text/xml;charset=UTF-8" })
 	@ResponseBody
-	public FlowRespMesg flowCallback(@RequestBody String body) {
+	public FlowNotifyResp flowCallback(@RequestBody String body) {
 		return flowService.exchangeCallback(body);
 	}
 }

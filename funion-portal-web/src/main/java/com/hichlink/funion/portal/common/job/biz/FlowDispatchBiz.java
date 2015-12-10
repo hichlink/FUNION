@@ -13,8 +13,8 @@ import com.hichlink.funion.common.entity.FlowExchangeLog;
 import com.hichlink.funion.common.entity.FlowPayRecord;
 import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.flow.FlowDispatch;
-import com.hichlink.funion.common.flow.FossFlowMakeBack;
-import com.hichlink.funion.common.flow.exchange.FlowMakeOrderReqMesg;
+import com.hichlink.funion.common.flow.entity.FlowOrderReq;
+import com.hichlink.funion.common.flow.entity.FlowOrderResp;
 import com.hichlink.funion.common.service.FlowExchangeLogService;
 import com.hichlink.funion.common.service.FlowPayRecordService;
 import com.hichlink.funion.common.service.FlowProductInfoService;
@@ -62,13 +62,13 @@ public class FlowDispatchBiz {
 				flowExchangeLog.setFlowVoucherId(extOrder);
 				flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_SENDING);
 				flowPayRecordService.update(flowPayRecord);
-				FossFlowMakeBack resp = dispatchFlow(flowPayRecord.getMobile(), flowProductInfo.getPackageId(),
+				FlowOrderResp resp = dispatchFlow(flowPayRecord.getMobile(), flowProductInfo.getPackageId(),
 						extOrder);
 				LOG.debug("resp={}",resp.toString());
-				if (FossFlowMakeBack.OK.equals(resp.getCode())) {
+				if (null != resp && resp.isSucc()) {
 					flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_GATE_OK);
 					flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_GATE_OK);
-					flowExchangeLog.setExchangeOrderId(resp.getOrderId());
+					flowExchangeLog.setExchangeOrderId(resp.getMsgBody().getContent().getOrderId());
 				} else {
 					flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
 					flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_FAIL);
@@ -82,13 +82,14 @@ public class FlowDispatchBiz {
 		}
 	}
 
-	public FossFlowMakeBack dispatchFlow(String mobile, String packageId, String extOrder) throws Exception {
-		FlowMakeOrderReqMesg reqMesg = new FlowMakeOrderReqMesg();
-		reqMesg.setUser(mobile);
-		reqMesg.setPackageId(packageId);
-		reqMesg.setExtorder(extOrder);
-		reqMesg.setOrderType("1");
-		return FlowDispatch.getInstance().dispatchFlow(reqMesg, SystemConfig.getInstance().geFlowAppId(),
+	public FlowOrderResp dispatchFlow(String mobile, String packageId, String extOrder) throws Exception {
+		FlowOrderReq flowOrderReq = new FlowOrderReq();
+		FlowOrderReq.Content content = flowOrderReq.new Content();
+		content.setUser(mobile);
+		content.setPackageId(packageId);
+		content.setExtorder(extOrder);
+		content.setOrderType("1");
+		return FlowDispatch.getInstance().dispatchFlow(content, SystemConfig.getInstance().geFlowAppId(),
 				SystemConfig.getInstance().getFlowAppkey(), SystemConfig.getInstance().getDispatchUrl());
 	}
 }

@@ -23,6 +23,8 @@ import com.hichlink.funion.common.entity.FlowExchangeLog;
 import com.hichlink.funion.common.entity.FlowPayRecord;
 import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.entity.WxPayRecord;
+import com.hichlink.funion.common.flow.entity.FlowNotifyReq;
+import com.hichlink.funion.common.flow.entity.FlowNotifyResp;
 import com.hichlink.funion.common.flow.exchange.FlowRespMesg;
 import com.hichlink.funion.common.service.FlowExchangeLogService;
 import com.hichlink.funion.common.service.FlowPayRecordService;
@@ -131,12 +133,12 @@ public class FlowService {
 
 		return resp.getPrepayId();
 	}
-	public FlowRespMesg exchangeCallback(String body){
+	public FlowNotifyResp exchangeCallback(String body){
 		if (StringUtils.isBlank(body)){
 			throw new MyException("内容为空");
 		}
-		FlowRespMesg resp = JSONObject.parseObject(body, FlowRespMesg.class);
-		String extOrderId = resp.getMsgbody().getContent().getExtOrder();
+		FlowNotifyReq req = JSONObject.parseObject(body, FlowNotifyReq.class);
+		String extOrderId = req.getMsgBody().getContent().getExtOrder();
 		if (StringUtils.isBlank(extOrderId)){
 			throw new MyException("extOrder为空");
 		}
@@ -145,7 +147,7 @@ public class FlowService {
 			throw new MyException("根据extOrder=" + extOrderId + "查找不到记录.");
 		}
 		FlowPayRecord flowPayRecord = flowPayRecordService.get(flowExchangeLog.getRecordId());
-		if (resp.getMsgbody().getContent().isSuccess()){
+		if (null != req && req.isSucc()){
 			flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_OK);
 			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_OK);
 		}else{
@@ -153,10 +155,16 @@ public class FlowService {
 			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
 		}
 		flowPayRecord.setCheckTime(new Date());
-		flowExchangeLog.setRemark(resp.getMsgbody().getContent().getStatus());
+		flowExchangeLog.setRemark(req.getMsgBody().getContent().getStatus());
 		flowExchangeLogService.update(flowExchangeLog);
 		flowPayRecordService.update(flowPayRecord);
-		
-		return null;
+		FlowNotifyResp flowNotifyResp = new FlowNotifyResp();
+		FlowNotifyResp.MsgBody msgBody = flowNotifyResp.new MsgBody();
+		FlowNotifyResp.Resp resp = flowNotifyResp.new Resp();
+		resp.setCode(FlowNotifyReq.SUCC);
+		msgBody.setResp(resp);
+		flowNotifyResp.setFlowHeader(req.getFlowHeader());
+		flowNotifyResp.setMsgBody(msgBody);
+		return flowNotifyResp;
 	}
 }
