@@ -169,10 +169,10 @@ public class HttpClientUtil {
 
 			HttpPost httpPost = new HttpPost(url);
 			httpPost.addHeader("Content-Type", contentType);
-			if (StringUtils.isNotBlank(body)) {
+			/*if (StringUtils.isNotBlank(body)) {
 				body = URLEncoder.encode(body, "UTF-8");
-			}
-			HttpEntity se = new StringEntity(body);
+			}*/
+			HttpEntity se = new StringEntity(body,"UTF-8");
 			httpPost.setEntity(se);
 
 			CloseableHttpResponse response = httpclient.execute(httpPost);

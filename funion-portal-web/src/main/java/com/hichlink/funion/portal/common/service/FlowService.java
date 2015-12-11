@@ -25,7 +25,6 @@ import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.entity.WxPayRecord;
 import com.hichlink.funion.common.flow.entity.FlowNotifyReq;
 import com.hichlink.funion.common.flow.entity.FlowNotifyResp;
-import com.hichlink.funion.common.flow.exchange.FlowRespMesg;
 import com.hichlink.funion.common.service.FlowExchangeLogService;
 import com.hichlink.funion.common.service.FlowPayRecordService;
 import com.hichlink.funion.common.service.FlowProductInfoService;
@@ -51,6 +50,7 @@ public class FlowService {
 	private FlowPayRecordService flowPayRecordService;
 	@Autowired
 	private FlowExchangeLogService flowExchangeLogService;
+
 	public List<FlowProductInfo> getProductByMobile(String mobile) {
 		String operatorCode = CheckPhone.getMobileOpr(mobile);
 		if (StringUtils.isBlank(operatorCode)) {// 找不到对应运营商，返回空
@@ -133,24 +133,26 @@ public class FlowService {
 
 		return resp.getPrepayId();
 	}
-	public FlowNotifyResp exchangeCallback(String body){
-		if (StringUtils.isBlank(body)){
+
+	public FlowNotifyResp exchangeCallback(String body) {
+		LOG.debug("流量网关回调body={}",body);
+		if (StringUtils.isBlank(body)) {
 			throw new MyException("内容为空");
 		}
 		FlowNotifyReq req = JSONObject.parseObject(body, FlowNotifyReq.class);
 		String extOrderId = req.getMsgBody().getContent().getExtOrder();
-		if (StringUtils.isBlank(extOrderId)){
+		if (StringUtils.isBlank(extOrderId)) {
 			throw new MyException("extOrder为空");
 		}
 		FlowExchangeLog flowExchangeLog = flowExchangeLogService.getByFlowVoucherId(extOrderId);
-		if (null == flowExchangeLog){
+		if (null == flowExchangeLog) {
 			throw new MyException("根据extOrder=" + extOrderId + "查找不到记录.");
 		}
 		FlowPayRecord flowPayRecord = flowPayRecordService.get(flowExchangeLog.getRecordId());
-		if (null != req && req.isSucc()){
+		if (null != req && req.isSucc()) {
 			flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_OK);
 			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_OK);
-		}else{
+		} else {
 			flowExchangeLog.setFlag(FlowPayRecord.SEND_STATUS_FAIL);
 			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
 		}
@@ -159,8 +161,8 @@ public class FlowService {
 		flowExchangeLogService.update(flowExchangeLog);
 		flowPayRecordService.update(flowPayRecord);
 		FlowNotifyResp flowNotifyResp = new FlowNotifyResp();
-		FlowNotifyResp.MsgBody msgBody = flowNotifyResp.new MsgBody();
-		FlowNotifyResp.Resp resp = flowNotifyResp.new Resp();
+		FlowNotifyResp.MsgBody msgBody = new FlowNotifyResp.MsgBody();
+		FlowNotifyResp.Resp resp = new FlowNotifyResp.Resp();
 		resp.setCode(FlowNotifyReq.SUCC);
 		msgBody.setResp(resp);
 		flowNotifyResp.setFlowHeader(req.getFlowHeader());

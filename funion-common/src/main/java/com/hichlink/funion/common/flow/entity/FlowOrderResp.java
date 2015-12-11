@@ -10,12 +10,12 @@ public class FlowOrderResp {
 	@JsonProperty("HEADER")
 	private FlowHeader flowHeader = new FlowHeader();
 	@JsonProperty("MSGBODY")
-	private MsgBody msgBody;
+	private MsgBody msgBody = new MsgBody();
 	public static final String SUCC = "00";
 
 	public boolean isSucc() {
 		return (null != this.getMsgBody() && null != this.getMsgBody().getResp()
-				&& SUCC.equals(this.getMsgBody().getResp()));
+				&& SUCC.equals(this.getMsgBody().getResp().getCode()));
 	}
 
 	public FlowHeader getFlowHeader() {
@@ -33,13 +33,22 @@ public class FlowOrderResp {
 	public void setMsgBody(MsgBody msgBody) {
 		this.msgBody = msgBody;
 	}
+	
+	@Override
+	public String toString() {
+		return "FlowOrderResp [flowHeader=" + flowHeader + ", msgBody=" + msgBody + ", isSucc()=" + isSucc()
+				+ ", getFlowHeader()=" + getFlowHeader() + ", getMsgBody()=" + getMsgBody() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
 
-	public class MsgBody {
+	public static class MsgBody {
 		@JsonProperty("RESP")
 		private Resp resp;
 		@JsonProperty("CONTENT")
-		private Content content;
-
+		private Content content = new Content();
+		public MsgBody() {
+			
+		}
 		public Resp getResp() {
 			return resp;
 		}
@@ -58,12 +67,14 @@ public class FlowOrderResp {
 
 	}
 
-	public class Resp {
+	public static class Resp {
 		@JsonProperty("RCODE")
 		private String code;
 		@JsonProperty("RMSG")
 		private String msg;
-
+		public Resp(){
+			
+		}
 		public String getCode() {
 			return code;
 		}
@@ -82,12 +93,14 @@ public class FlowOrderResp {
 
 	}
 
-	public class Content {
+	public static class Content {
 		@JsonProperty("ORDERID")
 		private String orderId;
 		@JsonProperty("EXTORDER")
 		private String extOrder;
-
+		public Content(){
+			super();
+		}
 		public String getOrderId() {
 			return orderId;
 		}

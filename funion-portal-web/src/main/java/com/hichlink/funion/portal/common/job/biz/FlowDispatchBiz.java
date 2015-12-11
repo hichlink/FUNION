@@ -60,6 +60,7 @@ public class FlowDispatchBiz {
 				flowExchangeLog.setMobileHome("");
 				flowExchangeLog.setMobileOperator("");
 				flowExchangeLog.setFlowVoucherId(extOrder);
+				flowExchangeLog.setExchangeOrderId("");
 				flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_SENDING);
 				flowPayRecordService.update(flowPayRecord);
 				FlowOrderResp resp = dispatchFlow(flowPayRecord.getMobile(), flowProductInfo.getPackageId(),
@@ -83,8 +84,7 @@ public class FlowDispatchBiz {
 	}
 
 	public FlowOrderResp dispatchFlow(String mobile, String packageId, String extOrder) throws Exception {
-		FlowOrderReq flowOrderReq = new FlowOrderReq();
-		FlowOrderReq.Content content = flowOrderReq.new Content();
+		FlowOrderReq.Content content = new FlowOrderReq.Content();
 		content.setUser(mobile);
 		content.setPackageId(packageId);
 		content.setExtorder(extOrder);

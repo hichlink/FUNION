@@ -1,2 +1,2 @@
-set RELEASE_HOME=e:\deploy\511
+set RELEASE_HOME=c:\deploy\513
 mvn clean package

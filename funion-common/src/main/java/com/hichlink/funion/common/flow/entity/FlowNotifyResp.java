@@ -28,7 +28,7 @@ public class FlowNotifyResp {
 		this.msgBody = msgBody;
 	}
 
-	public class MsgBody {
+	public static class MsgBody {
 		@JsonProperty("RESP")
 		private Resp resp;
 
@@ -43,7 +43,7 @@ public class FlowNotifyResp {
 
 	}
 
-	public class Resp {
+	public static class Resp {
 		@JsonProperty("RCODE")
 		private String code;
 		@JsonProperty("RMSG")

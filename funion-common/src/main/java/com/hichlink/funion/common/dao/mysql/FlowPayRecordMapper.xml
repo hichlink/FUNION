@@ -72,7 +72,7 @@
 				and pay_status = #{payStatus}
 			</if>
 			<if test="isRefund != null">
-				and is_refund = #{params.isRefund}
+				and is_refund = #{isRefund}
 			</if>
 		</where>
   </select>

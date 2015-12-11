@@ -46,7 +46,7 @@ public class FlowDispatch {
 		String sign = MD5Util.MD5(flowRequestAppSecret + s.getUser() + s.getPackageId() + s.getOrderType());// MD5(APPSecret+USER+PACKEID+ORDERTYPE)
 		s.setSign(sign);
 		ObjectMapper objectMapper = new ObjectMapper();
-		FlowOrderReq.FlowOrderMsgBody flowOrderMsgBody = flowOrderReq.new FlowOrderMsgBody();
+		FlowOrderReq.FlowOrderMsgBody flowOrderMsgBody = new FlowOrderReq.FlowOrderMsgBody();
 		s.setSign(sign);
 		flowOrderMsgBody.setContent(s);
 		flowOrderReq.setFlowOrderMsgBody(flowOrderMsgBody);

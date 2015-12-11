@@ -59,7 +59,7 @@ public class FetchCashService {
 			WxMchOrderInfo wxMchOrderInfo = new WxMchOrderInfo();
 			wxMchOrderInfo.setAmount(cash.multiply(HUNDRED).intValue());
 			wxMchOrderInfo.setCheckName("");
-			wxMchOrderInfo.setDesc("test");
+			wxMchOrderInfo.setDesc("佣金提现");
 			wxMchOrderInfo.setMchAppid(appId);
 			wxMchOrderInfo.setOpenId(openUserinfo.getOpenid());
 			String orderId = OrderSeqGen.createApplyId();

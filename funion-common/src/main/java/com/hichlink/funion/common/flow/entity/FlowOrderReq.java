@@ -11,7 +11,7 @@ public class FlowOrderReq {
 	private FlowHeader flowHeader = new FlowHeader();
 	@JsonProperty("MSGBODY")
 	private FlowOrderMsgBody flowOrderMsgBody = new FlowOrderMsgBody();
-	
+
 	public FlowHeader getFlowHeader() {
 		return flowHeader;
 	}
@@ -28,9 +28,13 @@ public class FlowOrderReq {
 		this.flowOrderMsgBody = flowOrderMsgBody;
 	}
 
-	public class FlowOrderMsgBody {
+	public static class FlowOrderMsgBody {
 		@JsonProperty("CONTENT")
 		private Content content = new Content();
+
+		public FlowOrderMsgBody() {
+
+		}
 
 		public Content getContent() {
 			return content;
@@ -39,10 +43,10 @@ public class FlowOrderReq {
 		public void setContent(Content content) {
 			this.content = content;
 		}
-		
+
 	}
 
-	public class Content {
+	public static class Content {
 		@JsonProperty("SIGN")
 		private String sign;// 签名
 		@JsonProperty("USER")
@@ -56,6 +60,10 @@ public class FlowOrderReq {
 		private String extorder; // 外部订单号
 		@JsonProperty("NOTE")
 		private String note; // 备用
+
+		public Content() {
+
+		}
 
 		public String getSign() {
 			return sign;
