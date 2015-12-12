@@ -134,19 +134,30 @@ public class FlowService {
 		return resp.getPrepayId();
 	}
 
-	public FlowNotifyResp exchangeCallback(String body) {
-		LOG.debug("流量网关回调body={}",body);
-		if (StringUtils.isBlank(body)) {
+	public FlowNotifyResp exchangeCallback(FlowNotifyReq req) {
+		LOG.debug("流量网关回调body={}",req.toString());
+		/*if (StringUtils.isBlank(body)) {
 			throw new MyException("内容为空");
 		}
-		FlowNotifyReq req = JSONObject.parseObject(body, FlowNotifyReq.class);
+		FlowNotifyReq req = JSONObject.parseObject(body, FlowNotifyReq.class);*/
 		String extOrderId = req.getMsgBody().getContent().getExtOrder();
+		FlowNotifyResp flowNotifyResp = new FlowNotifyResp();
+		FlowNotifyResp.MsgBody msgBody = new FlowNotifyResp.MsgBody();
+		FlowNotifyResp.Resp resp = new FlowNotifyResp.Resp();
+		resp.setCode("99");
+		msgBody.setResp(resp);
+		flowNotifyResp.setFlowHeader(req.getFlowHeader());
+		flowNotifyResp.setMsgBody(msgBody);
 		if (StringUtils.isBlank(extOrderId)) {
-			throw new MyException("extOrder为空");
+			LOG.error("回调的extOrderId = null");
+			resp.setMsg("extOrder为空");
+			return flowNotifyResp;
 		}
 		FlowExchangeLog flowExchangeLog = flowExchangeLogService.getByFlowVoucherId(extOrderId);
 		if (null == flowExchangeLog) {
-			throw new MyException("根据extOrder=" + extOrderId + "查找不到记录.");
+			LOG.error("根据extOrder={}查找不到记录.",extOrderId);
+			resp.setMsg("根据extOrder=" + extOrderId + "查找不到记录.");
+			return flowNotifyResp;
 		}
 		FlowPayRecord flowPayRecord = flowPayRecordService.get(flowExchangeLog.getRecordId());
 		if (null != req && req.isSucc()) {
@@ -157,16 +168,10 @@ public class FlowService {
 			flowPayRecord.setSendStatus(FlowPayRecord.SEND_STATUS_FAIL);
 		}
 		flowPayRecord.setCheckTime(new Date());
-		flowExchangeLog.setRemark(req.getMsgBody().getContent().getStatus());
+		flowExchangeLog.setRemark(req.getMsgBody().getContent().getCode());
 		flowExchangeLogService.update(flowExchangeLog);
 		flowPayRecordService.update(flowPayRecord);
-		FlowNotifyResp flowNotifyResp = new FlowNotifyResp();
-		FlowNotifyResp.MsgBody msgBody = new FlowNotifyResp.MsgBody();
-		FlowNotifyResp.Resp resp = new FlowNotifyResp.Resp();
 		resp.setCode(FlowNotifyReq.SUCC);
-		msgBody.setResp(resp);
-		flowNotifyResp.setFlowHeader(req.getFlowHeader());
-		flowNotifyResp.setMsgBody(msgBody);
 		return flowNotifyResp;
 	}
 }

@@ -16,7 +16,7 @@ public class FlowNotifyReq {
 
 	public boolean isSucc() {
 		return (null != this.getMsgBody() && null != this.getMsgBody().getContent()
-				&& SUCC.equals(this.getMsgBody().getContent().getCode()));
+				&& SUCC.equals(this.getMsgBody().getContent().getStatus()));
 	}
 	
 	public FlowHeader getFlowHeader() {
@@ -34,8 +34,15 @@ public class FlowNotifyReq {
 	public void setMsgBody(MsgBody msgBody) {
 		this.msgBody = msgBody;
 	}
+	
+	@Override
+	public String toString() {
+		return "FlowNotifyReq [flowHeader=" + flowHeader + ", msgBody=" + msgBody + ", isSucc()=" + isSucc()
+				+ ", getFlowHeader()=" + getFlowHeader() + ", getMsgBody()=" + getMsgBody() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
 
-	public class MsgBody {
+	public static class MsgBody {
 		@JsonProperty("CONTENT")
 		private Content content;
 
@@ -49,7 +56,7 @@ public class FlowNotifyReq {
 
 	}
 
-	public class Content {
+	public static class Content {
 		@JsonProperty("ORDERID")
 		private String orderId;
 		@JsonProperty("EXTORDER")

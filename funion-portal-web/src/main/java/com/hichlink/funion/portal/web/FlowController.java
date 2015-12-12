@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +28,7 @@ import com.hichlink.funion.common.entity.FlowPayRecord;
 import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.entity.WxPayRecord;
+import com.hichlink.funion.common.flow.entity.FlowNotifyReq;
 import com.hichlink.funion.common.flow.entity.FlowNotifyResp;
 import com.hichlink.funion.common.service.FlowPayRecordService;
 import com.hichlink.funion.common.service.FlowProductInfoService;
@@ -227,9 +229,9 @@ public class FlowController extends BaseController {
 		return "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
 	}
 
-	@RequestMapping(value = "/flowCallback.do", produces = { "text/xml;charset=UTF-8" })
+	@RequestMapping(value = "/flowCallback.do",method=RequestMethod.POST,produces="application/json")
 	@ResponseBody
-	public FlowNotifyResp flowCallback(@RequestBody String body) {
-		return flowService.exchangeCallback(body);
+	public FlowNotifyResp flowCallback(@RequestBody FlowNotifyReq flowNotifyReq) {
+		return flowService.exchangeCallback(flowNotifyReq);
 	}
 }
