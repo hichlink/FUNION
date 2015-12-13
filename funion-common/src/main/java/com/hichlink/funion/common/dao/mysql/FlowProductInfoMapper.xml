@@ -13,6 +13,7 @@
     <result column="operator_price" property="operatorPrice" jdbcType="DECIMAL" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="flow_amount" property="flowAmount" jdbcType="INTEGER" />
+    <result column="commision_amount" property="commisionAmount" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -21,7 +22,7 @@
   </sql>
   <sql id="Base_Column_List" >
     product_id, product_name, product_code, package_id, zone, operator_code, cost_price, 
-    settlement_price, operator_price, remark, flow_amount
+    settlement_price, operator_price, remark, flow_amount,commision_amount
   </sql>
   <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.aspire.webbas.core.pagination.mybatis.pager.Page" >
     select
@@ -56,11 +57,11 @@
     insert into flow_product_info (product_id, product_name, product_code, 
       package_id, zone, operator_code, 
       cost_price, settlement_price, operator_price, 
-      remark, flow_amount)
+      remark, flow_amount,commision_amount)
     values (#{productId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR}, 
       #{packageId,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR}, #{operatorCode,jdbcType=VARCHAR}, 
       #{costPrice,jdbcType=DECIMAL}, #{settlementPrice,jdbcType=DECIMAL}, #{operatorPrice,jdbcType=DECIMAL}, 
-      #{remark,jdbcType=VARCHAR}, #{flowAmount,jdbcType=INTEGER})
+      #{remark,jdbcType=VARCHAR}, #{flowAmount,jdbcType=INTEGER}, #{commisionAmount,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.hichlink.funion.common.entity.FlowProductInfo" >
     insert into flow_product_info
@@ -98,6 +99,9 @@
       <if test="flowAmount != null" >
         flow_amount,
       </if>
+      <if test="commisionAmount != null" >
+        commision_amount,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="productId != null" >
@@ -132,6 +136,9 @@
       </if>
       <if test="flowAmount != null" >
         #{flowAmount,jdbcType=INTEGER},
+      </if>
+      <if test="commisionAmount != null" >
+        #{commisionAmount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -168,6 +175,9 @@
       <if test="flowAmount != null" >
         flow_amount = #{flowAmount,jdbcType=INTEGER},
       </if>
+       <if test="commisionAmount != null" >
+        commision_amount = #{commisionAmount,jdbcType=DECIMAL},
+      </if>
     </set>
     where product_id = #{productId,jdbcType=BIGINT}
   </update>
@@ -182,7 +192,8 @@
       settlement_price = #{settlementPrice,jdbcType=DECIMAL},
       operator_price = #{operatorPrice,jdbcType=DECIMAL},
       remark = #{remark,jdbcType=VARCHAR},
-      flow_amount = #{flowAmount,jdbcType=INTEGER}
+      flow_amount = #{flowAmount,jdbcType=INTEGER},
+      commision_amount = #{commisionAmount,jdbcType=DECIMAL}
     where product_id = #{productId,jdbcType=BIGINT}
   </update>
 </mapper>

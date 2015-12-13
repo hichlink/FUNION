@@ -58,6 +58,8 @@ public class FlowProductInfo {
     流量包大小
      */
     private Integer flowAmount;
+    
+    private BigDecimal commisionAmount;
 
     /**
     产品ID
@@ -190,4 +192,13 @@ public class FlowProductInfo {
     public void setFlowAmount(Integer flowAmount) {
         this.flowAmount = flowAmount;
     }
+
+	public BigDecimal getCommisionAmount() {
+		return commisionAmount;
+	}
+
+	public void setCommisionAmount(BigDecimal commisionAmount) {
+		this.commisionAmount = commisionAmount;
+	}
+    
 }

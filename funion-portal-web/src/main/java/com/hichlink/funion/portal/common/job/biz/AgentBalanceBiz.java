@@ -14,9 +14,11 @@ import com.aspire.webbas.core.pagination.mybatis.pager.Page;
 import com.hichlink.funion.common.entity.AgentInfo;
 import com.hichlink.funion.common.entity.BalanceFlow;
 import com.hichlink.funion.common.entity.FlowPayRecord;
+import com.hichlink.funion.common.entity.FlowProductInfo;
 import com.hichlink.funion.common.service.AgentInfoService;
 import com.hichlink.funion.common.service.BalanceFlowService;
 import com.hichlink.funion.common.service.FlowPayRecordService;
+import com.hichlink.funion.common.service.FlowProductInfoService;
 
 @Service("agentBalanceBiz")
 public class AgentBalanceBiz {
@@ -27,6 +29,8 @@ public class AgentBalanceBiz {
 	private AgentInfoService agentInfoService;
 	@Autowired
 	private BalanceFlowService balanceFlowService;
+	@Autowired
+	private FlowProductInfoService flowProductInfoService;
 
 	public void batchBalance() {
 		Page<FlowPayRecord> params = new Page<FlowPayRecord>();
@@ -50,15 +54,20 @@ public class AgentBalanceBiz {
 				continue;
 			}
 			int ratio = agentInfo.getCommisionRatio();
-			BigDecimal commisionAmount = data.getSettlementPrice().subtract(data.getOperatorPrice())
-					.multiply(new BigDecimal(ratio).divide(new BigDecimal(100)));
+			BigDecimal myCommisionAmount = BigDecimal.ZERO;
+			FlowProductInfo flowProductInfo = flowProductInfoService.get(data.getProductId());
+			if (null != flowProductInfo) {
+				myCommisionAmount = flowProductInfo.getCommisionAmount();
+			}
+
+			BigDecimal commisionAmount = myCommisionAmount.multiply(new BigDecimal(ratio).divide(new BigDecimal(100)));
 			BalanceFlow balanceFlow = new BalanceFlow();
 			balanceFlow.setAgentId(agentInfo.getAgentId());
 			balanceFlow.setCommisionAmount(commisionAmount);
 			balanceFlow.setInputTime(new Date());
 			balanceFlow.setRecordId(data.getRecordId());
 			balanceFlow.setType(BalanceFlow.TYPE_COMMISION);
-			balanceFlow.setRemark("佣金结算 +" + commisionAmount.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue());
+			balanceFlow.setRemark("佣金结算 +" + commisionAmount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 			balanceFlowService.insert(balanceFlow);
 			agentInfoService.updateBalance(agentInfo.getAgentId(), commisionAmount);
 			agentInfoService.updateIncome(agentInfo.getAgentId(), commisionAmount);
