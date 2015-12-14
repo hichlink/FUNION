@@ -49,6 +49,29 @@ public class WxRefundResp extends WxBaseResp {
 	private Integer couponRefundCount;
 	@XStreamAlias("coupon_refund_id")
 	private String couponRefundId;
+	
+	@Override
+	public String toString() {
+		return "WxRefundResp [errCode=" + errCode + ", errCodeDes=" + errCodeDes + ", appId=" + appId + ", mchId="
+				+ mchId + ", deviceInfo=" + deviceInfo + ", nonceStr=" + nonceStr + ", sign=" + sign
+				+ ", transactionId=" + transactionId + ", outTradeNo=" + outTradeNo + ", outRefundNo=" + outRefundNo
+				+ ", refundId=" + refundId + ", refundChannel=" + refundChannel + ", refundFee=" + refundFee
+				+ ", totalFee=" + totalFee + ", feeType=" + feeType + ", cashFee=" + cashFee + ", cashRefundFee="
+				+ cashRefundFee + ", couponRefundFee=" + couponRefundFee + ", couponRefundCount=" + couponRefundCount
+				+ ", couponRefundId=" + couponRefundId + ", getErrCode()=" + getErrCode() + ", getErrCodeDes()="
+				+ getErrCodeDes() + ", getAppId()=" + getAppId() + ", getMchId()=" + getMchId() + ", getDeviceInfo()="
+				+ getDeviceInfo() + ", getNonceStr()=" + getNonceStr() + ", getSign()=" + getSign()
+				+ ", getTransactionId()=" + getTransactionId() + ", getOutTradeNo()=" + getOutTradeNo()
+				+ ", getOutRefundNo()=" + getOutRefundNo() + ", getRefundId()=" + getRefundId()
+				+ ", getRefundChannel()=" + getRefundChannel() + ", getRefundFee()=" + getRefundFee()
+				+ ", getTotalFee()=" + getTotalFee() + ", getFeeType()=" + getFeeType() + ", getCashFee()="
+				+ getCashFee() + ", getCashRefundFee()=" + getCashRefundFee() + ", getCouponRefundFee()="
+				+ getCouponRefundFee() + ", getCouponRefundCount()=" + getCouponRefundCount() + ", getCouponRefundId()="
+				+ getCouponRefundId() + ", getReturnCode()=" + getReturnCode() + ", getReturnMsg()=" + getReturnMsg()
+				+ ", getResultCode()=" + getResultCode() + ", isResultSuccess()=" + isResultSuccess()
+				+ ", isReturnSuccess()=" + isReturnSuccess() + ", isSuccess()=" + isSuccess() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
 
 	public String getErrCode() {
 		return errCode;

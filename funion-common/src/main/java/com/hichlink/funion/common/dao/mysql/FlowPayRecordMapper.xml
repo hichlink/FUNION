@@ -80,7 +80,7 @@
     delete from flow_pay_record
     where record_id = #{recordId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" >
+  <insert id="insert" parameterType="com.hichlink.funion.common.entity.FlowPayRecord" useGeneratedKeys="true" keyProperty="recordId">
     insert into flow_pay_record (record_id, open_id, union_id, 
       nick_name, head_img, mobile, 
       product_id, num, cost_price, 
@@ -89,7 +89,7 @@
       input_time, identity_id, is_balance, 
       remark, is_refund, refund_time, 
       check_time)
-    values (#{recordId,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+    values (#{recordId}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{productId,jdbcType=BIGINT}, #{num,jdbcType=INTEGER}, #{costPrice,jdbcType=DECIMAL}, 
       #{settlementPrice,jdbcType=DECIMAL}, #{operatorPrice,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER}, 

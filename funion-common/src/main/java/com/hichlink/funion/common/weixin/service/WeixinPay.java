@@ -8,5 +8,5 @@ import com.hichlink.funion.common.weixin.entity.WxRefundResp;
 public interface WeixinPay {
 	WxOrderInfoResp sendOrder(WxOrderInfo wxOrderInfo, String key);
 
-	WxRefundResp refund(WxRefundReq wxRefundReq, String key);
+	WxRefundResp refund(WxRefundReq wxRefundReq, String key,String certPath);
 }

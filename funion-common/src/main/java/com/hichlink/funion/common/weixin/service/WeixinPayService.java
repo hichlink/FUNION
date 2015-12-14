@@ -39,13 +39,13 @@ public class WeixinPayService implements WeixinPay {
 	}
 
 	@Override
-	public WxRefundResp refund(WxRefundReq wxRefundReq, String key) {
+	public WxRefundResp refund(WxRefundReq wxRefundReq, String key,String certPath) {
 		String result = null;
 		try {
-			result = HttpClientUtil.postByBody(REFUND_URL, wxRefundReq.toPayXml(key), MediaTypes.APPLICATION_XML_UTF_8);
+			result = HttpClientUtil.postByBodyWithCert(REFUND_URL, wxRefundReq.toPayXml(key), MediaTypes.APPLICATION_XML_UTF_8,certPath);
 		} catch (HttpException e) {
 			log.error(e.getMessage(), e);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 		if (StringUtils.isNotBlank(result)) {

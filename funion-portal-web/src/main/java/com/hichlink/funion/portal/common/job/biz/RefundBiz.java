@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import com.hichlink.funion.common.entity.FlowPayRecord;
 import com.hichlink.funion.common.service.FlowPayRecordService;
 import com.hichlink.funion.common.util.OrderSeqGen;
-import com.hichlink.funion.common.weixin.WeixinMchPayBiz;
 import com.hichlink.funion.common.weixin.WeixinPayBiz;
-import com.hichlink.funion.common.weixin.entity.WxMchOrderInfo;
-import com.hichlink.funion.common.weixin.entity.WxMchOrderInfoResp;
 import com.hichlink.funion.common.weixin.entity.WxRefundReq;
 import com.hichlink.funion.common.weixin.entity.WxRefundResp;
 import com.hichlink.funion.portal.common.config.SystemConfig;
@@ -53,13 +50,14 @@ public class RefundBiz {
 			wxRefundReq.setAppId(appId);
 			wxRefundReq.setNonceStr(UUID.randomUUID().toString().replaceAll("-", ""));
 			wxRefundReq.setOutRefundNo(OrderSeqGen.createApplyId());
-			wxRefundReq.setRefundFee(data.getCostPrice().multiply(HUNDRED).intValue());
-			wxRefundReq.setTotalFee(data.getCostPrice().multiply(HUNDRED).intValue());
+			wxRefundReq.setRefundFee(data.getSettlementPrice().multiply(HUNDRED).intValue());
+			wxRefundReq.setTotalFee(data.getSettlementPrice().multiply(HUNDRED).intValue());
 			wxRefundReq.setOutTradeNo(data.getOutTradeNo());
 			data.setIsRefund(FlowPayRecord.IS_REFUND_YES);
 			flowPayRecordService.update(data);
-			WxRefundResp resp = weixinPayBiz.refund(wxRefundReq);
-			LOG.debug("resp={}", resp.toString());
+			String certPath = SystemConfig.getInstance().getCertPath();
+			WxRefundResp resp = weixinPayBiz.refund(wxRefundReq,certPath);
+			LOG.debug("resp={}", null != resp ?resp.toString():"");
 			if (resp.isSuccess()) {
 				data.setRefundTime(new Date());
 			} else {

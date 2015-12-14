@@ -36,11 +36,11 @@ public class WeixinPayBiz {
 		wxOrderInfo.setMchId(wc.getWxMerchantNo());
 		return weixinPay.sendOrder(wxOrderInfo, wc.getApiKey());
 	}
-	public WxRefundResp refund(WxRefundReq wxRefundReq){
+	public WxRefundResp refund(WxRefundReq wxRefundReq,String certPath){
 		WxAccessConf wc = getWxAccessConf(wxRefundReq.getAppId());
 		wxRefundReq.setMchId(wc.getWxMerchantNo());
 		wxRefundReq.setOpUserId(wc.getWxMerchantNo());
-		return weixinPay.refund(wxRefundReq, wc.getApiKey());
+		return weixinPay.refund(wxRefundReq, wc.getApiKey(),certPath);
 	}
 	private WxAccessConf getWxAccessConf(String appId) {
 		WxAccessConf bean = new WxAccessConf();
