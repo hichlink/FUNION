@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.hichlink.funion.common.util.Signature;
 
-public class WxOrderInfo {
+public class WxOrderInfo extends WxBaseReq{
 	/**
 	 * 公众账号ID
 	 */
@@ -299,16 +299,4 @@ public class WxOrderInfo {
 		return map;
 	}
 
-	public String toPayXml(String key) {
-		Map<String, String> fileds = getFieldMap();
-		String sign = Signature.getSign(fileds, key);
-		StringBuilder sb = new StringBuilder();
-		sb.append("<xml>");
-		for (String filed : fileds.keySet()) {
-			sb.append("<" + filed + "><![CDATA[" + fileds.get(filed) + "]]></" + filed + ">");
-		}
-		sb.append("<sign><![CDATA[" + sign + "]]></sign>");
-		sb.append("</xml>");
-		return sb.toString();
-	}
 }

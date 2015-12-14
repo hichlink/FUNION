@@ -18,6 +18,8 @@ import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.util.Signature;
 import com.hichlink.funion.common.weixin.entity.WxOrderInfo;
 import com.hichlink.funion.common.weixin.entity.WxOrderInfoResp;
+import com.hichlink.funion.common.weixin.entity.WxRefundReq;
+import com.hichlink.funion.common.weixin.entity.WxRefundResp;
 import com.hichlink.funion.common.weixin.service.WeixinPay;
 
 @Component
@@ -34,7 +36,12 @@ public class WeixinPayBiz {
 		wxOrderInfo.setMchId(wc.getWxMerchantNo());
 		return weixinPay.sendOrder(wxOrderInfo, wc.getApiKey());
 	}
-
+	public WxRefundResp refund(WxRefundReq wxRefundReq){
+		WxAccessConf wc = getWxAccessConf(wxRefundReq.getAppId());
+		wxRefundReq.setMchId(wc.getWxMerchantNo());
+		wxRefundReq.setOpUserId(wc.getWxMerchantNo());
+		return weixinPay.refund(wxRefundReq, wc.getApiKey());
+	}
 	private WxAccessConf getWxAccessConf(String appId) {
 		WxAccessConf bean = new WxAccessConf();
 		bean.setAppId(appId);

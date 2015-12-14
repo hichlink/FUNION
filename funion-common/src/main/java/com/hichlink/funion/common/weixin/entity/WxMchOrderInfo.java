@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.hichlink.funion.common.util.Signature;
 
-public class WxMchOrderInfo {
+public class WxMchOrderInfo extends WxBaseReq {
 	/**
 	 * 微信分配的公众账号ID（企业号corpid即为此appId）
 	 */
@@ -176,18 +176,5 @@ public class WxMchOrderInfo {
 			map.put("spbill_create_ip", this.getSpbillCreateIp());
 		}
 		return map;
-	}
-
-	public String toPayXml(String key) {
-		Map<String, String> fileds = getFieldMap();
-		String sign = Signature.getSign(fileds, key);
-		StringBuilder sb = new StringBuilder();
-		sb.append("<xml>");
-		for (String filed : fileds.keySet()) {
-			sb.append("<" + filed + "><![CDATA[" + fileds.get(filed) + "]]></" + filed + ">");
-		}
-		sb.append("<sign><![CDATA[" + sign + "]]></sign>");
-		sb.append("</xml>");
-		return sb.toString();
 	}
 }
