@@ -44,10 +44,11 @@ public class MainController extends BaseController {
 	@RequestMapping(value = "/getMyBalance.do")
 	@ResponseBody
 	public Map<String, Object> getMyBalance(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String,Object> result = new HashMap<String,Object>();
-		result.put("balance", getAgentInfo().getBalance());
-		result.put("incomeTotal", getAgentInfo().getIncomeTotal());
-		return super.success(getAgentInfo().getBalance());
+		AgentInfo agentInfo = getAgentInfo();
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("balance", agentInfo.getBalance());
+		result.put("incomeTotal", agentInfo.getIncomeTotal());
+		return super.success(result);
 	}
 
 	private AgentInfo getAgentInfo() {
@@ -114,10 +115,10 @@ public class MainController extends BaseController {
 
 	@RequestMapping(value = "/index.do")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (null == SessionUtil.getRegisterWxUserInfo()){
+		if (null == SessionUtil.getRegisterWxUserInfo()) {
 			return new ModelAndView("redirect:/main/enter.do");
 		}
-		
+
 		AgentInfo agentInfo = null;
 		try {
 			agentInfo = getAgentInfo();

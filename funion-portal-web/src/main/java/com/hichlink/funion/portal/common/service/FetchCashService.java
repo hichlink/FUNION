@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aspire.webbas.core.exception.MyException;
 import com.hichlink.funion.common.entity.AgentInfo;
+import com.hichlink.funion.common.entity.BalanceFlow;
 import com.hichlink.funion.common.entity.FetchCashFlow;
 import com.hichlink.funion.common.service.AgentInfoService;
+import com.hichlink.funion.common.service.BalanceFlowService;
 import com.hichlink.funion.common.service.FetchCashFlowService;
 import com.hichlink.funion.common.util.OrderSeqGen;
 import com.hichlink.funion.common.weixin.WeixinMchPayBiz;
@@ -30,6 +32,8 @@ public class FetchCashService {
 	private AgentInfoService agentInfoService;
 	@Autowired
 	private FetchCashFlowService fetchCashFlowService;
+	@Autowired
+	private BalanceFlowService balanceFowService;
 	@Autowired
 	private WeixinMchPayBiz weixinMchPayBiz;
 	private final static Byte[] synFlag = new Byte[0];
@@ -72,14 +76,24 @@ public class FetchCashService {
 			WxMchOrderInfoResp resp = weixinMchPayBiz.sendOrder(wxMchOrderInfo, certPath);
 			LOG.debug("resp={}", resp.toString());
 			if (resp.isSuccess()) {
+				BigDecimal commisionAmount = BigDecimal.ZERO.subtract(cash);
+				BalanceFlow balanceFlow = new BalanceFlow();
+				balanceFlow.setAgentId(agentInfo.getAgentId());
+				balanceFlow.setCommisionAmount(commisionAmount);
+				balanceFlow.setInputTime(new Date());
+				balanceFlow.setRemark("佣金提现,账户余额" + commisionAmount + "元");
+				balanceFlow.setType(BalanceFlow.TYPE_FETCH_CASH);
+				balanceFlow.setRecordId(null);
+				balanceFowService.insert(balanceFlow);
 				FetchCashFlow fetchCashFlow = new FetchCashFlow();
 				fetchCashFlow.setAgentId(agentInfo.getAgentId());
 				fetchCashFlow.setCashAmount(cash);
 				fetchCashFlow.setInputTime(new Date());
 				fetchCashFlow.setType(1);
-				fetchCashFlow.setRemark("佣金提现,cash=" + cash + "元");
+				fetchCashFlow.setRemark("佣金提现,账户余额" + commisionAmount + "元");
 				fetchCashFlowService.insert(fetchCashFlow);
-				agentInfoService.updateBalance(agentInfo.getAgentId(), BigDecimal.ZERO.subtract(cash));
+
+				agentInfoService.updateBalance(agentInfo.getAgentId(), commisionAmount);
 			} else {
 				throw new MyException(resp.getReturnMsg());
 			}

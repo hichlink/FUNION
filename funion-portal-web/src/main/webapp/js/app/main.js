@@ -16,6 +16,7 @@ $(function() {
 			type : 'get',
 			success : function(data) {
 				if (data.success) {
+					$("#cash").val('');
 					$("#amountTip,#balance").html(data.data.balance);
 					$("#incomeTotal").html(data.data.incomeTotal);
 				} else {
@@ -45,6 +46,7 @@ $(function() {
 				flag = false;
 				if (data.success) {
 					getMyBalance();
+					initBalanceFlow();
 					alert('提取成功');
 				} else {
 					alert(data.message || '系统错误');

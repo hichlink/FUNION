@@ -23,11 +23,14 @@ public class BalanceFlow {
 	private Long recordId;
 
 	/**
-	 * 结算类型 1:佣金
+	 * 结算类型 1:佣金 2:提现
 	 */
 	private Integer type;
 	
+	
 	public static final Integer TYPE_COMMISION = 1;
+	
+	public static final Integer TYPE_FETCH_CASH = 2;
 
 	/**
 	 * 佣金
