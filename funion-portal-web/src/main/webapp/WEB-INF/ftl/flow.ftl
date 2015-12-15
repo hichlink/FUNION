@@ -61,7 +61,7 @@
 					<input type="hidden" id="uuid" name="uuid" value="${uuid}" />
 					<div class="am-form-group">
 						<div class="am-u-sm-12">
-							<input type="text" id="mobile" name="mobile" placeholder="充值号码 ">
+							<input type="text" id="mobile" name="mobile" placeholder="输入11位手机号码 ">
 							<small><span>移动号码</span> 全国通用，当月有效，支持2G/3G/4G</small>
 						</div>
 					</div>
