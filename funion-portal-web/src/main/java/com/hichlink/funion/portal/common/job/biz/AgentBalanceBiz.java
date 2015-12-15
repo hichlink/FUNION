@@ -67,7 +67,7 @@ public class AgentBalanceBiz {
 			balanceFlow.setInputTime(new Date());
 			balanceFlow.setRecordId(data.getRecordId());
 			balanceFlow.setType(BalanceFlow.TYPE_COMMISION);
-			balanceFlow.setRemark("佣金结算 +" + commisionAmount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+			balanceFlow.setRemark("佣金结算 ，+" + commisionAmount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()+"元");
 			balanceFlowService.insert(balanceFlow);
 			agentInfoService.updateBalance(agentInfo.getAgentId(), commisionAmount);
 			agentInfoService.updateIncome(agentInfo.getAgentId(), commisionAmount);

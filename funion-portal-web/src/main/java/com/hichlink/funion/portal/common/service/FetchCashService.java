@@ -81,7 +81,7 @@ public class FetchCashService {
 				balanceFlow.setAgentId(agentInfo.getAgentId());
 				balanceFlow.setCommisionAmount(commisionAmount);
 				balanceFlow.setInputTime(new Date());
-				balanceFlow.setRemark("佣金提现,账户余额" + commisionAmount + "元");
+				balanceFlow.setRemark("佣金提现," + commisionAmount + "元");
 				balanceFlow.setType(BalanceFlow.TYPE_FETCH_CASH);
 				balanceFlow.setRecordId(null);
 				balanceFowService.insert(balanceFlow);
@@ -90,7 +90,7 @@ public class FetchCashService {
 				fetchCashFlow.setCashAmount(cash);
 				fetchCashFlow.setInputTime(new Date());
 				fetchCashFlow.setType(1);
-				fetchCashFlow.setRemark("佣金提现,账户余额" + commisionAmount + "元");
+				fetchCashFlow.setRemark("佣金提现," + commisionAmount + "元");
 				fetchCashFlowService.insert(fetchCashFlow);
 
 				agentInfoService.updateBalance(agentInfo.getAgentId(), commisionAmount);
