@@ -78,5 +78,13 @@ public class SystemConfig {
 	public String getMobileInfoUrl() {
 		return getString("mobileInfoUrl");
 	}
-	
+	public String getShowapiMhUrl() {
+		return getString("showapi.mh-url");
+	}
+	public String getShowapiAppid() {
+		return getString("showapi.appid");
+	}
+	public String getShowapiAppkey() {
+		return getString("showapi.appkey");
+	}
 }

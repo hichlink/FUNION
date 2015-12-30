@@ -17,6 +17,7 @@ import com.aspire.webbas.core.web.BaseController;
 import com.hichlink.funion.mh.common.config.SystemConfig;
 import com.hichlink.funion.mh.common.entity.MobileHomeInfo;
 import com.hichlink.funion.mh.common.service.MobileHomeInfoService;
+import com.hichlink.funion.mh.common.service.ShowApiContext;
 import com.hichlink.funion.mh.common.util.HttpClientUtil;
 import com.hichlink.funion.mh.common.util.IMSIUtil;
 
@@ -38,7 +39,11 @@ public class MobileHomeInfoController extends BaseController {
 	@Autowired
 	@Qualifier("mobileHomeInfoService")
 	private MobileHomeInfoService mobileHomeInfoService;
-
+	@RequestMapping(value = "/showapi.ws")
+	@ResponseBody
+	public Map<String, Object> showapi(String mobile) {
+		return super.success(ShowApiContext.getContext().getMobileHome(mobile));
+	}
 	@RequestMapping(value = "/mobile.ws")
 	@ResponseBody
 	public Map<String, Object> getByMobile(String mobile) {

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<mobileInfoUrl>http://foss.szwisdom.cn/foss-fscg/crmservice/mobileInfo.ws?mobileNo={0}</mobileInfoUrl>
+	<showapi>
+		<mh-url>http://route.showapi.com/6-1?</mh-url>
+		<appid>13030</appid>
+		<appkey>e9e78866022249a79e317e5730de7eeb</appkey>
+	</showapi>
 </config>
