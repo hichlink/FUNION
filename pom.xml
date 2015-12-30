@@ -358,6 +358,7 @@
 		<module>funion-common</module>
 		<module>funion-admin-web</module>
 		<module>funion-portal-web</module>
+		<module>funion-mh-web</module>
 	</modules>
 	<build>
 		<plugins>

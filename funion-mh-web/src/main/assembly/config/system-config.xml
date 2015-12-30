@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<mobileInfoUrl>http://foss.szwisdom.cn/foss-fscg/crmservice/mobileInfo.ws?mobileNo={0}</mobileInfoUrl>
+</config>
