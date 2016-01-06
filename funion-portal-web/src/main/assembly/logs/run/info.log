@@ -1,4 +1,0 @@
-2015-11-17 11:55:16.043 [localhost-startStop-1] INFO  com.funion.foss.portal.common.servlet.DefaultInitServlet - Loaded logback configure file from E:\mywork\FOSS_UNION\source\funion\foss-portal-web\src\main\assembly/config/logback/logback.xml.
-2015-11-17 11:55:16.480 [localhost-startStop-1] INFO  com.funion.foss.portal.common.servlet.DefaultInitServlet - Web Application Context【F:\workplace2\.metadata\.plugins\org.eclipse.wst.server.core\tmp5\wtpwebapps\foss-portal-web\】 Destroyed.
-2015-11-17 12:05:59.384 [localhost-startStop-1] INFO  com.funion.foss.portal.common.servlet.DefaultInitServlet - Loaded logback configure file from E:\mywork\FOSS_UNION\source\funion\foss-portal-web\src\main\assembly/config/logback/logback.xml.
-2015-11-17 12:05:59.692 [localhost-startStop-1] INFO  com.funion.foss.portal.common.servlet.DefaultInitServlet - Web Application Context【F:\workplace2\.metadata\.plugins\org.eclipse.wst.server.core\tmp5\wtpwebapps\foss-portal-web\】 Destroyed.
