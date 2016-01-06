@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quartz>
+	<job>
+		<job-detail>
+			<name>FlowDispatchJob</name>
+			<group>DEFAULT</group>
+			<job-class>com.hichlink.funion.portal.common.job.FlowDispatchJob
+			</job-class>
+			<volatility>false</volatility>
+			<durability>false</durability>
+			<recover>false</recover>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>FlowDispatchJob</name>
+				<group>DEFAULT</group>
+				<job-name>flowDispatchJob</job-name>
+				<job-group>DEFAULT</job-group>
+				<!-- 每天早上1点整 -->
+				<cron-expression>0 0/1 * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+	<job>
+		<job-detail>
+			<name>AgentBalanceJob</name>
+			<group>DEFAULT</group>
+			<job-class>com.hichlink.funion.portal.common.job.AgentBalanceJob
+			</job-class>
+			<volatility>false</volatility>
+			<durability>false</durability>
+			<recover>false</recover>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>AgentBalanceJob</name>
+				<group>DEFAULT</group>
+				<job-name>agentBalanceJob</job-name>
+				<job-group>DEFAULT</job-group>
+				<!-- 每天早上1点整 -->
+				<cron-expression>0 0/1 * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+	<job>
+		<job-detail>
+			<name>RefundJob</name>
+			<group>DEFAULT</group>
+			<job-class>com.hichlink.funion.portal.common.job.RefundJob
+			</job-class>
+			<volatility>false</volatility>
+			<durability>false</durability>
+			<recover>false</recover>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>RefundJob</name>
+				<group>DEFAULT</group>
+				<job-name>refundJob</job-name>
+				<job-group>DEFAULT</job-group>
+				<!-- 每天早上1点整 -->
+				<cron-expression>0 0/30 * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+</quartz>

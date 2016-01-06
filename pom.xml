@@ -359,6 +359,7 @@
 		<module>funion-admin-web</module>
 		<module>funion-portal-web</module>
 		<module>funion-mh-web</module>
+		<module>funion-game-web</module>
 	</modules>
 	<build>
 		<plugins>
