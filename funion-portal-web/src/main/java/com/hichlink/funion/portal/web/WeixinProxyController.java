@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aspire.webbas.core.util.WebUtil;
 import com.hichlink.funion.common.entity.WxAccessConf;
+import com.hichlink.funion.common.util.Signature;
 import com.hichlink.funion.common.weixin.WeixinApiBiz;
 import com.hichlink.funion.common.weixin.entity.AccessToken;
 import com.hichlink.funion.portal.common.config.SystemConfig;
+
+import net.sf.json.JSONObject;
 
 @Controller
 public class WeixinProxyController extends BaseActionController {
@@ -87,5 +92,26 @@ public class WeixinProxyController extends BaseActionController {
 			return e.getMessage();
 		}
 		return null;
+	}
+
+	private void outputJSONP(HttpServletRequest request, HttpServletResponse response, String content) throws IOException {
+		String jsonp = request.getParameter("jsonpcallback");
+		WebUtil.output(response, jsonp + "(" + content + ")", "application/javascript");
+	}
+
+	@RequestMapping(value = "/getJsConfig")
+	public void getJsConfig(HttpServletRequest request, HttpServletResponse response,String url) throws IOException {
+		if (StringUtils.isBlank(url)) {
+			log.info("url传递失败");
+			outputJSONP(request,response,"传递失败");
+			return;
+		}
+		String appId = SystemConfig.getInstance().getAppId();
+		String jsTicket = weixinApiBiz.getJsapiTicket(appId);
+		log.debug("jsTicket:=" + jsTicket);
+		Map<String, String> ret = Signature.sign(jsTicket, url);
+		log.debug("ret:=" + ret);
+		ret.put("appid", appId);
+		outputJSONP(request,response,JSONObject.fromObject(ret).toString());
 	}
 }
