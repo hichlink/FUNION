@@ -33,7 +33,7 @@ public class WeixinApiBiz {
 		this.weixinApi = weixinApi;
 	}
 
-	private WxAccessConf getWxAccessConf(String appId) {
+	public WxAccessConf getWxAccessConf(String appId) {
 		WxAccessConf bean = new WxAccessConf();
 		bean.setAppId(appId);
 		WxAccessConf wc = wxAccessConfMapper.getByWxConf(bean);

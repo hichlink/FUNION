@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.aspire.webbas.core.exception.MyException;
 import com.hichlink.funion.common.util.HttpClientUtil;
 import com.hichlink.funion.common.weixin.entity.AccessToken;
 import com.hichlink.funion.common.weixin.entity.ApiToken;
@@ -80,7 +81,7 @@ public class WeixinApiService implements WeixinApi {
 		}
 		JSONObject json = JSON.parseObject(response);
 		if (null == json || null != json.get("errcode")) {
-			return null;
+			throw new MyException(response);
 		}
 		return JSON.parseObject(response, ApiToken.class);
 	}
