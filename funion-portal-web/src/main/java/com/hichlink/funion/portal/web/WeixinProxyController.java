@@ -37,7 +37,7 @@ public class WeixinProxyController extends BaseActionController {
 			String response_type, String scope, String state) {
 		request.getSession().setAttribute(SESSION_REDIRECT_URI, redirect_uri);
 		String appId = SystemConfig.getInstance().getAppId();
-		String redirectUri = SystemConfig.getInstance().getDomain() + request.getContextPath() + "/proxy/redirect";
+		String redirectUri = SystemConfig.getInstance().getDomain() + request.getContextPath() + "/proxy/redirect?";
 		String jumpUrl = "";
 		if ("snsapi_userinfo".equalsIgnoreCase(scope)) {
 			jumpUrl = weixinApiBiz.getAuthUrlBySnsapiUserInfo(appId, redirectUri);

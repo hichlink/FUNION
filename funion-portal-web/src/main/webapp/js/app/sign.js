@@ -1,4 +1,4 @@
-$.getJSON("http://hichlink.com/funion-portal/getJsConfig?url="
+$.getJSON("http://poc.szwisdom.com/foss-portal/proxy/getJsConfig?url="
 		+ encodeURIComponent(window.location.href) + "&jsoncallback=?", {},
 		function(data) {
 			wx.config({
