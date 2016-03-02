@@ -41,6 +41,7 @@ $(function() {
 		$boxs.on('click', function() {
 			$boxs.removeClass('box-on');
 			$(this).addClass('box-on');
+			$("#costPriceTip").html('￥'+ $(this).attr('data-price') + '元');
 		});
 	}
 	function getFlowPackageByMobile() {

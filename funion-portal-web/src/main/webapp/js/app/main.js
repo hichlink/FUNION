@@ -55,14 +55,24 @@ $(function() {
 		});
 	}
 	initBalanceFlow();
-	function initBalanceFlow() {
+	function initBalanceFlow(page) {
+		$("#more").hide();
 		$.ajax({
 			url : ctxPaths + '/main/balanceFlow.do',
+			data :{page:page,rows:10},
 			type : 'get',
 			success : function(data) {
 				if (data.success) {
 					var html = template('balanceFlowTmpl', data);
-					$("#balanceFlow").html(html);
+					$("#balanceFlow").append(html);
+					if (data.page < data.total){
+						$("#more").show();
+						$("#more").unbind('click').bind('click',function(){
+							initBalanceFlow(data.page + 1);
+						});
+					}else{
+						$("#more").hide();
+					}
 				} else {
 					alert(data.message || '系统错误');
 				}

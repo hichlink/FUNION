@@ -72,6 +72,6 @@
 	<script type="text/javascript"
 		src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 			<script type="text/javascript" src="${ctx}/js/app/common.js"></script>
-	<script type="text/javascript" src="${ctx}/js/app/pay.js?20151201"></script>
+	<script type="text/javascript" src="${ctx}/js/app/pay.js?20160302"></script>
 </body>
 </html>

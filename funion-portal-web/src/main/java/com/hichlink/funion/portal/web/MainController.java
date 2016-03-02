@@ -65,8 +65,7 @@ public class MainController extends BaseController {
 
 	@RequestMapping(value = "/balanceFlow.do")
 	@ResponseBody
-	public Map<String, Object> balanceFlow(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Page<BalanceFlow> params = new Page<BalanceFlow>();
+	public Map<String, Object> balanceFlow(Page<BalanceFlow> params,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AgentInfo agentInfo = getAgentInfo();
 		params.getParams().put("agentId", agentInfo.getAgentId());
 		params.setAssembleOrderBy(" input_time desc ");

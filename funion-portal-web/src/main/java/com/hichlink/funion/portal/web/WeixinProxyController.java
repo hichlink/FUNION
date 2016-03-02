@@ -1,6 +1,7 @@
 package com.hichlink.funion.portal.web;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.aspire.webbas.core.util.WebUtil;
 import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.util.Signature;
@@ -37,14 +39,14 @@ public class WeixinProxyController extends BaseActionController {
 			String response_type, String scope, String state) {
 		request.getSession().setAttribute(SESSION_REDIRECT_URI, redirect_uri);
 		String appId = SystemConfig.getInstance().getAppId();
-		String redirectUri = SystemConfig.getInstance().getDomain() + request.getContextPath() + "/proxy/redirect?";
+		String redirectUri = SystemConfig.getInstance().getDomain() + request.getContextPath() + "/proxy/redirect";
 		String jumpUrl = "";
-		if ("snsapi_userinfo".equalsIgnoreCase(scope)) {
-			jumpUrl = weixinApiBiz.getAuthUrlBySnsapiUserInfo(appId, redirectUri);
-		} else {
-			jumpUrl = weixinApiBiz.getAuthUrlBySnsapiBase(appId, redirectUri);
-		}
 		try {
+			if ("snsapi_userinfo".equalsIgnoreCase(scope)) {
+				jumpUrl = weixinApiBiz.getAuthUrlBySnsapiUserInfo(appId, URLEncoder.encode(redirectUri, "utf-8"));
+			} else {
+				jumpUrl = weixinApiBiz.getAuthUrlBySnsapiBase(appId, URLEncoder.encode(redirectUri, "utf-8"));
+			}
 			response.sendRedirect(jumpUrl);
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
@@ -66,18 +68,17 @@ public class WeixinProxyController extends BaseActionController {
 	}
 
 	@RequestMapping(value = "/sns/oauth2/access_token")
-	@ResponseBody
-	public Object accessToken(HttpServletRequest request, HttpServletResponse response, String appid, String secret,
-			String code, String grant_type) {
+	public void accessToken(HttpServletRequest request, HttpServletResponse response, String appid, String secret,
+			String code, String grant_type) throws IOException {
 		String appId = SystemConfig.getInstance().getAppId();
 		AccessToken accessToken = weixinApiBiz.getAccessToken(appId, code);
-		return accessToken;
+		WebUtil.output(response, JSON.toJSONString(accessToken), "application/json");
 	}
 
 	@RequestMapping(value = "/cgi-bin/token")
 	@ResponseBody
-	public Object token(HttpServletRequest request, HttpServletResponse response, String appid, String secret,
-			String grant_type) {
+	public void token(HttpServletRequest request, HttpServletResponse response, String appid, String secret,
+			String grant_type) throws IOException {
 		String appId = SystemConfig.getInstance().getAppId();
 		try {
 			WxAccessConf wc = weixinApiBiz.getWxAccessConf(appId);
@@ -86,24 +87,25 @@ public class WeixinProxyController extends BaseActionController {
 				Map<String, Object> result = new HashMap<String, Object>();
 				result.put("access_token", wc.getAccessToken());
 				result.put("expires_in", second);
-				return result;
+				WebUtil.output(response, JSON.toJSONString(result), "application/json");
 			}
 		} catch (Exception e) {
-			return e.getMessage();
+			log.error(e.getMessage(), e);
+			WebUtil.output(response, e.getMessage(), "application/json");
 		}
-		return null;
 	}
 
-	private void outputJSONP(HttpServletRequest request, HttpServletResponse response, String content) throws IOException {
+	private void outputJSONP(HttpServletRequest request, HttpServletResponse response, String content)
+			throws IOException {
 		String jsonp = request.getParameter("jsonpcallback");
 		WebUtil.output(response, jsonp + "(" + content + ")", "application/javascript");
 	}
 
 	@RequestMapping(value = "/getJsConfig")
-	public void getJsConfig(HttpServletRequest request, HttpServletResponse response,String url) throws IOException {
+	public void getJsConfig(HttpServletRequest request, HttpServletResponse response, String url) throws IOException {
 		if (StringUtils.isBlank(url)) {
 			log.info("url传递失败");
-			outputJSONP(request,response,"传递失败");
+			outputJSONP(request, response, "传递失败");
 			return;
 		}
 		String appId = SystemConfig.getInstance().getAppId();
@@ -112,6 +114,6 @@ public class WeixinProxyController extends BaseActionController {
 		Map<String, String> ret = Signature.sign(jsTicket, url);
 		log.debug("ret:=" + ret);
 		ret.put("appid", appId);
-		outputJSONP(request,response,JSONObject.fromObject(ret).toString());
+		outputJSONP(request, response, JSONObject.fromObject(ret).toString());
 	}
 }

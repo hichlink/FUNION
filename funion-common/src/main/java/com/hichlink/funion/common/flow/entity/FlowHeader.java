@@ -58,4 +58,10 @@ public class FlowHeader {
 		this.secertKey = secertKey;
 	}
 
+	@Override
+	public String toString() {
+		return "FlowHeader [version=" + version + ", timestamp=" + timestamp + ", seqNo=" + seqNo + ", appId=" + appId
+				+ ", secertKey=" + secertKey + "]";
+	}
+	
 }

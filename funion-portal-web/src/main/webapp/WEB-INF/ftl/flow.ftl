@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>流量9.5折任性充-流量向前冲</title>
+<title>移动，联通，电信流量充值-流量向前冲</title>
 <#include "root.ftl" encoding="utf-8">
 <style>
 .box {
 	border-radius: 0.5em;
-	width: 90px;
+	width: 136px;
 	height: 48px;
 	border: 1px solid #CCCCCC;
 	float: left;
-	margin: 8px 4px;
+	margin: 4px 4px;
 	text-align: center;
 	line-height: 18px;
-	font-size: 12px;
+	font-size: 16px;
 	padding: 4px;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .txt1 {
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: bold;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .txt3 {
-	font-size: 12px;
+	font-size: 14px;
 	color: #339900;
 }
 
@@ -48,7 +48,7 @@
 <body>
 	<header class="am-topbar">
 		<div class="am-topbar-brand">
-			<strong>全网9.5折随时充</strong>
+			<strong>移动，联通，电信手机号码流量充值</strong>
 		</div>
 	</header>
 
@@ -68,7 +68,7 @@
 					<div class="am-form-group" id="flowPackageDiv"></div>
 					<div class="am-form-group">
 						<div class="am-u-sm-12" style="text-align: right;">
-							<button type="button" id="payBtn" class="am-btn am-btn-warning am-btn-block">立即充值</button>
+							<button type="button" id="payBtn" class="am-btn am-btn-warning am-btn-block">立即充值 <span id="costPriceTip"></span></button>
 						</div>
 					</div>
 					<div class="am-form-group">
@@ -86,7 +86,7 @@
 	<script id="flowPackages" type="text/html"> 
 	   <div class="am-u-sm-12">
 			<% for(var i=0; i<data.length; i++){%>  
-			<div class="box" data-id="<%=data[i].productId%>">
+			<div class="box" data-id="<%=data[i].productId%>" data-price="<%=data[i].settlementPrice%>">
 				<span class="txt1"><%=data[i].flowAmount%>M</span><br /> <span
 						class="txt2 line-through"><%=data[i].costPrice%>元</span><span class="txt2">
 				 现价</span><span class="txt3"><%=data[i].settlementPrice%></span><span class="txt2">元</span>
@@ -103,6 +103,6 @@
 	<script src="${ctx}/js/template-native.js"></script>
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="${ctx}/js/app/wxshare.js"></script>
-	<script src="${ctx}/js/app/flow.js"></script>
+	<script src="${ctx}/js/app/flow.js?20160302"></script>
 </body>
 </html>

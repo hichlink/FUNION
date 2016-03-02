@@ -51,6 +51,7 @@
           <tbody id="balanceFlow">
           </tbody>
         </table>
+        <div  style="text-align:center;"><a id="more" href="javascript:;" style="display:none;">查看更多</a></div>
       </div>
     </div>
 

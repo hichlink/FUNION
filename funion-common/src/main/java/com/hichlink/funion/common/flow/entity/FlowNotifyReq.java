@@ -16,7 +16,7 @@ public class FlowNotifyReq {
 
 	public boolean isSucc() {
 		return (null != this.getMsgBody() && null != this.getMsgBody().getContent()
-				&& SUCC.equals(this.getMsgBody().getContent().getStatus()));
+				&& SUCC.equals(this.getMsgBody().getContent().getCode()));
 	}
 	
 	public FlowHeader getFlowHeader() {
@@ -53,7 +53,7 @@ public class FlowNotifyReq {
 		public void setContent(Content content) {
 			this.content = content;
 		}
-
+		
 	}
 
 	public static class Content {
@@ -98,5 +98,10 @@ public class FlowNotifyReq {
 			this.code = code;
 		}
 
+		@Override
+		public String toString() {
+			return "Content [orderId=" + orderId + ", extOrder=" + extOrder + ", status=" + status + ", code=" + code
+					+ "]";
+		}
 	}
 }
