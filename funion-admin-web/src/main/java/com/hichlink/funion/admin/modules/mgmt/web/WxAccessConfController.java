@@ -11,13 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.aspire.webbas.core.pagination.mybatis.pager.Page;
 import com.aspire.webbas.core.web.BaseController;
 import com.hichlink.funion.common.entity.WxAccessConf;
 import com.hichlink.funion.common.service.WxAccessConfService;
-
 
 /**
  * 
@@ -30,47 +30,50 @@ import com.hichlink.funion.common.service.WxAccessConfService;
  */
 @Controller
 @RequestMapping("/wxAccessConf")
-public class WxAccessConfController extends BaseController{
+public class WxAccessConfController extends BaseController {
 	private static final Logger LOG = LoggerFactory.getLogger(WxAccessConfController.class);
-    @Autowired
-    @Qualifier("wxAccessConfService")
-    private WxAccessConfService wxAccessConfService;
-    
-    @RequestMapping(value = "/query.ajax")
+	@Autowired
+	@Qualifier("wxAccessConfService")
+	private WxAccessConfService wxAccessConfService;
+
+	@RequestMapping(value = "/query.ajax")
 	@ResponseBody
-	 public Map<String, Object> pageQuery(Page<WxAccessConf> page) {
-	    Page<WxAccessConf> list = wxAccessConfService.pageQuery(page);
-	    return super.page(list);
-    }
-         @RequestMapping(value = "/add.ajax", method = RequestMethod.POST)
+	public Map<String, Object> pageQuery(Page<WxAccessConf> page) {
+		Page<WxAccessConf> list = wxAccessConfService.pageQuery(page);
+		return super.page(list);
+	}
+
+	@RequestMapping(value = "/add.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("wxAccessConf") WxAccessConf data) {
-    	wxAccessConfService.saveAndUpdate(data);
+		wxAccessConfService.saveAndUpdate(data);
 		return super.success("新增成功");
-    }
-   
-    @RequestMapping(value = "/delete.ajax")
+	}
+
+	@RequestMapping(value = "/delete.ajax")
 	@ResponseBody
-	 public Map<String, Object> delete(Long seqId) {
-    		wxAccessConfService.delete(seqId);
-			return super.success("删除成功");
-	  }
-	 @RequestMapping(value = "/get.ajax")
-	 @ResponseBody
-	 public Map<String, Object> get(Long seqId) {
-		 	WxAccessConf data = wxAccessConfService.get(seqId);
-			return super.success(data);
-	    }
-	    /**
-	    *	更新的时候需额外传递updId,值跟主键值一样,被@ModelAttribute注释的方法会在此controller每个方法执行前被执行，要谨慎使用
-	    */
-	    @ModelAttribute("wxAccessConf")
-		public void getForUpdate(@RequestParam(value = "updId",required=false) Long updId,
-				Model model) {
-								if (null != updId) {
-									   model.addAttribute("wxAccessConf",wxAccessConfService.get(updId));
-				  }else{
-				  		model.addAttribute("wxAccessConf",new WxAccessConf());
-				  }
+	public Map<String, Object> delete(Long seqId) {
+		wxAccessConfService.delete(seqId);
+		return super.success("删除成功");
+	}
+
+	@RequestMapping(value = "/get.ajax")
+	@ResponseBody
+	public Map<String, Object> get(Long seqId) {
+		WxAccessConf data = wxAccessConfService.get(seqId);
+		return super.success(data);
+	}
+
+	/**
+	 * 更新的时候需额外传递updId,值跟主键值一样,被@ModelAttribute注释的方法会在此controller每个方法执行前被执行，
+	 * 要谨慎使用
+	 */
+	@ModelAttribute("wxAccessConf")
+	public void getForUpdate(@RequestParam(value = "updId", required = false) Long updId, Model model) {
+		if (null != updId) {
+			model.addAttribute("wxAccessConf", wxAccessConfService.get(updId));
+		} else {
+			model.addAttribute("wxAccessConf", new WxAccessConf());
 		}
 	}
+}
